@@ -24,10 +24,10 @@ antigen bundles <<EOBUNDLES
 	zsh-users/zsh-autosuggestions
 	sudo
 	git
-	python
-	gradle
+#	python
+#	gradle
 	ssh-agent
-	nmap
+#	nmap
 	pip
 	command-not-found
 	zpm-zsh/clipboard
