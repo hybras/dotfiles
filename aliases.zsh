@@ -5,7 +5,7 @@ alias pip='pip3'
 alias nano='nano -a'
 alias grep='grep --color=auto'
 alias ytdl='youtube-dl'
-alias code='codium'
+#alias code='codium'
 alias cat='bat'
 alias notify='notify-send'
 
