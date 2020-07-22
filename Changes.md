@@ -26,6 +26,7 @@
 1. Bonjour
 2. [AMD Radeon Graphics Drivers](https://www.amd.com/en/support/kb/release-notes/rn-amdgpu-unified-linux-20-10)
 3. [Syncthing Gnome Tray Extension](https://extensions.gnome.org/extension/989/syncthing-icon/)
+4. [Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/)
 
 ## Notes
 
