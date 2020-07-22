@@ -16,7 +16,7 @@ eval $(starship init zsh)
 
 source ~/antigen.zsh
 antigen use oh-my-zsh
-
+zstyle :omz:plugins:ssh-agent identities id_rsa_github
 # antigen theme hybras/Arity-Zsh-Theme
 
 antigen bundles <<EOBUNDLES
