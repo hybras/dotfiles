@@ -11,9 +11,8 @@
 
 ## Extras
 
-1) Zsh
-   1) [Antigen](https://github.com/zsh-users/antigen)
-      1) `curl -L git.io/antigen > ~/antigen.zsh`
+1) [Antigen](https://github.com/zsh-users/antigen)
+    1) `curl -L git.io/antigen > ~/antigen.zsh`
 2) Nano
     1) [.nanorc](https://github.com/scopatz/nanorc)
 3) Rust
