@@ -1,0 +1,11 @@
+syncthing
+curl
+resolvconf
+python3-pip
+xclip
+xbacklight
+gdebi
+chrome-gnome-shell
+gnome-shell-extensions
+numix-icon-theme-circle
+numix-icon-theme
