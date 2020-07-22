@@ -2,14 +2,12 @@
 
 ## From Store
 
-1) VS Code
-2) IntellIJ
+1) IntellIJ
    1) Plugins
-3) [Tor](https://torproject.org)
-4) GIMP
-5) [Chome Beta](https://www.google.com/chrome/beta)
-6) VS Codium
-7) Gnome Tweaks
+2) [Tor](https://torproject.org)
+3) GIMP
+4) [Chome Beta](https://www.google.com/chrome/beta)
+5) Gnome Tweaks
 
 ## Extras
 
