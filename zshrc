@@ -58,6 +58,8 @@ path=(
 	"."
 	#Rust
 	"$HOME/.cargo/bin"
+	# homebrew openjdk
+	"/home/linuxbrew/.linuxbrew/opt/openjdk/bin"
 	$path
 )
 
@@ -68,3 +70,4 @@ if [[ -x "$HOME/aliases.zsh" ]]; then
 	source "$HOME/aliases.zsh"
 fi
 
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
