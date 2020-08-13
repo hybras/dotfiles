@@ -8,6 +8,7 @@ alias ytdl='youtube-dl'
 #alias code='codium'
 alias cat='bat'
 alias notify='notify-send'
+alias proton='sudo protonvpn'
 
 #alias l='exa -lbF'
 #alias ll='exa -labF'
