@@ -1,9 +1,10 @@
 zsh
-syncthing
 curl
 resolvconf
 python3-pip
 xclip
+# UI
+syncthing
 xbacklight
 gdebi
 chrome-gnome-shell
