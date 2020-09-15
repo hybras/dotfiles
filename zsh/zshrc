@@ -13,8 +13,9 @@ compinit
 # End of lines added by compinstall
 
 eval $(starship init zsh)
-if [[ ! -f "~/antigen.zsh"]]; then
-	curl -L git.io/antigen > antigen.zsh
+if [[ ! -f "$HOME/antigen.zsh" ]]
+then
+	curl -L git.io/antigen > $HOME/antigen.zsh
 fi
 
 source ~/antigen.zsh
@@ -46,10 +47,6 @@ antigen apply
 
 autoload -U compinit && compinit
 
-manpath=(
-	$manpath
-)
-
 export EDITOR='nano'
 export VISUAL='nano'
 
@@ -62,15 +59,15 @@ path=(
 	#Rust
 	"$HOME/.cargo/bin"
 	# homebrew openjdk
-	"/home/linuxbrew/.linuxbrew/opt/openjdk/bin"
+	"/home/linuxbrew/.linuxbrew/opt/openjdk@11/bin"
 	$path
 )
 
 
 export PATH
 
-if [[ -x "$HOME/aliases.zsh" ]]; then
-	source "$HOME/aliases.zsh"
+if [[ -x "$../aliases.zsh" ]]; then
+	source "$../aliases.zsh"
 fi
 
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
