@@ -26,3 +26,7 @@ songdl() {
 viddl() {
 	youtube-dl --add-metadata --format bestvideo+bestaudio "$@"
 }
+
+notify() {
+	powershell.exe "New-BurntToastNotification -Text \"$1\""
+}
