@@ -12,7 +12,6 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-eval $(starship init zsh)
 if [[ ! -f "$HOME/antigen.zsh" ]]
 then
 	curl -L git.io/antigen > $HOME/antigen.zsh
@@ -28,17 +27,18 @@ antigen bundles <<EOBUNDLES
 	zsh-users/zsh-autosuggestions
 	sudo
 	git
-#	python
+	python
 #	gradle
 	ssh-agent
 #	nmap
-	pip
+#	pip
 	command-not-found
 	zpm-zsh/clipboard
 	DarrinTisdale/zsh-aliases-exa
 	RobSis/zsh-completion-generator
 	rummik/zsh-ing
 	robertzk/send.zsh
+	dotenv
 EOBUNDLES
 
 GENCOMPL_FPATH=$HOME/.config/gencomp
@@ -60,14 +60,15 @@ path=(
 	"$HOME/.cargo/bin"
 	# homebrew openjdk
 	"/home/linuxbrew/.linuxbrew/opt/openjdk@11/bin"
+	"/home/linuxbrew/.linuxbrew/lib/ruby/gems/2.7.0/bin"
 	$path
 )
 
 
 export PATH
-
-if [[ -x "$../aliases.zsh" ]]; then
-	source "$../aliases.zsh"
+if [[ -x "../aliases.zsh" ]]; then
+	source "../aliases.zsh"
 fi
 
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+eval $(starship init zsh)
