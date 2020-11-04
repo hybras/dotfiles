@@ -66,8 +66,9 @@ path=(
 
 
 export PATH
-if [[ -x "../aliases.zsh" ]]; then
-	source "../aliases.zsh"
+local alias_files="$HOME/Documents/dotfiles/aliases.zsh"
+if [[ -x $alias_files ]]; then
+	source $alias_files
 fi
 
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
