@@ -5,7 +5,7 @@ alias pip='pip3'
 alias nano='nano -a'
 alias ytdl='youtube-dl'
 alias cat='bat'
-alias notify='notify-send'
+#alias notify='notify-send'
 alias proton='sudo protonvpn'
 
 #alias l='exa -lbF'
