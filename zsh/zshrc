@@ -42,6 +42,7 @@ antigen bundles <<EOBUNDLES
 EOBUNDLES
 
 GENCOMPL_FPATH=$HOME/.config/gencomp
+GENCOMPL_PY=python3
 
 antigen apply
 
