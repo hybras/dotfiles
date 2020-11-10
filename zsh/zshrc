@@ -47,8 +47,8 @@ antigen apply
 
 autoload -U compinit && compinit
 
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
@@ -73,3 +73,4 @@ fi
 
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 eval $(starship init zsh)
+
