@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+youtube-dl --extract-audio --add-metadata --output "~/Music/%(title)s.%(ext)s" "$@"
