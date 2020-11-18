@@ -1,5 +1,5 @@
-brew bundle
-
+brew bundle --file "${0:h}/Brewfile"
+echo "${0:h}"
 fpath+=( "${0:h}/functions" )
 autoload -Uz exa viddl songdl notify
 
