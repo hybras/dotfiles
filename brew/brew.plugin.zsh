@@ -1,6 +1,6 @@
 brew bundle
 
-source ./aliases.zsh
+source "${0:h}/aliases.zsh"
 
 fpath+= ( "${0:h}/functions" )
 
