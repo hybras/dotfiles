@@ -1,4 +1,5 @@
 tap "homebrew/core"
+brew "antigen"
 brew "asciinema"
 brew "python"
 brew "bat"
