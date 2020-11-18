@@ -1,5 +1,3 @@
-zsh
-curl
 resolvconf
 python3-pip
 xclip
