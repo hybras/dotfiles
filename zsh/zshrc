@@ -56,9 +56,6 @@ path=(
 	"."
 	#Rust
 	"$HOME/.cargo/bin"
-	# homebrew openjdk
-	"/home/linuxbrew/.linuxbrew/opt/openjdk@11/bin"
-	"/home/linuxbrew/.linuxbrew/lib/ruby/gems/2.7.0/bin"
 	$path
 )
 
