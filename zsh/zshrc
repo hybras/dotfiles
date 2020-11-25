@@ -34,7 +34,8 @@ antigen bundles <<EOBUNDLES
 	rummik/zsh-ing
 	robertzk/send.zsh
 	dotenv
-	/home/hybras/varun/Documents/dotfiles grace --no-local-clone
+	/home/hybras/Documents/dotfiles grace --no-local-clone
+	/home/hybras/Documents/dotfiles brew --no-local-clone
 EOBUNDLES
 
 GENCOMPL_FPATH=$HOME/.config/gencomp
