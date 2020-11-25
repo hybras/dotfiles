@@ -34,7 +34,7 @@ antigen bundles <<EOBUNDLES
 	rummik/zsh-ing
 	robertzk/send.zsh
 	dotenv
-	/home/hybras/Documents/dotfiles grace --no-local-clone
+	/home/hybras/varun/Documents/dotfiles grace --no-local-clone
 EOBUNDLES
 
 GENCOMPL_FPATH=$HOME/.config/gencomp
@@ -64,10 +64,6 @@ path=(
 
 
 export PATH
-local alias_files="$HOME/Documents/dotfiles/aliases.zsh"
-if [[ -x $alias_files ]]; then
-	source $alias_files
-fi
 
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 eval $(starship init zsh)
