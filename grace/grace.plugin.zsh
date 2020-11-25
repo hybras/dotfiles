@@ -1,1 +1,1 @@
-alias grace="sshpass -f ~/.umd ssh grace"
+alias grace="sshpass -f ~/.umd ssh umd"
