@@ -14,7 +14,7 @@ compinit
 
 source /home/linuxbrew/.linuxbrew/share/antigen/antigen.zsh
 antigen use oh-my-zsh
-
+zstyle :omz:plugins:ssh-agent identities id_rsa_github id_rsa_gitlab
 # antigen theme hybras/Arity-Zsh-Theme
 
 antigen bundles <<EOBUNDLES
