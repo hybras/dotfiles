@@ -14,7 +14,7 @@ compinit
 
 source /home/linuxbrew/.linuxbrew/share/antigen/antigen.zsh
 antigen use oh-my-zsh
-zstyle :omz:plugins:ssh-agent identities id_rsa_github id_rsa_gitlab
+# zstyle :omz:plugins:ssh-agent identities id_rsa_github id_rsa_gitlab
 # antigen theme hybras/Arity-Zsh-Theme
 
 antigen bundles <<EOBUNDLES
@@ -70,4 +70,6 @@ eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 eval $(starship init zsh)
 
 export GPG_TTY=$(tty)
+
+eval $(keychain  --quiet --eval --agents ssh,gpg id_rsa_github id_rsa_gitlab 7FD60B3517AC96ABCFE9772BAF0C06DB358518CD 32BA737F24AE087BBF50F78A6FEDA4DAB2EBFD7E)
 
