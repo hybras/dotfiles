@@ -1,5 +1,2 @@
-exa
-bat
-ripgrep
-cargo-generate
-nu
+open
+pijul
