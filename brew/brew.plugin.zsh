@@ -13,5 +13,5 @@ alias cat='bat'
 #alias notify='notify-send'
 alias ps='procs'
 alias vi='nvim'
-
+alias pj='pijul'
 alias l1='exa -1'
