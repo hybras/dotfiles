@@ -72,7 +72,7 @@ eval $(starship init zsh)
 
 export GPG_TTY=$(tty)
 
-eval $(keychain --eval --agents ssh,gpg id_rsa_github id_rsa_gitlab 7FD60B3517AC96ABCFE9772BAF0C06DB358518CD 32BA737F24AE087BBF50F78A6FEDA4DAB2EBFD7E)
+eval $(keychain --eval --agents ssh,gpg id_rsa_github id_rsa_gitlab CECCB3D5398F04652EF4A536109BC93C8B952313)
 
 # opam configuration
 test -r /home/hybras/.opam/opam-init/init.zsh && . /home/hybras/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
