@@ -60,7 +60,7 @@ path=(
 	"/home/linuxbrew/.linuxbrew/opt/openjdk/bin"
 	#Ruby
 	"/home/linuxbrew/.linuxbrew/opt/ruby@2.7/bin"
-	"/home/linuxbrew/.linuxbrew/lib/ruby/gems/2.7.0/bin"
+	"/home/linuxbrew/.linuxbrew/lib/ruby/gems/3.0.0/bin"
 	$path
 )
 
