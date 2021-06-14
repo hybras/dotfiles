@@ -52,8 +52,6 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 
 # /Library/Apple/usr/bin:/Library/Apple/bin:/Library/TeX/texbin:/usr/local/go/bin:
 path=(
-	#Current Directory
-	"."
 	#Rust
 	"$HOME/.cargo/bin"
 	#Java
