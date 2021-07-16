@@ -23,8 +23,6 @@ eval $(keychain --eval --agents ssh,gpg id_rsa_github id_rsa_gitlab pijul_nest g
 eval $(brew caveats antigen | rg source)
 
 antigen use oh-my-zsh
-# zstyle :omz:plugins:ssh-agent identities id_rsa_github id_rsa_gitlab
-# antigen theme hybras/Arity-Zsh-Theme
 
 antigen bundles <<EOBUNDLES
 	zsh-users/zsh-syntax-highlighting
@@ -63,14 +61,8 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 path=(
 	#Rust
 	"$HOME/.cargo/bin"
-	#Java
-	"/home/linuxbrew/.linuxbrew/opt/openjdk/bin"
-	#Ruby
-	"/home/linuxbrew/.linuxbrew/opt/ruby@2.7/bin"
-	"/home/linuxbrew/.linuxbrew/lib/ruby/gems/3.0.0/bin"
 	$path
 )
-
 
 export PATH
 
