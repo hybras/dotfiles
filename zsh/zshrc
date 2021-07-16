@@ -12,7 +12,16 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-source /home/linuxbrew/.linuxbrew/share/antigen/antigen.zsh
+eval "$(/opt/homebrew/bin/brew shellenv)"
+eval $(starship init zsh)
+eval "$(mcfly init zsh)"
+
+export GPG_TTY=$(tty)
+
+eval $(keychain --eval --agents ssh,gpg id_rsa_github id_rsa_gitlab pijul_nest github gitlab)
+
+eval $(brew caveats antigen | rg source)
+
 antigen use oh-my-zsh
 # zstyle :omz:plugins:ssh-agent identities id_rsa_github id_rsa_gitlab
 # antigen theme hybras/Arity-Zsh-Theme
@@ -64,14 +73,6 @@ path=(
 
 
 export PATH
-
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-eval $(starship init zsh)
-eval "$(mcfly init zsh)"
-
-export GPG_TTY=$(tty)
-
-eval $(keychain --eval --agents ssh,gpg id_rsa_github id_rsa_gitlab pijul_nest github gitlab)
 
 # opam configuration
 test -r $HOME/.opam/opam-init/init.zsh && . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
