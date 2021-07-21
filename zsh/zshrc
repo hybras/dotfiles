@@ -4,13 +4,6 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd
 bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '$HOME/.zshrc'
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval $(starship init zsh)
@@ -20,6 +13,13 @@ export GPG_TTY=$(tty)
 
 eval $(brew caveats antigen | rg source)
 
+fpath=(
+	$(brew --prefix)/share/zsh/site-functions
+	$fpath
+)
+
+autoload -Uz compinit
+compinit
 
 zstyle :omz:plugins:ssh-agent identities id_rsa_github id_rsa_gitlab pijul_nest
 
