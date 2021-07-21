@@ -1,5 +1,5 @@
 fpath+=( "${0:h}/functions" )
-autoload -Uz exa viddl songdl help
+autoload -Uz help
 
 alias jsh='jshell'
 alias python='python3'
@@ -13,3 +13,6 @@ alias ps='procs'
 alias vi='nvim'
 alias pj='pijul'
 alias l1='exa -1'
+alias exa='exa --group-directories-first'
+alias viddl='youtube-dl --add-metadata'
+alias songdl='youtube-dl --extract-audio --add-metadata --output "~/Music/%(title)s.%(ext)s"'
