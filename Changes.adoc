@@ -1,3 +1,14 @@
-# macOS Changes
+= macOS Changes
 
 * https://www.tp-link.com/us/support/download/ue305/#Driver[TP Link Ethernet Driver]
+
+== Terminal
+
+* https://hyper.is[hyper]
+* https://github.com/alacritty/alacritty/[alacritty]
+* https://sw.kovidgoyal.net/kitty/[kitty]
+* https://iterm2.com[iterm]
+* https://www.warp.dev[warp]
+
+== Shell
+https://www.nushell.sh[nushell]
