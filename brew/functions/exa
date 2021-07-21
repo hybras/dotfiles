@@ -1,3 +1,0 @@
-#!/usr/bin/env zsh
-
-command exa --group-directories-first "$@"
