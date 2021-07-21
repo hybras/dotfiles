@@ -43,7 +43,7 @@ antigen bundles <<EOBUNDLES
 	robertzk/send.zsh
 	dotenv
 	$HOME/Documents/dotfiles grace --no-local-clone
-	$HOME/Documents/dotfiles brew --no-local-clone
+	$HOME/Documents/dotfiles aliases --no-local-clone
 EOBUNDLES
 
 GENCOMPL_FPATH=$HOME/.config/gencomp

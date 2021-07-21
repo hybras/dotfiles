@@ -1,7 +1,5 @@
-#brew bundle --file "${0:h}/Brewfile" 1> /dev/null
-
 fpath+=( "${0:h}/functions" )
-autoload -Uz exa viddl songdl notify
+autoload -Uz exa viddl songdl help
 
 alias jsh='jshell'
 alias python='python3'
