@@ -18,9 +18,10 @@ eval "$(mcfly init zsh)"
 
 export GPG_TTY=$(tty)
 
-eval $(keychain --eval --agents ssh,gpg id_rsa_github id_rsa_gitlab pijul_nest github gitlab)
-
 eval $(brew caveats antigen | rg source)
+
+
+zstyle :omz:plugins:ssh-agent identities id_rsa_github id_rsa_gitlab pijul_nest
 
 antigen use oh-my-zsh
 
