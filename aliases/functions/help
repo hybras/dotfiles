@@ -1,3 +1,5 @@
 #!/usr/bin/env zsh
 
+# https://hints.macworld.com/article.php?story=20051225101106519
+
 command man -t "$@" | open -f -a Preview
