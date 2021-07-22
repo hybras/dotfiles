@@ -42,6 +42,7 @@ antigen bundles <<EOBUNDLES
 	rummik/zsh-ing
 	robertzk/send.zsh
 	dotenv
+	scriptingosx/mac-zsh-completions
 	$HOME/Documents/dotfiles grace --no-local-clone
 	$HOME/Documents/dotfiles aliases --no-local-clone
 EOBUNDLES
