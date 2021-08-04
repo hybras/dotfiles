@@ -11,64 +11,19 @@ eval "$(mcfly init zsh)"
 
 export GPG_TTY=$(tty)
 
-eval $(brew caveats antigen | rg source)
-
 fpath=(
 	$(brew --prefix)/share/zsh/site-functions
 	$fpath
 )
 
-autoload -Uz compinit
-compinit
-
 zstyle :omz:plugins:ssh-agent identities id_rsa_github id_rsa_gitlab pijul_nest
-
-antigen use oh-my-zsh
-
-antigen bundles <<EOBUNDLES
-	zsh-users/zsh-syntax-highlighting
-	zsh-users/zsh-autosuggestions
-	sudo
-	git
-	python
-#	gradle
-	ssh-agent
-#	nmap
-#	pip
-	command-not-found
-	zpm-zsh/clipboard
-	DarrinTisdale/zsh-aliases-exa
-	RobSis/zsh-completion-generator
-	rummik/zsh-ing
-	robertzk/send.zsh
-	dotenv
-	scriptingosx/mac-zsh-completions
-	$HOME/Documents/dotfiles grace --no-local-clone
-	$HOME/Documents/dotfiles aliases --no-local-clone
-EOBUNDLES
 
 GENCOMPL_FPATH=$HOME/.config/gencomp
 GENCOMPL_PY=python3
 
-antigen apply
+eval "$(sheldon source)"
 
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
 
-export EDITOR='nvim'
-export VISUAL='nvim'
-
-export LSCOLORS=ExFxBxDxCxegedabagacad
-
-# /Library/Apple/usr/bin:/Library/Apple/bin:/Library/TeX/texbin:/usr/local/go/bin:
-path=(
-	#Rust
-	"$HOME/.cargo/bin"
-	"/opt/homebrew/lib/ruby/gems/3.0.0/bin"
-	"/opt/homebrew/opt/ruby/bin"
-	$path
-)
-
-export PATH
-
-# opam configuration
-test -r $HOME/.opam/opam-init/init.zsh && . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+export EDITOR='code --wait'
+export VISUAL='code --wait'
