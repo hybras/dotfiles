@@ -26,5 +26,5 @@ eval "$(sheldon source)"
 
 autoload -Uz compinit && compinit
 
-export EDITOR='code --wait'
-export VISUAL='code --wait'
+export EDITOR='codium --wait'
+export VISUAL='codium --wait'
