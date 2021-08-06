@@ -12,3 +12,7 @@
 
 == Shell
 https://www.nushell.sh[nushell]
+
+== Horndis
+
+https://github.com/jwise/HoRNDIS
