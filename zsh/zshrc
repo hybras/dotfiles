@@ -19,8 +19,12 @@ fpath=(
 
 zstyle :omz:plugins:ssh-agent identities id_rsa_github id_rsa_gitlab pijul_nest
 
+zstyle :plugin:zsh-completion-generator programs youtube-dl
+
 GENCOMPL_FPATH=$HOME/.config/gencomp
 GENCOMPL_PY=python3
+
+autoload -Uz compinit && compinit
 
 eval "$(sheldon source)"
 
