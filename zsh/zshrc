@@ -32,3 +32,9 @@ autoload -Uz compinit && compinit
 
 export EDITOR='codium --wait'
 export VISUAL='codium --wait'
+
+export path=(
+	"/opt/homebrew/opt/ruby/bin"
+	"/opt/homebrew/lib/ruby/gems/3.0.0/bin"
+	$path
+)
