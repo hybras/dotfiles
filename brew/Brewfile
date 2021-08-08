@@ -1,6 +1,7 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
+tap "homebrew/command-not-found"
 tap "homebrew/core"
 tap "homebrew/portable-ruby"
 
@@ -9,11 +10,12 @@ tap "cantino/mcfly"
 tap "heroku/brew"
 tap "jmacdonald/amp"
 tap "linuxbrew/xorg"
+tap "nrlquaker/createzap"
 tap "rafaelgarrido/caveats"
+tap "robotsandpencils/made"
 tap "rs/tap"
 
 brew "alerter"
-brew "antigen"
 brew "openssl@1.1"
 brew "python@3.9"
 brew "asciinema"
@@ -42,6 +44,7 @@ brew "libusb"
 brew "libxml2"
 brew "libxslt"
 brew "llvm"
+brew "macos-trash"
 brew "neovim"
 brew "nmap"
 brew "node"
@@ -50,46 +53,54 @@ brew "procs"
 brew "ripgrep"
 brew "ruby"
 brew "rust-analyzer"
+brew "rustup-init"
 brew "sd"
+brew "sheldon"
+brew "shellcheck"
 brew "starship"
 brew "subversion"
 brew "tealdeer"
-brew "trash-cli"
 brew "xh"
 brew "xxhash"
 brew "youtube-dl"
 brew "zellij"
 brew "zoxide"
 brew "zsh"
-
-
 brew "cantino/mcfly/mcfly"
 brew "heroku/brew/heroku"
 brew "jmacdonald/amp/amp"
 brew "rafaelgarrido/caveats/brew-caveats"
+brew "robotsandpencils/made/xcodes"
 
 cask "font-cascadia-code"
 cask "font-fira-mono-nerd-font"
+cask "font-inconsolata-for-powerline"
 cask "font-inconsolata-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-source-code-pro-for-powerline"
 
 cask "bitwarden", args: { appdir: "~/Applications" }
+cask "bluestacks", args: { appdir: "~/Applications" }
 cask "brave-browser", args: { appdir: "~/Applications" }
 cask "cakebrew", args: { appdir: "~/Applications" }
 cask "discord", args: { appdir: "~/Applications" }
+cask "gitfinder", args: { appdir: "~/Applications" }
 cask "google-chrome", args: { appdir: "~/Applications" }
 cask "gpg-suite-no-mail", args: { appdir: "~/Applications" }
 cask "iina", args: { appdir: "~/Applications" }
 cask "intellij-idea", args: { appdir: "~/Applications" }
 cask "iterm2", args: { appdir: "~/Applications" }
+cask "karabiner-elements", args: { appdir: "~/Applications" }
 cask "mactex", args: { appdir: "~/Applications" }
 cask "netnewswire", args: { appdir: "~/Applications" }
 cask "ngrok", args: { appdir: "~/Applications" }
 cask "protonvpn", args: { appdir: "~/Applications" }
+cask "pulse", args: { appdir: "~/Applications" }
 cask "signal", args: { appdir: "~/Applications" }
+cask "steam", args: { appdir: "~/Applications" }
 cask "suspicious-package", args: { appdir: "~/Applications" }
 cask "syncthing", args: { appdir: "~/Applications" }
 cask "tor-browser", args: { appdir: "~/Applications" }
-cask "visual-studio-code", args: { appdir: "~/Applications" }
 cask "vlc", args: { appdir: "~/Applications" }
+cask "vscodium", args: { appdir: "~/Applications" }
+cask "xcodes", args: { appdir: "~/Applications" }
