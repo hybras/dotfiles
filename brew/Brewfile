@@ -1,10 +1,12 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
+tap "homebrew/cask-versions"
 tap "homebrew/command-not-found"
 tap "homebrew/core"
 tap "homebrew/portable-ruby"
 
+tap "adoptopenjdk/openjdk"
 tap "beeftornado/rmtree"
 tap "cantino/mcfly"
 tap "heroku/brew"
@@ -19,12 +21,17 @@ brew "alerter"
 brew "openssl@1.1"
 brew "python@3.9"
 brew "asciinema"
+brew "atomicparsley"
 brew "bat"
 brew "glib"
 brew "pkg-config"
+brew "chezmoi"
+brew "dos2unix"
 brew "dprint"
+brew "dust"
 brew "exa"
 brew "fd"
+brew "unbound"
 brew "libsodium"
 brew "rubberband"
 brew "ffmpeg"
@@ -48,6 +55,8 @@ brew "macos-trash"
 brew "neovim"
 brew "nmap"
 brew "node"
+brew "nushell"
+brew "openjdk"
 brew "perl"
 brew "procs"
 brew "ripgrep"
@@ -79,7 +88,7 @@ cask "font-inconsolata-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-source-code-pro-for-powerline"
 
-cask "bitwarden", args: { appdir: "~/Applications" }
+cask "adoptopenjdk16"
 cask "bluestacks", args: { appdir: "~/Applications" }
 cask "brave-browser", args: { appdir: "~/Applications" }
 cask "cakebrew", args: { appdir: "~/Applications" }
@@ -95,6 +104,7 @@ cask "mactex", args: { appdir: "~/Applications" }
 cask "netnewswire", args: { appdir: "~/Applications" }
 cask "ngrok", args: { appdir: "~/Applications" }
 cask "protonvpn", args: { appdir: "~/Applications" }
+cask "proxyman", args: { appdir: "~/Applications" }
 cask "pulse", args: { appdir: "~/Applications" }
 cask "signal", args: { appdir: "~/Applications" }
 cask "steam", args: { appdir: "~/Applications" }
@@ -103,4 +113,5 @@ cask "syncthing", args: { appdir: "~/Applications" }
 cask "tor-browser", args: { appdir: "~/Applications" }
 cask "vlc", args: { appdir: "~/Applications" }
 cask "vscodium", args: { appdir: "~/Applications" }
+cask "whoozle-android-file-transfer", args: { appdir: "~/Applications" }
 cask "xcodes", args: { appdir: "~/Applications" }
