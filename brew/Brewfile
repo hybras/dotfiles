@@ -82,7 +82,7 @@ brew "jmacdonald/amp/amp"
 brew "rafaelgarrido/caveats/brew-caveats"
 brew "robotsandpencils/made/xcodes"
 
-cask_args appdir: "~/Applications"
+cask_args appdir: "~/Applications", require_sha: true
 
 cask "font-cascadia-code"
 cask "font-fira-mono-nerd-font"
