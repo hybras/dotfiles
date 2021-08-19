@@ -82,6 +82,8 @@ brew "jmacdonald/amp/amp"
 brew "rafaelgarrido/caveats/brew-caveats"
 brew "robotsandpencils/made/xcodes"
 
+cask_args appdir: "~/Applications"
+
 cask "font-cascadia-code"
 cask "font-fira-mono-nerd-font"
 cask "font-inconsolata-for-powerline"
@@ -90,32 +92,32 @@ cask "font-jetbrains-mono-nerd-font"
 cask "font-source-code-pro-for-powerline"
 
 cask "adoptopenjdk16"
-cask "bluestacks", args: { appdir: "~/Applications" }
-cask "brave-browser", args: { appdir: "~/Applications" }
-cask "cakebrew", args: { appdir: "~/Applications" }
-cask "discord", args: { appdir: "~/Applications" }
-cask "gitfinder", args: { appdir: "~/Applications" }
-cask "google-chrome", args: { appdir: "~/Applications" }
-cask "gpg-suite-no-mail", args: { appdir: "~/Applications" }
-cask "iina", args: { appdir: "~/Applications" }
-cask "intellij-idea", args: { appdir: "~/Applications" }
-cask "iterm2", args: { appdir: "~/Applications" }
-cask "karabiner-elements", args: { appdir: "~/Applications" }
-cask "mactex", args: { appdir: "~/Applications" }
-cask "netnewswire", args: { appdir: "~/Applications" }
-cask "ngrok", args: { appdir: "~/Applications" }
-cask "protonvpn", args: { appdir: "~/Applications" }
-cask "proxyman", args: { appdir: "~/Applications" }
-cask "pulse", args: { appdir: "~/Applications" }
-cask "signal", args: { appdir: "~/Applications" }
-cask "steam", args: { appdir: "~/Applications" }
-cask "suspicious-package", args: { appdir: "~/Applications" }
-cask "syncthing", args: { appdir: "~/Applications" }
-cask "tor-browser", args: { appdir: "~/Applications" }
-cask "vlc", args: { appdir: "~/Applications" }
-cask "vscodium", args: { appdir: "~/Applications" }
-cask "whoozle-android-file-transfer", args: { appdir: "~/Applications" }
-cask "xcodes", args: { appdir: "~/Applications" }
+cask "bluestacks"
+cask "brave-browser"
+cask "cakebrew"
+cask "discord"
+cask "gitfinder"
+cask "google-chrome"
+cask "gpg-suite-no-mail"
+cask "iina"
+cask "intellij-idea"
+cask "iterm2"
+cask "karabiner-elements"
+cask "mactex"
+cask "netnewswire"
+cask "ngrok"
+cask "protonvpn"
+cask "proxyman"
+cask "pulse"
+cask "signal"
+cask "steam"
+cask "suspicious-package"
+cask "syncthing"
+cask "tor-browser"
+cask "vlc"
+cask "vscodium"
+cask "whoozle-android-file-transfer"
+cask "xcodes"
 
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
