@@ -52,6 +52,7 @@ brew "libxml2"
 brew "libxslt"
 brew "llvm"
 brew "macos-trash"
+brew "mas"
 brew "neovim"
 brew "nmap"
 brew "node"
@@ -115,3 +116,10 @@ cask "vlc", args: { appdir: "~/Applications" }
 cask "vscodium", args: { appdir: "~/Applications" }
 cask "whoozle-android-file-transfer", args: { appdir: "~/Applications" }
 cask "xcodes", args: { appdir: "~/Applications" }
+
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Xcode", id: 497799835
