@@ -11,7 +11,13 @@
 * https://www.warp.dev[warp]
 
 == Shell
-https://www.nushell.sh[nushell]
+
+* https://www.nushell.sh[nushell]
+
+* https://github.com/zdharma/fast-syntax-highlighting#chroma-function
+https://github.com/marzocchi/zsh-notify#configuration
+* https://rust-lang.github.io/rustup/installation/index.html#enable-tab-completion-for-bash-fish-zsh-or-powershell[Cargo, Rustup autocomplete]
+
 
 == Horndis
 
