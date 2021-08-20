@@ -42,5 +42,10 @@ https://github.com/marzocchi/zsh-notify#configuration
 * https://github.com/samuelclay/NewsBlur[NewsBlur]
 * https://nodetics.com/feedbro[FeedBro]
 
+== Misc
 
-https://github.com/jwise/HoRNDIS
+* https://github.com/jwise/HoRNDIS[Horndis]
+* Karabiner : Remap keys to application at ~/Application
+* https://davidwalsh.name/touch-sudo[ Sudo with TouchID
+]
+* https://nodetics.com/feedbro[FeedBro]
