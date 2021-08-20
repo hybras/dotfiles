@@ -1,7 +1,5 @@
 = macOS Changes
 
-* https://www.tp-link.com/us/support/download/ue305/#Driver[TP Link Ethernet Driver]
-
 == Terminal
 
 * https://hyper.is[hyper]
@@ -46,6 +44,7 @@ https://github.com/marzocchi/zsh-notify#configuration
 
 * https://github.com/jwise/HoRNDIS[Horndis]
 * Karabiner : Remap keys to application at ~/Application
-* https://davidwalsh.name/touch-sudo[ Sudo with TouchID
-]
+* https://davidwalsh.name/touch-sudo[Sudo with TouchID]
 * https://nodetics.com/feedbro[FeedBro]
+* https://www.tp-link.com/us/support/download/ue305/#Driver[TP Link Ethernet Driver]
+
