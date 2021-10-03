@@ -1,0 +1,63 @@
+# `sheldon` configuration file
+# ----------------------------
+#
+# You can modify this file directly or you can use one of the following
+# `sheldon` commands which are provided to assist in editing the config file:
+#
+# - `sheldon add` to add a new plugin to the config file
+# - `sheldon edit` to open up the config file in the default editor
+# - `sheldon remove` to remove a plugin from the config file
+#
+# See the documentation for more https://github.com/rossmacarthur/sheldon#readme
+
+shell = "zsh"
+
+[plugins]
+
+[plugins.aliases] # my personal aliases
+local = '~/Documents/dotfiles/aliases'
+
+[plugins.syntax-highlighting]
+github = 'zsh-users/zsh-syntax-highlighting'
+
+[plugins.autocomplete]
+github = 'zsh-users/zsh-autosuggestions'
+
+[plugins.mac-completions]
+github = 'scriptingosx/mac-zsh-completions'
+
+[plugins.sudo]
+github = 'ohmyzsh/ohmyzsh'
+dir = 'plugins/sudo'
+
+[plugins.git-aliases]
+github = 'ohmyzsh/ohmyzsh'
+dir = 'plugins/git'
+
+[plugins.command-not-found]
+github = 'ohmyzsh/ohmyzsh'
+dir = 'plugins/command-not-found'
+
+[plugins.dotenv]
+github = 'ohmyzsh/ohmyzsh'
+dir = 'plugins/dotenv'
+
+[plugins.gradle]
+github = 'ohmyzsh/ohmyzsh'
+dir = 'plugins/gradle'
+
+[plugins.clip]
+github = 'zpm-zsh/clipboard'
+
+[plugins.exa-aliases]
+github = 'DarrinTisdale/zsh-aliases-exa'
+
+[plugins.ping]
+github = 'rummik/zsh-ing'
+
+[plugins.colored-man]
+github = 'ael-code/zsh-colored-man-pages'
+
+[plugins.compgen]
+github = 'RobSis/zsh-completion-generator'
+
