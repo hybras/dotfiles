@@ -1,0 +1,50 @@
+= macOS Changes
+
+== Terminal
+
+* https://hyper.is[hyper]
+* https://github.com/alacritty/alacritty/[alacritty]
+* https://sw.kovidgoyal.net/kitty/[kitty]
+* https://iterm2.com[iterm]
+* https://www.warp.dev[warp]
+
+== Shell
+
+* https://www.nushell.sh[nushell]
+
+* https://github.com/zdharma/fast-syntax-highlighting#chroma-function
+https://github.com/marzocchi/zsh-notify#configuration
+* https://rust-lang.github.io/rustup/installation/index.html#enable-tab-completion-for-bash-fish-zsh-or-powershell[Cargo, Rustup autocomplete]
+
+== Dotfiles Management
+
+* https://github.com/twpayne/chezmoi
+* https://github.com/SuperCuber/dotter
+* https://github.com/CGamesPlay/dfm
+* https://github.com/gbrlsnchs/pilgo
+* https://github.com/TheLocehiliosan/yadm
+* https://github.com/kobus-v-schoor/dotgit
+* https://github.com/zero-sh/zero.sh
+* https://dotfiles.github.io/utilities/
+
+== RSS
+
+* https://quiterss.org/[Quite]
+* https://ravenreader.app/[Raven]
+* https://github.com/Xyrio/RSSOwlnix[Owl]
+* https://miniflux.app/[MiniFlux]
+* https://petrolette.space/[Petrolette]
+* https://gitlab.com/thiagoVA/sourcerer[Sourceres]
+* https://gitlab.com/amatriain/feedbunch[FeedBunch]
+* https://yomu.jaxx2104.info/[Yomu]
+* https://github.com/samuelclay/NewsBlur[NewsBlur]
+* https://nodetics.com/feedbro[FeedBro]
+
+== Misc
+
+* https://github.com/jwise/HoRNDIS[Horndis]
+* Karabiner : Remap keys to application at ~/Application
+* https://davidwalsh.name/touch-sudo[Sudo with TouchID]
+* https://www.tp-link.com/us/support/download/ue305/#Driver[TP Link Ethernet Driver]
+* https://nightowl.kramser.xyz/[NightOwl]
+
