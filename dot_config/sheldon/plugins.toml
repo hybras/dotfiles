@@ -14,8 +14,12 @@ shell = "zsh"
 
 [plugins]
 
-[plugins.aliases] # my personal aliases
-local = '~/Documents/dotfiles/aliases'
+[plugins.my_functions]
+local = '~/.config/zsh/personal/functions'
+apply = ['fpath']
+
+[plugins.my_aliases]
+local = '~/.config/zsh/personal/aliases'
 
 [plugins.syntax-highlighting]
 github = 'zsh-users/zsh-syntax-highlighting'
@@ -60,4 +64,3 @@ github = 'ael-code/zsh-colored-man-pages'
 
 [plugins.compgen]
 github = 'RobSis/zsh-completion-generator'
-
