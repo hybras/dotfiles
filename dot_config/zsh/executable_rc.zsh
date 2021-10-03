@@ -27,10 +27,10 @@ fpath=(
 
 zstyle :omz:plugins:ssh-agent identities id_rsa_github id_rsa_gitlab pijul_nest
 
-zstyle :plugin:zsh-completion-generator programs youtube-dl dprint
+zstyle :plugin:zsh-completion-generator programs youtube-dl dprint mkcert
 
-GENCOMPL_FPATH=$XDG_CACHE_HOME/gencomp
-GENCOMPL_PY=python3
+export GENCOMPL_FPATH=$XDG_CACHE_HOME/gencomp
+export GENCOMPL_PY=python3
 
 # The git plugin needs compdef
 autoload -Uz compinit && compinit
