@@ -20,6 +20,7 @@ apply = ['fpath']
 
 [plugins.my_aliases]
 local = '~/.config/zsh/personal/aliases'
+use = ['aliases.plugin.zsh', 'bw.plugin.zsh']
 
 [plugins.syntax-highlighting]
 github = 'zsh-users/zsh-syntax-highlighting'
