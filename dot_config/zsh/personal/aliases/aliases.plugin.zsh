@@ -1,3 +1,6 @@
+fpath+=( "${0:h}/functions" )
+autoload -Uz help
+
 alias jsh='jshell'
 alias python='python3'
 alias py='python3'
