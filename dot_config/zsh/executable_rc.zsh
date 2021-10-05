@@ -26,6 +26,7 @@ fpath=(
 )
 
 zstyle :omz:plugins:ssh-agent identities id_rsa_github id_rsa_gitlab pijul_nest
+zstyle :omz:plugins:ssh-agent ssh-add-args -A
 
 zstyle :plugin:zsh-completion-generator programs youtube-dl dprint mkcert
 

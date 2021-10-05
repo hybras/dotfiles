@@ -35,6 +35,10 @@ github = 'scriptingosx/mac-zsh-completions'
 github = 'ohmyzsh/ohmyzsh'
 dir = 'plugins/sudo'
 
+[plugins.ssh-agent]
+github = 'ohmyzsh/ohmyzsh'
+dir = 'plugins/ssh-agent'
+
 [plugins.git-aliases]
 github = 'ohmyzsh/ohmyzsh'
 dir = 'plugins/git'
