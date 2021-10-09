@@ -37,9 +37,9 @@ module.exports = {
     handlers: [
         {
             match: [
-                /^https?:\/\/youtube\.com\/.*$/,
-                /^https?:\/\/wikipedia\.com\/.*$/,
-                /^https?:\/\/github\.com\/.*$/,
+                /^https:\/\/youtube\.com\/.*$/,
+                /^https:\/\/wikipedia\.com\/.*$/,
+                /^https:\/\/github\.com\/.*$/,
             ],
             browser: tor,
         },
