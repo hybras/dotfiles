@@ -4,6 +4,7 @@ const browserosaurus = "com.browserosaurus"
 const tor = "org.torproject.torbrowser"
 const zoom = "us.zoom.xos"
 const vscode = "com.visualstudio.code.oss"
+const brave = "com.brave.Browser"
 
 module.exports = {
     defaultBrowser: browserosaurus,
