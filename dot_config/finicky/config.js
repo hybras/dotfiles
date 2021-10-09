@@ -53,5 +53,9 @@ module.exports = {
             ].includes(opener.bundleId),
             browser: tor,
         },
+        {
+            match: /https:\/\/feed.dilbert.com\/.*$/,
+            browser: brave
+        }
     ],
 };
