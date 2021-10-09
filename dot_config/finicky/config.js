@@ -54,7 +54,7 @@ module.exports = {
             browser: tor,
         },
         {
-            match: /https:\/\/feed.dilbert.com\/.*$/,
+            match: /^https:\/\/feed.dilbert.com\/.*$/,
             browser: brave
         }
     ],
