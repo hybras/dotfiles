@@ -41,9 +41,9 @@ dir = 'plugins/keychain'
 github = 'ohmyzsh/ohmyzsh'
 dir = 'plugins/sudo'
 
-[plugins.ssh-agent]
-github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/ssh-agent'
+# [plugins.ssh-agent]
+# github = 'ohmyzsh/ohmyzsh'
+# dir = 'plugins/ssh-agent'
 
 [plugins.git-aliases]
 github = 'ohmyzsh/ohmyzsh'
