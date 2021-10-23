@@ -33,9 +33,9 @@ github = 'zsh-users/zsh-autosuggestions'
 [plugins.mac-completions]
 github = 'scriptingosx/mac-zsh-completions'
 
-[plugins.keychain]
-github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/keychain'
+# [plugins.keychain]
+# github = 'ohmyzsh/ohmyzsh'
+# dir = 'plugins/keychain'
 
 [plugins.sudo]
 github = 'ohmyzsh/ohmyzsh'
