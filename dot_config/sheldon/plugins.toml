@@ -33,10 +33,6 @@ github = 'zsh-users/zsh-autosuggestions'
 [plugins.mac-completions]
 github = 'scriptingosx/mac-zsh-completions'
 
-# [plugins.keychain]
-# github = 'ohmyzsh/ohmyzsh'
-# dir = 'plugins/keychain'
-
 [plugins.sudo]
 github = 'ohmyzsh/ohmyzsh'
 dir = 'plugins/sudo'
@@ -44,6 +40,14 @@ dir = 'plugins/sudo'
 # [plugins.ssh-agent]
 # github = 'ohmyzsh/ohmyzsh'
 # dir = 'plugins/ssh-agent'
+
+[plugins.gpg-agent]
+github = 'ohmyzsh/ohmyzsh'
+dir = 'plugins/gpg-agent'
+
+[plugins.keychain]
+github = 'ohmyzsh/ohmyzsh'
+dir = 'plugins/keychain'
 
 [plugins.git-aliases]
 github = 'ohmyzsh/ohmyzsh'
