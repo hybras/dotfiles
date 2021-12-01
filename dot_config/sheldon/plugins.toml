@@ -41,13 +41,13 @@ dir = 'plugins/sudo'
 # github = 'ohmyzsh/ohmyzsh'
 # dir = 'plugins/ssh-agent'
 
-[plugins.gpg-agent]
-github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/gpg-agent'
+# [plugins.gpg-agent]
+# github = 'ohmyzsh/ohmyzsh'
+# dir = 'plugins/gpg-agent'
 
-[plugins.keychain]
-github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/keychain'
+# [plugins.keychain]
+# github = 'ohmyzsh/ohmyzsh'
+# dir = 'plugins/keychain'
 
 [plugins.git-aliases]
 github = 'ohmyzsh/ohmyzsh'
