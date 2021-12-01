@@ -29,3 +29,4 @@ export path=(
 )
 
 export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
+export GPG_TTY=$(tty)
