@@ -38,6 +38,11 @@ module.exports = {
         {
             match: [
                 /^https:\/\/youtube\.com\/.*$/,
+            ],
+            browser: brave,
+        },
+        {
+            match: [
                 /^https:\/\/wikipedia\.com\/.*$/,
                 /^https:\/\/github\.com\/.*$/,
             ],
