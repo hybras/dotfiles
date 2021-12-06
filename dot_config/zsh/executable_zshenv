@@ -19,11 +19,11 @@ fi
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
-echo "brew env"
+echo "starting: $path"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-echo "path extras"
+echo "with homebrew: $path"
 
 path=(
 # 	"/opt/homebrew/opt/ruby/bin"
@@ -33,6 +33,8 @@ path=(
 	# "$HOME/Library/Python/3.9/bin"
 	$path
 )
+
+echo "with extras: $path"
 
 export PATH
 
