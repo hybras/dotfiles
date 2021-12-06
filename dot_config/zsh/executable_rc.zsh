@@ -13,7 +13,6 @@ bindkey -e
 # setopt CORRECT
 # setopt CORRECT_ALL
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
 eval $(starship init zsh)
 eval "$(mcfly init zsh)"
 eval "$(zoxide init zsh)"
