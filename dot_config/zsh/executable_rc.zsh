@@ -45,5 +45,7 @@ autoload -Uz compinit && compinit
 export EDITOR='codium --wait'
 export VISUAL='codium --wait'
 
+echo "opam path"
+
 # opam configuration
 [[ ! -r /Users/hybras/.opam/opam-init/init.zsh ]] || source /Users/hybras/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null

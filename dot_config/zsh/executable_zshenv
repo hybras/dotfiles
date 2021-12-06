@@ -19,7 +19,11 @@ fi
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
+echo "brew env"
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+echo "path extras"
 
 path=(
 # 	"/opt/homebrew/opt/ruby/bin"
