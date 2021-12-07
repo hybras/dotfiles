@@ -1,5 +1,5 @@
 fpath+=( "${0:h}/functions" )
-autoload -Uz help
+autoload -Uz help opam_init
 
 alias jsh='jshell'
 alias python='python3'
