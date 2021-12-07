@@ -32,14 +32,13 @@ zstyle :omz:plugins:keychain options --quiet
 zstyle :omz:plugins:keychain agents gpg,ssh
 zstyle :omz:plugins:keychain identities 7C7ECFF562786CA6B4A8633B8AC89A889BFA44A8 CECCB3D5398F04652EF4A536109BC93C8B952313 id_rsa_github id_rsa_gitlab id_umd
 
-zstyle :plugin:zsh-completion-generator programs youtube-dl dprint mkcert
+# zstyle :plugin:zsh-completion-generator programs $program
 
-export GENCOMPL_FPATH=$XDG_CACHE_HOME/gencomp
-export GENCOMPL_PY=python3
+# export GENCOMPL_FPATH=$XDG_CACHE_HOME/gencomp
+# export GENCOMPL_PY=python3
 
 # The git plugin needs compdef
 autoload -Uz compinit && compinit
-
 
 eval "$(sheldon source)"
 

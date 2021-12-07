@@ -77,5 +77,5 @@ github = 'rummik/zsh-ing'
 [plugins.colored-man]
 github = 'ael-code/zsh-colored-man-pages'
 
-[plugins.compgen]
-github = 'RobSis/zsh-completion-generator'
+# [plugins.compgen]
+# github = 'RobSis/zsh-completion-generator'
