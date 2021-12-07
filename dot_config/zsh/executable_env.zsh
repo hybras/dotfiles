@@ -19,18 +19,5 @@ fi
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
-eval `/opt/homebrew/bin/brew shellenv zsh`
-
-path=(
-# 	"/opt/homebrew/opt/ruby/bin"
-# 	"/opt/homebrew/lib/ruby/gems/3.0.0/bin"
-# 	"/opt/homebrew/opt/openjdk/bin"
-	"$HOME/.cargo/bin"
-	# "$HOME/Library/Python/3.9/bin"
-	$path
-)
-
-export PATH
-
 export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 export GPG_TTY=$(tty)
