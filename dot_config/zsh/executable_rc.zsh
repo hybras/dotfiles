@@ -40,19 +40,13 @@ export GENCOMPL_PY=python3
 # The git plugin needs compdef
 autoload -Uz compinit && compinit
 
-echo "before sheldon: $path"
-
 
 eval "$(sheldon source)"
-
-echo "after sheldon: $path"
 
 autoload -Uz compinit && compinit
 
 export EDITOR='codium --wait'
 export VISUAL='codium --wait'
-
-echo "final path: $path"
 
 # opam configuration
 # [[ ! -r /Users/hybras/.opam/opam-init/init.zsh ]] || source /Users/hybras/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
