@@ -24,6 +24,10 @@ apply = ['fpath']
 local = '~/.config/zsh/personal/aliases'
 use = ['aliases.plugin.zsh', 'bw.plugin.zsh']
 
+[plugins.gencomp_cache]
+local = '~/.cache/gencomp'
+apply = ['fpath']
+
 [plugins.syntax-highlighting]
 github = 'zsh-users/zsh-syntax-highlighting'
 
