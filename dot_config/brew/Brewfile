@@ -117,6 +117,7 @@ cask "font-source-code-pro-for-powerline"
 
 cask "adoptopenjdk16"
 cask "alacritty"
+cask "betterdiscord-installer"
 cask "bluestacks"
 cask "bonjeff"
 cask "brave-browser"
