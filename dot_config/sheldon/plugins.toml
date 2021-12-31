@@ -25,12 +25,23 @@ defer = { value = 'zsh-defer source "{{ file }}"', each = true }
 github = 'romkatv/zsh-defer'
 apply = ['source']
 
+[plugins.brew]
+local = '~/.config/zsh/personal'
+apply = ['source']
+
 [plugins.my_functions]
 local = '~/.config/zsh/personal/functions'
 
 [plugins.my_aliases]
 local = '~/.config/zsh/personal/aliases'
 use = ['aliases.plugin.zsh', 'bw.plugin.zsh']
+
+[plugins.starship]
+local = '~/.config/zsh/personal'
+apply = ['source']
+
+[plugins.mcfly]
+local = '~/.config/zsh/personal'
 
 [plugins.gencomp_cache]
 local = '~/.cache/gencomp'
@@ -62,6 +73,10 @@ dir = 'plugins/{{ name }}'
 # dir = 'plugins/{{ name }}'
 
 [plugins.git]
+github = 'ohmyzsh/ohmyzsh'
+dir = 'plugins/{{ name }}'
+
+[plugins.zoxide]
 github = 'ohmyzsh/ohmyzsh'
 dir = 'plugins/{{ name }}'
 

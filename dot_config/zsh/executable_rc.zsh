@@ -10,8 +10,6 @@ setopt HIST_REDUCE_BLANKS
 setopt autocd
 bindkey -e
 
-eval `/opt/homebrew/bin/brew shellenv zsh`
-
 path=(
 	"/opt/homebrew/opt/ruby/bin"
 	"/opt/homebrew/lib/ruby/gems/3.0.0/bin"
@@ -26,16 +24,7 @@ export PATH
 # setopt CORRECT
 # setopt CORRECT_ALL
 
-eval $(starship init zsh)
-eval "$(mcfly init zsh)"
-eval "$(zoxide init zsh)"
-
 export GPG_TTY=$(tty)
-
-fpath=(
-	$(brew --prefix)/share/zsh/site-functions
-	$fpath
-)
 
 # zstyle :omz:plugins:ssh-agent identities id_rsa_github id_rsa_gitlab pijul_nest
 # zstyle :omz:plugins:ssh-agent ssh-add-args -A
@@ -48,10 +37,7 @@ zstyle :omz:plugins:keychain identities 7C7ECFF562786CA6B4A8633B8AC89A889BFA44A8
 # export GENCOMPL_FPATH=$XDG_CACHE_HOME/gencomp
 # export GENCOMPL_PY=python3
 
-# The git plugin needs compdef
-autoload -Uz compinit && compinit
-
-eval "$(sheldon source)"
+eval "$(/opt/homebrew/bin/sheldon source)"
 
 autoload -Uz compinit && compinit
 
