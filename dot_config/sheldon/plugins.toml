@@ -14,11 +14,19 @@
 
 shell = "zsh"
 
+apply = ['defer']
+
+[templates]
+defer = { value = 'zsh-defer source "{{ file }}"', each = true }
+
 [plugins]
+
+[plugins.zsh-defer]
+github = 'romkatv/zsh-defer'
+apply = ['source']
 
 [plugins.my_functions]
 local = '~/.config/zsh/personal/functions'
-apply = ['fpath']
 
 [plugins.my_aliases]
 local = '~/.config/zsh/personal/aliases'
