@@ -104,5 +104,8 @@ github = 'rummik/zsh-ing'
 [plugins.colored-man]
 github = 'ael-code/zsh-colored-man-pages'
 
+[plugins.you-should-use]
+github = "MichaelAquilina/zsh-you-should-use"
+
 # [plugins.compgen]
 # github = 'RobSis/zsh-completion-generator'
