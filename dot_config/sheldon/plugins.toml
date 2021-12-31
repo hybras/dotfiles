@@ -60,18 +60,6 @@ github = 'scriptingosx/mac-zsh-completions'
 github = 'ohmyzsh/ohmyzsh'
 dir = 'plugins/{{ name }}'
 
-# [plugins.ssh-agent]
-# github = 'ohmyzsh/ohmyzsh'
-# dir = 'plugins/{{ name }}'
-
-# [plugins.gpg-agent]
-# github = 'ohmyzsh/ohmyzsh'
-# dir = 'plugins/{{ name }}'
-
-# [plugins.keychain]
-# github = 'ohmyzsh/ohmyzsh'
-# dir = 'plugins/{{ name }}'
-
 [plugins.git]
 github = 'ohmyzsh/ohmyzsh'
 dir = 'plugins/{{ name }}'
@@ -106,6 +94,18 @@ github = 'ael-code/zsh-colored-man-pages'
 
 [plugins.you-should-use]
 github = "MichaelAquilina/zsh-you-should-use"
+
+# [plugins.ssh-agent]
+# github = 'ohmyzsh/ohmyzsh'
+# dir = 'plugins/{{ name }}'
+
+# [plugins.gpg-agent]
+# github = 'ohmyzsh/ohmyzsh'
+# dir = 'plugins/{{ name }}'
+
+# [plugins.keychain]
+# github = 'ohmyzsh/ohmyzsh'
+# dir = 'plugins/{{ name }}'
 
 # [plugins.compgen]
 # github = 'RobSis/zsh-completion-generator'
