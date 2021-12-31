@@ -39,35 +39,35 @@ github = 'scriptingosx/mac-zsh-completions'
 
 [plugins.sudo]
 github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/sudo'
+dir = 'plugins/{{ name }}'
 
 # [plugins.ssh-agent]
 # github = 'ohmyzsh/ohmyzsh'
-# dir = 'plugins/ssh-agent'
+# dir = 'plugins/{{ name }}'
 
 # [plugins.gpg-agent]
 # github = 'ohmyzsh/ohmyzsh'
-# dir = 'plugins/gpg-agent'
+# dir = 'plugins/{{ name }}'
 
 # [plugins.keychain]
 # github = 'ohmyzsh/ohmyzsh'
-# dir = 'plugins/keychain'
+# dir = 'plugins/{{ name }}'
 
-[plugins.git-aliases]
+[plugins.git]
 github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/git'
+dir = 'plugins/{{ name }}'
 
 [plugins.command-not-found]
 github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/command-not-found'
+dir = 'plugins/{{ name }}'
 
 [plugins.dotenv]
 github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/dotenv'
+dir = 'plugins/{{ name }}'
 
 [plugins.gradle]
 github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/gradle'
+dir = 'plugins/{{ name }}'
 
 [plugins.clip]
 github = 'zpm-zsh/clipboard'
