@@ -38,29 +38,25 @@ module.exports = {
         {
             match: [
                 /^https:\/\/youtube\.com\/.*$/,
+                /^https:\/\/wikipedia\.com\/.*$/,
+                /^https:\/\/github\.com\/.*$/,
+                /^https:\/\/feed.dilbert.com\/.*$/,
             ],
             browser: brave,
         },
         {
-            match: [
-                /^https:\/\/wikipedia\.com\/.*$/,
-                /^https:\/\/github\.com\/.*$/,
-            ],
-            browser: tor,
+            match: ({ opener }) => [
+                netnewswire,
+                vscode,
+            ].includes(opener.bundleId),
+            browser: brave,
         },
         {
-            // Open any link clicked in Mail & Outlook in Google Chrome
             match: ({ opener }) => [
                 zoom,
-                netnewswire,
                 steam,
-                vscode
             ].includes(opener.bundleId),
             browser: tor,
         },
-        {
-            match: /^https:\/\/feed.dilbert.com\/.*$/,
-            browser: brave
-        }
     ],
 };
