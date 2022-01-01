@@ -24,9 +24,9 @@ colors:
     white:   '#fffefe'
 
 font:
-  normal:
-    family: Monaco
   size: 16.0
+  normal:
+    family: JetBrainsMono Nerd Font
 
 selection:
   # This string contains all characters that are used as separators for "semantic words" in Alacritty.
