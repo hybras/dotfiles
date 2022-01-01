@@ -7,5 +7,8 @@ shel:
 zsh:
     chezmoi apply ~/.config/zsh/env.zsh ~/.config/zsh/rc.zsh
 
+ala:
+    chezmoi apply ~/.config/alacritty.yml
+
 diff:
     chezmoi diff
