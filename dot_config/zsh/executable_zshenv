@@ -1,6 +1,3 @@
-# $HOME/.zshenv should only be a one-liner that sources this file
-# echo "source $HOME/.config/zsh/.zshenv" >| $HOME/.zshenv
-
 # Set XDG dirs
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
