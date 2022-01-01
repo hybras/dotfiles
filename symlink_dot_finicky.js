@@ -1,1 +1,1 @@
-/Users/hybras/.config/finicky/config.js
+/Users/hybras/.config/finicky.js
