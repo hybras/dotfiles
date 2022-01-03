@@ -7,6 +7,7 @@
 * https://sw.kovidgoyal.net/kitty/[kitty]
 * https://iterm2.com[iterm]
 * https://www.warp.dev[warp]
+* https://wezfurlong.org/wezterm/[wezterm]
 
 == Shell
 
@@ -47,4 +48,4 @@ https://github.com/marzocchi/zsh-notify#configuration
 * https://davidwalsh.name/touch-sudo[Sudo with TouchID]
 * https://www.tp-link.com/us/support/download/ue305/#Driver[TP Link Ethernet Driver]
 * https://nightowl.kramser.xyz/[NightOwl]
-
+* https://support.discord.com/hc/en-us/articles/1500006741102#h_01F33Q2M9381YXGAD2YBVF43NG[Discord Audio Sharing]
