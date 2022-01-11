@@ -49,3 +49,4 @@ https://github.com/marzocchi/zsh-notify#configuration
 * https://www.tp-link.com/us/support/download/ue305/#Driver[TP Link Ethernet Driver]
 * https://nightowl.kramser.xyz/[NightOwl]
 * https://support.discord.com/hc/en-us/articles/1500006741102#h_01F33Q2M9381YXGAD2YBVF43NG[Discord Audio Sharing]
+* https://github.com/hamxiaoz/open-folder-with-vs-code[Open in VS Code Finder Shortcut]
