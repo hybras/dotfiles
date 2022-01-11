@@ -26,8 +26,10 @@ github = 'romkatv/zsh-defer'
 apply = ['source']
 
 [plugins.brew]
-local = '~/.config/zsh/personal'
-apply = ['source']
+inline = "eval `/opt/homebrew/bin/brew shellenv zsh`"
+
+[plugins.brew-zsh-completions]
+inline = 'zsh-defer fpath+="$(brew --prefix)/share/zsh/site-functions"'
 
 [plugins.my_functions]
 local = '~/.config/zsh/personal/functions'
@@ -36,12 +38,11 @@ local = '~/.config/zsh/personal/functions'
 local = '~/.config/zsh/personal/aliases'
 use = ['aliases.plugin.zsh', 'bw.plugin.zsh']
 
-[plugins.starship]
-local = '~/.config/zsh/personal'
-apply = ['source']
+[plugins.starship] # why dont it work with zsh-defer?
+inline = 'eval "$(starship init zsh)"'
 
 [plugins.mcfly]
-local = '~/.config/zsh/personal'
+inline = 'zsh-defer eval "$(mcfly init zsh)"'
 
 [plugins.gencomp_cache]
 local = '~/.cache/gencomp'
@@ -93,7 +94,14 @@ github = 'rummik/zsh-ing'
 github = 'ael-code/zsh-colored-man-pages'
 
 [plugins.you-should-use]
-github = "MichaelAquilina/zsh-you-should-use"
+github = 'MichaelAquilina/zsh-you-should-use'
+
+[plugins.rust-completion]
+inline = 'zsh-defer source $(rustc --print sysroot)/share/zsh/site-functions/_cargo'
+
+[plugins.opam]
+local = '~/.opam/opam-init/'
+use = ['init.zsh']
 
 # [plugins.ssh-agent]
 # github = 'ohmyzsh/ohmyzsh'
