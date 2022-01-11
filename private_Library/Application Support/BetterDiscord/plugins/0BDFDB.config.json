@@ -1,5 +1,6 @@
 {
 	"changeLogs": {
+		"BDFDB": "2.0.6",
 		"BetterNsfwTag": "1.2.7",
 		"ShowHiddenChannels": "3.0.4"
 	},
@@ -12,7 +13,7 @@
 		"useChromium": false
 	},
 	"hashes": {
-		"0BDFDB.data.json": "d4b0c62bfe402228295873986d4be8c56cd92e05",
-		"0BDFDB.raw.css": "6bb82eb9f45d2d68a03ad2d3e21dcf35a5e2e3ee"
+		"0BDFDB.data.json": "fd74baa926908e4ada61518baa3581a771f03afc",
+		"0BDFDB.raw.css": "d5ce2dee72b046d17c121e10e368985c71bbaced"
 	}
 }
