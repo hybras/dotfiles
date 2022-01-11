@@ -7,5 +7,8 @@
     "BetterVolume": true,
     "PluginRepo": true,
     "BetterNsfwTag": true,
-    "HideSideBar": true
+    "HideSideBar": true,
+    "BetterInvites": true,
+    "BetterCodeblocks": true,
+    "BetterFolders": false
 }
