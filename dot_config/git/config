@@ -18,5 +18,3 @@
 	whitespace = red reverse
 [init]
 	defaultBranch = main
-[core]
-	excludesfile = /Users/hybras/.config/git/ig
