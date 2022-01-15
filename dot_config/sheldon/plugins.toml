@@ -81,8 +81,20 @@ dir = 'plugins/{{ name }}'
 github = 'ohmyzsh/ohmyzsh'
 dir = 'plugins/{{ name }}'
 
+[plugins.clipboard]
+github = 'ohmyzsh/ohmyzsh'
+dir = 'lib'
+
 [plugins.clip]
-github = 'zpm-zsh/clipboard'
+inline = """
+function clip () {
+  if [[ -t 0 ]]; then
+    clippaste
+  else
+    clipcopy
+  fi
+}
+"""
 
 [plugins.exa-aliases]
 github = 'DarrinTisdale/zsh-aliases-exa'
