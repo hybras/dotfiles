@@ -1,2 +1,2 @@
 fpath+="${0:h}"
-autoload -Uz help
+autoload -Uz help clip
