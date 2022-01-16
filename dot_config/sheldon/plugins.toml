@@ -25,9 +25,6 @@ defer = { value = 'zsh-defer source "{{ file }}"', each = true }
 github = 'romkatv/zsh-defer'
 apply = ['source']
 
-[plugins.brew]
-inline = "eval `/opt/homebrew/bin/brew shellenv zsh`"
-
 [plugins.brew-zsh-completions]
 inline = 'zsh-defer fpath+="$(brew --prefix)/share/zsh/site-functions"'
 
