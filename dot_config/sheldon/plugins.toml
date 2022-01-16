@@ -108,6 +108,15 @@ inline = 'zsh-defer eval `rustup completions zsh rustup`'
 local = '~/.opam/opam-init/'
 use = ['init.zsh']
 
+[plugins.autoenv]
+github = 'zpm-zsh/autoenv'
+
+[plugins.virtualenv]
+github = 'MichaelAquilina/zsh-autoswitch-virtualenv'
+
+[plugins.auto-notify]
+github = 'MichaelAquilina/zsh-auto-notify'
+
 # [plugins.ssh-agent]
 # github = 'ohmyzsh/ohmyzsh'
 # dir = 'plugins/{{ name }}'
