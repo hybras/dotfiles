@@ -25,9 +25,7 @@ zstyle :omz:plugins:keychain identities 7C7ECFF562786CA6B4A8633B8AC89A889BFA44A8
 # export GENCOMPL_PY=python3
 export YSU_HARDCORE=1
 
-eval `/opt/homebrew/bin/brew shellenv zsh`
-
-eval "$(/opt/homebrew/bin/sheldon source)"
+eval "$(sheldon source)"
 
 autoload -Uz compinit && compinit
 
