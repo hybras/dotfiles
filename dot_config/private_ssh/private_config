@@ -1,0 +1,32 @@
+Host grace
+	User vchari
+	HostName grace.umd.edu
+
+Host terp
+	User vchari
+	HostName terpconnect.umd.edu
+
+Host umd_cs_git
+	User vchari
+	HostName gitlab.cs.umd.edu
+	PreferredAuthentications publickey
+
+Host github
+	HostName github.com
+	UseKeychain yes
+   	AddKeysToAgent yes
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/id_rsa_github
+
+Host gitlab
+	HostName gitlab.com
+	UseKeychain yes
+	AddKeysToAgent yes
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/id_rsa_gitlab
+
+Host eld
+	User hybras
+	HostName elderberry.local
+	PreferredAuthentications publickey,password
+	IdentityFile ~/.ssh/id_rsa_github
