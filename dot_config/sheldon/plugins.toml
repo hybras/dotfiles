@@ -33,7 +33,9 @@ local = '~/.config/zsh/personal/functions'
 
 [plugins.my_aliases]
 local = '~/.config/zsh/personal/aliases'
-use = ['aliases.plugin.zsh', 'bw.plugin.zsh']
+
+[plugins.bitwarden]
+local = '~/.config/zsh/personal'
 
 [plugins.starship] # why dont it work with zsh-defer?
 inline = 'eval "$(starship init zsh)"'
