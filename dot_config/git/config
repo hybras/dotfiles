@@ -24,3 +24,5 @@
 	autocrlf = input
 [interactive]
 	diffFilter = diff-so-fancy --patch
+[alias]
+	ignore = gi

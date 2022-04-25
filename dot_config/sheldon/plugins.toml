@@ -64,6 +64,10 @@ dir = 'plugins/{{ name }}'
 github = 'ohmyzsh/ohmyzsh'
 dir = 'plugins/{{ name }}'
 
+[plugins.gitignore]
+github = 'ohmyzsh/ohmyzsh'
+dir = 'plugins/{{ name }}'
+
 [plugins.zoxide]
 github = 'ohmyzsh/ohmyzsh'
 dir = 'plugins/{{ name }}'
