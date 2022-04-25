@@ -2,11 +2,11 @@
  * @name BetterInvites
  * @author HypedDomi#1711
  * @authorId 354191516979429376
- * @version 1.2.0
+ * @version 1.5.0
  * @description Shows some useful information in the invitation
  * @invite gp2ExK5vc7
  * @source https://github.com/HypedDomi/BetterDiscordStuff/tree/main/Plugins/BetterInvites
- * @updateUrl https://raw.githubusercontent.com/HypedDomi/BetterDiscordStuff/main/Plugins/BetterInvites/BetterInvites.plugin.js
+ * @updateUrl https://betterdiscord.app/gh-redirect/?id=539
  * @donate https://paypal.me/dominik1711
  * @website https://bambus.me/BetterDiscordStuff/
  */
@@ -24,7 +24,7 @@ const config = {
                 discord_id: "354191516979429376",
             },
         ],
-        version: "1.2.0",
+        version: "1.5.0",
         description:
             "Shows some useful information in the invitation",
         github:
@@ -36,8 +36,19 @@ const config = {
         {
             type: "switch",
             id: "showBanner",
-            name: "Show Guild Banner",
+            name: "Show Banner on Invite",
             value: true,
+        },
+        {
+            type: "dropdown",
+            id: "bannerType",
+            name: "Banner Type",
+            note: "The type of banner to show",
+            value: 0,
+            options: [
+                { label: "BetterInvites Banner", value: 0 },
+                { label: "Discord Invite Splash", value: 1 }
+            ]
         },
         {
             type: "switch",
@@ -85,14 +96,9 @@ const config = {
     ],
     changelog: [
         {
-            title: "NEW",
+            title: "What's new",
             type: "added",
-            items: ["Added Invite Expiration"],
-        },
-        {
-            title: "FIXED",
-            type: "fixed",
-            items: ["Fixed some classes"],
+            items: ["Added Option to switch the banner type"],
         }
     ],
 };
@@ -157,11 +163,6 @@ module.exports = !global.ZeresPluginLibrary
                     if (!invite) return;
                     const { guild, inviter } = invite;
 
-                    let boostLevel = 0;
-                    if (guild.features.includes("VANITY_URL")) boostLevel = 3;
-                    else if (guild.features.includes("BANNER")) boostLevel = 2;
-                    else if (guild.features.includes("ANIMATED_ICON")) boostLevel = 1;
-
                     let expireTooltip = "";
                     if (invite.expires_at != null) {
                         const inviteExpireDays = Math.floor((new Date(invite.expires_at) - Date.now()) / 1000 / 60 / 60 / 24);
@@ -177,17 +178,8 @@ module.exports = !global.ZeresPluginLibrary
                         }
                     }
 
-                    if (this.settings.showBanner && guild?.banner) {
-                        component.props.children.splice(1, 0,
-                            React.createElement("div", { className: `${config.info.name}-guildBanner`, style: { position: "relative", marginBottom: "1%" } },
-                                React.createElement("img", {
-                                    src: `https://cdn.discordapp.com/banners/${guild.id}/${guild.banner}.png?size=1024`,
-                                    style: { width: "100%", height: "auto", maxHeight: "100px", borderRadius: "5px", objectFit: "cover" }
-                                })
-                            )
-                        )
-                    }
-                    component.props.children[this.settings.showBanner && guild?.banner ? 2 : 1].props.children.splice(2, 0,
+                    const boostLevel = component.props.children[2].props.children[0].props.guild?.premiumTier;
+                    component.props.children[2].props.children.splice(2, 0,
                         this.settings.showBoost || this.settings.showInviter || this.settings.showVerification || this.settings.showNSFW || this.settings.showExpire ?
                             React.createElement("div", { className: `${config.info.name}-iconWrapper`, style: { display: "grid", grid: "auto / auto auto", direction: "rtl", "grid-gap": "3px" } },
                                 // Boost
@@ -198,7 +190,7 @@ module.exports = !global.ZeresPluginLibrary
                                 // Inviter
                                 this.settings.showInviter && inviter ?
                                     React.createElement(TooltipContainer, { text: `Invited by: ${inviter?.username}#${inviter?.discriminator}` },
-                                        React.createElement("img", { style: { height: "28px", borderRadius: "5px", objectFit: "contain" }, src: `https://cdn.discordapp.com/avatars/${inviter?.id}/${inviter?.avatar}.png?size=1024`, onError: (e) => { e.target.src = "https://cdn.discordapp.com/embed/avatars/0.png"; } }))
+                                        React.createElement("img", { style: { height: "28px", borderRadius: "5px", objectFit: "contain" }, onClick: () => { DiscordNative.clipboard.copy(inviter?.id); window.BdApi.showToast("Copied ID", { type: "info", icon: true, timeout: 4000 }) }, src: `https://cdn.discordapp.com/avatars/${inviter?.id}/${inviter?.avatar}.png?size=1024`, onError: (e) => { e.target.src = "https://cdn.discordapp.com/embed/avatars/0.png"; } }))
                                     : null,
                                 // Verification
                                 this.settings.showVerification && guild?.verification_level > 0 ?
@@ -218,7 +210,7 @@ module.exports = !global.ZeresPluginLibrary
                             ) : null
                     );
 
-                    const contentDiv = component.props.children[this.settings.showBanner && guild?.banner ? 2 : 1];
+                    const contentDiv = component.props.children[2];
 
                     if (this.settings.showDescription && guild?.description) {
                         // Description
@@ -237,6 +229,26 @@ module.exports = !global.ZeresPluginLibrary
                             margin: "3% 0 0 0"
                         };
                         contentDiv.props.children.push(joinButton);
+                    }
+
+                    if (!this.settings.showBanner && guild.features.includes("INVITE_SPLASH")) {
+                        component.props.children.splice(0, 1);
+                    } else if (this.settings.showBanner && this.settings.bannerType === 0 && guild?.banner) {
+                        component.props.children.splice(2, 0,
+                            React.createElement("div", { className: `${config.info.name}-guildBanner`, style: { position: "relative", marginBottom: "1%" } },
+                                React.createElement("img", {
+                                    src: `https://cdn.discordapp.com/banners/${guild.id}/${guild.banner}.gif?size=1024`,
+                                    style: { width: "100%", height: "auto", maxHeight: "100px", borderRadius: "5px", objectFit: "cover" },
+                                    onError: (e) => {
+                                        e.target.onError = null
+                                        e.target.src = `https://cdn.discordapp.com/banners/${guild.id}/${guild.banner}.png?size=1024`
+                                    }
+                                })
+                            )
+                        )
+                        if (guild.features.includes("INVITE_SPLASH")) {
+                            component.props.children.splice(0, 1);
+                        }
                     }
                 });
             }

@@ -1,14 +1,14 @@
 {
-    "FreeEmojis": true,
-    "CallTimeCounter": true,
-    "ZeresPluginLibrary": true,
-    "ShowHiddenChannels": true,
-    "BDFDB": true,
-    "BetterVolume": true,
-    "PluginRepo": true,
-    "BetterNsfwTag": true,
-    "HideSideBar": true,
-    "BetterInvites": true,
+    "BDFDB": false,
+    "ZeresPluginLibrary": false,
     "BetterCodeblocks": true,
-    "BetterFolders": false
+    "BetterFolders": true,
+    "BetterInvites": true,
+    "BetterNsfwTag": true,
+    "BetterVolume": true,
+    "CallTimeCounter": true,
+    "FreeEmojis": true,
+    "PluginRepo": true,
+    "ShowHiddenChannels": true,
+    "HideSideBar": true
 }

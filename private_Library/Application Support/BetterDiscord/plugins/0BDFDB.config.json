@@ -1,19 +1,20 @@
 {
-	"changeLogs": {
-		"BDFDB": "2.0.6",
-		"BetterNsfwTag": "1.2.7",
-		"ShowHiddenChannels": "3.0.4"
-	},
-	"choices": {
-		"toastPosition": "right"
-	},
-	"general": {
-		"showToasts": true,
-		"showSupportBadges": true,
-		"useChromium": false
-	},
-	"hashes": {
-		"0BDFDB.data.json": "fd74baa926908e4ada61518baa3581a771f03afc",
-		"0BDFDB.raw.css": "d5ce2dee72b046d17c121e10e368985c71bbaced"
+	"all": {
+		"changeLogs": {
+			"BDFDB": "2.3.2"
+		},
+		"choices": {
+			"toastPosition": "right"
+		},
+		"general": {
+			"shareData": true,
+			"showToasts": true,
+			"showSupportBadges": true,
+			"useChromium": false
+		},
+		"hashes": {
+			"0BDFDB.data.json": "2a36abf88a44c84746b37f1816e90e30fa4b88ca",
+			"0BDFDB.raw.css": "2ebea7039d9e1cec337217c34a3382e7001aae1f"
+		}
 	}
 }

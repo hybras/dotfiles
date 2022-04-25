@@ -2,7 +2,7 @@
  * @name BetterNsfwTag
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 1.2.8
+ * @version 1.2.9
  * @description Adds a more noticeable Tag to NSFW Channels
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -17,20 +17,12 @@ module.exports = (_ => {
 		"info": {
 			"name": "BetterNsfwTag",
 			"author": "DevilBro",
-			"version": "1.2.8",
+			"version": "1.2.9",
 			"description": "Adds a more noticeable Tag to NSFW Channels"
 		}
 	};
 	
-	return (window.Lightcord && !Node.prototype.isPrototypeOf(window.Lightcord) || window.LightCord && !Node.prototype.isPrototypeOf(window.LightCord) || window.Astra && !Node.prototype.isPrototypeOf(window.Astra)) ? class {
-		getName () {return config.info.name;}
-		getAuthor () {return config.info.author;}
-		getVersion () {return config.info.version;}
-		getDescription () {return "Do not use LightCord!";}
-		load () {BdApi.alert("Attention!", "By using LightCord you are risking your Discord Account, due to using a 3rd Party Client. Switch to an official Discord Client (https://discord.com/) with the proper BD Injection (https://betterdiscord.app/)");}
-		start() {}
-		stop() {}
-	} : !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
+	return !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
 		getName () {return config.info.name;}
 		getAuthor () {return config.info.author;}
 		getVersion () {return config.info.version;}
@@ -91,7 +83,8 @@ module.exports = (_ => {
 			}
 
 			processChannelItem (e) {
-				if (e.instance.props.channel && e.instance.props.channel.nsfw) e.instance.props.children.push(BDFDB.ReactUtils.createElement("div", {
+				if (e.instance.props.channel && e.instance.props.channel.nsfw && !BDFDB.ReactUtils.findChild(e.instance.props.children, {key: "NFSW_TAG"})) e.instance.props.children.push(BDFDB.ReactUtils.createElement("div", {
+					key: "NFSW_TAG",
 					className: BDFDB.disCNS._betternsfwtagtag + BDFDB.disCN.channelchildiconbase,
 					children: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.Badges.TextBadge, {
 						style: {borderRadius: "3px"},
