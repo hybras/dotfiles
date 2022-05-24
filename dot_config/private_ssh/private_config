@@ -30,3 +30,11 @@ Host eld
 	HostName elderberry.local
 	PreferredAuthentications publickey,password
 	IdentityFile ~/.ssh/id_rsa_github
+
+Host kde_invent
+	HostName invent.kde.org
+	UseKeychain yes
+	AddKeysToAgent yes
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/id_invent_kde
+
