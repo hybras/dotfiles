@@ -19,4 +19,6 @@ alias code='codium'
 alias arm='arch -arm64'
 alias intel='arch -x86_64'
 alias hx='hexyl'
+alias asciidoctor='docker run --rm -it -v $(pwd):/documents asciidoctor/docker-asciidoctor asciidoctor'
+alias hugo='docker run --rm -it -v $(pwd):/src -p 1313:1313 hybras.dev/docker'
 
