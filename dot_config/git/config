@@ -17,12 +17,20 @@
 	new = green bold
 	whitespace = red reverse
 	func = 146 bold
+[delta]
+	navigate = true  # use n and N to move between diff sections
 [init]
 	defaultBranch = main
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta
 	autocrlf = input
 [interactive]
-	diffFilter = diff-so-fancy --patch
+	diffFilter = delta --color-only
 [alias]
 	ignore = gi
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+
