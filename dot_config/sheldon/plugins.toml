@@ -60,9 +60,9 @@ github = 'scriptingosx/mac-zsh-completions'
 github = 'ohmyzsh/ohmyzsh'
 dir = 'plugins/{{ name }}'
 
-[plugins.git]
-github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/{{ name }}'
+# [plugins.git]
+# github = 'ohmyzsh/ohmyzsh'
+# dir = 'plugins/{{ name }}'
 
 [plugins.gitignore]
 github = 'ohmyzsh/ohmyzsh'
