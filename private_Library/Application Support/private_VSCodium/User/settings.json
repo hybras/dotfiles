@@ -6,7 +6,7 @@
     "workbench.iconTheme": "material-icon-theme",
     "workbench.tree.indent": 12,
     "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb",
+        "*.ipynb": "jupyter-notebook",
         "*.pdf": "latex-workshop-pdf-hook"
     },
     "workbench.editor.enablePreview": false,
@@ -118,21 +118,16 @@
     ],
     "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
     "redhat.telemetry.enabled": false,
-    "java.project.importOnFirstTimeStartup": "automatic",
     "powershell.powerShellDefaultVersion": "Windows PowerShell (x86)",
     "vsicons.dontShowNewVersionMessage": true,
     "r.bracketedPaste": true,
     "r.rpath.windows": "C:\\Users\\varun\\scoop\\shims\\r.exe",
     "r.rterm.windows": "C:\\Users\\varun\\scoop\\apps\\python\\current\\Scripts\\radian.exe",
-    "solargraph.commandPath": "/opt/homebrew/lib/ruby/gems/3.0.0/bin/solargraph",
     "yaml.format.singleQuote": true,
     "yaml.format.enable": true,
     "[yaml]": {
         // "editor.defaultFormatter": "redhat.vscode-yaml"
     },
-    "rust-analyzer.server.path": "/opt/homebrew/bin/rust-analyzer",
-    "rust-analyzer.inlayHints.closureReturnTypeHints": true,
-    "rust-analyzer.inlayHints.lifetimeElisionHints": "skip_trivial",
     "auto-rename-tag.activationOnLanguage": [
         "html",
         "xml",
@@ -140,4 +135,5 @@
         "js",
     ],
     "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
+    "rust-analyzer.inlayHints.closureReturnTypeHints.enable": true,
 }
