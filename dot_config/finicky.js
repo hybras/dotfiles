@@ -5,6 +5,7 @@ const tor = "org.torproject.torbrowser"
 const zoom = "us.zoom.xos"
 const vscode = "com.visualstudio.code.oss"
 const brave = "com.brave.Browser"
+const iridium = "de.iridiumbrowser"
 
 module.exports = {
     defaultBrowser: browserosaurus,
@@ -42,14 +43,14 @@ module.exports = {
                 /^https:\/\/github\.com\/.*$/,
                 /^https:\/\/feed.dilbert.com\/.*$/,
             ],
-            browser: brave,
+            browser: iridium,
         },
         {
             match: ({ opener }) => [
                 netnewswire,
                 vscode,
             ].includes(opener.bundleId),
-            browser: brave,
+            browser: iridium,
         },
         {
             match: ({ opener }) => [
