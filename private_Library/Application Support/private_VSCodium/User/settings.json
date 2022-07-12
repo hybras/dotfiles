@@ -56,7 +56,6 @@
     "git.confirmSync": false,
     "git.allowForcePush": true,
     "git.closeDiffOnOperation": true,
-    "diffEditor.ignoreTrimWhitespace": false,
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.defaultDateShortFormat": "D MMM, YY",
     "gitlens.defaultDateFormat": null,
@@ -74,6 +73,7 @@
         "hackathon",
         "lockdown"
     ],
+    "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
     "python.languageServer": "Pylance",
     "python.linting.enabled": true,
     "python.formatting.provider": "black",
@@ -126,6 +126,7 @@
     "yaml.format.singleQuote": true,
     "yaml.format.enable": true,
     "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
         // "editor.defaultFormatter": "redhat.vscode-yaml"
     },
     "auto-rename-tag.activationOnLanguage": [
@@ -134,6 +135,6 @@
         "php",
         "js",
     ],
-    "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
     "rust-analyzer.inlayHints.closureReturnTypeHints.enable": true,
+    "diffEditor.ignoreTrimWhitespace": false,
 }
