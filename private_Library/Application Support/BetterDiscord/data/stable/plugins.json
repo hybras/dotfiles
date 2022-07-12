@@ -11,7 +11,7 @@
     "PluginRepo": true,
     "ShowHiddenChannels": true,
     "HideSideBar": false,
-    "TimedLightDarkMode": false,
+    "TimedLightDarkMode": true,
     "ThemeRepo": true,
     "AppNotifications": true,
     "BetterFormattingRedux": true,

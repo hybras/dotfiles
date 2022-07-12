@@ -12,7 +12,7 @@
 			"JoinedAtDate": "1.3.3",
 			"LastMessageDate": "1.2.8",
 			"MessageUtilities": "1.9.4",
-			"ShowHiddenChannels": "3.1.7"
+			"ShowHiddenChannels": "3.1.8"
 		},
 		"choices": {
 			"toastPosition": "right"
@@ -24,8 +24,8 @@
 			"useChromium": false
 		},
 		"hashes": {
-			"0BDFDB.data.json": "537366f2c078d5167561af33a0e0aa6ca6039e4d",
-			"0BDFDB.raw.css": "e8d30d44e567f6a77ef4e90734c27c2b47306d20"
+			"0BDFDB.data.json": "bfb5b8a3318a63fd624e036579a5304a9d19e733",
+			"0BDFDB.raw.css": "96fb638350f77c79c3648050d58a0ea7a700ea1b"
 		}
 	}
 }
