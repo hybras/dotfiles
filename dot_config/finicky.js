@@ -6,6 +6,7 @@ const zoom = "us.zoom.xos"
 const vscode = "com.visualstudio.code.oss"
 const brave = "com.brave.Browser"
 const iridium = "de.iridiumbrowser"
+const chrome = "com.google.Chrome"
 
 module.exports = {
     defaultBrowser: browserosaurus,
@@ -57,7 +58,7 @@ module.exports = {
                 zoom,
                 steam,
             ].includes(opener.bundleId),
-            browser: tor,
+            browser: chrome,
         },
     ],
 };
