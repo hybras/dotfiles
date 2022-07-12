@@ -38,3 +38,8 @@ Host kde_invent
 	PreferredAuthentications publickey
 	IdentityFile ~/.ssh/id_invent_kde
 
+Host aws
+	HostName *.us-west-2.compute.amazonaws.com
+	StrictHostKeyChecking no
+  	UserKnownHostsFile /dev/null
+  	LogLevel QUIET
