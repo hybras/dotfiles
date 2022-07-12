@@ -53,6 +53,11 @@ github = 'zsh-users/zsh-syntax-highlighting'
 [plugins.autocomplete]
 github = 'zsh-users/zsh-autosuggestions'
 
+[plugins.extra-completions]
+github = 'zsh-users/zsh-completions'
+dir = 'src'
+apply = ['fpath']
+
 [plugins.mac-completions]
 github = 'scriptingosx/mac-zsh-completions'
 
