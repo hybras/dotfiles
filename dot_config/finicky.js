@@ -7,6 +7,7 @@ const vscode = "com.visualstudio.code.oss"
 const brave = "com.brave.Browser"
 const iridium = "de.iridiumbrowser"
 const chrome = "com.google.Chrome"
+const firefox = "org.mozilla.firefox"
 
 module.exports = {
     defaultBrowser: browserosaurus,
@@ -44,14 +45,14 @@ module.exports = {
                 /^https:\/\/github\.com\/.*$/,
                 /^https:\/\/feed.dilbert.com\/.*$/,
             ],
-            browser: iridium,
+            browser: firefox,
         },
         {
             match: ({ opener }) => [
                 netnewswire,
                 vscode,
             ].includes(opener.bundleId),
-            browser: iridium,
+            browser: firefox,
         },
         {
             match: ({ opener }) => [
