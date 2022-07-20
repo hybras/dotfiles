@@ -8,6 +8,7 @@
 * https://iterm2.com[iterm]
 * https://www.warp.dev[warp]
 * https://wezfurlong.org/wezterm/[wezterm]
+* https://tabby.sh/[tabby]
 
 == Shell
 
