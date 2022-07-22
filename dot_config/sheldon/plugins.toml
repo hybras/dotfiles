@@ -121,10 +121,10 @@ github = 'MichaelAquilina/zsh-autoswitch-virtualenv'
 [plugins.auto-notify]
 github = 'MichaelAquilina/zsh-auto-notify'
 
-# [plugins.keychain] # blocking because it may ask for input
-# inline = """
-# eval `keychain --eval --quiet --inherit any --agents ssh,gpg C6AD1D9F96B7178A99B066A849DF81AF2D28CF82 7C7ECFF562786CA6B4A8633B8AC89A889BFA44A8 CECCB3D5398F04652EF4A536109BC93C8B952313 id_rsa_github id_rsa_gitlab id_invent_kde id_rsa_nest id_umd`
-# """
+[plugins.keychain] # blocking because it may ask for input
+inline = """
+eval `keychain --eval --noask --quiet --inherit any --agents ssh,gpg C6AD1D9F96B7178A99B066A849DF81AF2D28CF82 7C7ECFF562786CA6B4A8633B8AC89A889BFA44A8 CECCB3D5398F04652EF4A536109BC93C8B952313 id_rsa_github id_rsa_gitlab id_invent_kde id_rsa_nest id_umd`
+"""
 
 [plugins.gencomp]
 github = 'RobSis/zsh-completion-generator'
