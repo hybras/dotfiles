@@ -47,7 +47,7 @@ inline = 'eval "$(starship init zsh)"'
 inline = 'zsh-defer eval "$(mcfly init zsh)"'
 
 [plugins.direnv]
-inline = 'eval "$(direnv hook zsh)"'
+inline = 'zsh-defer eval "$(direnv hook zsh)"'
 
 [plugins.gencomp_cache]
 local = '~/.cache/gencomp'
