@@ -129,6 +129,10 @@ eval `keychain --eval --noask --quiet --inherit any --agents ssh,gpg C6AD1D9F96B
 [plugins.gencomp]
 github = 'RobSis/zsh-completion-generator'
 
+[plugins.bat]
+local = '/Users/hybras/.config/zsh/personal'
+use = ['bat.plugin.zsh']
+
 # [plugins.ssh-agent]
 # github = 'ohmyzsh/ohmyzsh'
 # dir = 'plugins/{{ name }}'
