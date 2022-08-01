@@ -1,6 +1,6 @@
 {
     "window.autoDetectColorScheme": true,
-    "workbench.colorTheme": "GitHub Light Default",
+    "workbench.colorTheme": "Pitch Black",
     "workbench.preferredDarkColorTheme": "Pitch Black",
     "workbench.preferredLightColorTheme": "GitHub Light Default",
     "workbench.iconTheme": "material-icon-theme",
@@ -32,8 +32,12 @@
         "source.fixAll.eslint": true
     },
     "editor.linkedEditing": true,
+    "editor.accessibilitySupport": "off",
     "debug.console.fontSize": 16,
     "terminal.external.windowsExec": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.EXE",
+    "terminal.integrated.env.osx": {
+        "FIG_NEW_SESSION": "1"
+    },
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 500,
     "files.exclude": {
@@ -56,6 +60,9 @@
     "git.confirmSync": false,
     "git.allowForcePush": true,
     "git.closeDiffOnOperation": true,
+    "git.enableCommitSigning": true,
+    "git.useEditorAsCommitInput": false,
+    "diffEditor.ignoreTrimWhitespace": false,
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.defaultDateShortFormat": "D MMM, YY",
     "gitlens.defaultDateFormat": null,
@@ -135,6 +142,5 @@
         "php",
         "js",
     ],
-    "rust-analyzer.inlayHints.closureReturnTypeHints.enable": true,
-    "diffEditor.ignoreTrimWhitespace": false,
+    "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "always",
 }
