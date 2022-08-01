@@ -4,3 +4,4 @@ macOS.adoc
 justfile
 Brewfile
 Brewfile.sh
+dotfiles.code-workspace
