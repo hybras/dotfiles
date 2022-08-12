@@ -19,4 +19,3 @@ alias code='codium'
 alias arm='arch -arm64'
 alias intel='arch -x86_64'
 alias hx='hexyl'
-

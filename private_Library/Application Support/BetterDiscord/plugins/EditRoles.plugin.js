@@ -2,7 +2,7 @@
  * @name EditRoles
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 1.0.8
+ * @version 1.0.9
  * @description Allows you to locally edit Roles
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -17,25 +17,17 @@ module.exports = (_ => {
 		"info": {
 			"name": "EditRoles",
 			"author": "DevilBro",
-			"version": "1.0.8",
+			"version": "1.0.9",
 			"description": "Allows you to locally edit Roles"
 		},
 		"changeLog": {
 			"fixed": {
-				"Icons": "Work again"
+				"Remove Icon": "Now works again"
 			}
 		}
 	};
 
-	return (window.Lightcord && !Node.prototype.isPrototypeOf(window.Lightcord) || window.LightCord && !Node.prototype.isPrototypeOf(window.LightCord) || window.Astra && !Node.prototype.isPrototypeOf(window.Astra)) ? class {
-		getName () {return config.info.name;}
-		getAuthor () {return config.info.author;}
-		getVersion () {return config.info.version;}
-		getDescription () {return "Do not use LightCord!";}
-		load () {BdApi.alert("Attention!", "By using LightCord you are risking your Discord Account, due to using a 3rd Party Client. Switch to an official Discord Client (https://discord.com/) with the proper BD Injection (https://betterdiscord.app/)");}
-		start() {}
-		stop() {}
-	} : !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
+	return !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
 		getName () {return config.info.name;}
 		getAuthor () {return config.info.author;}
 		getVersion () {return config.info.version;}
@@ -117,7 +109,10 @@ module.exports = (_ => {
 					}
 				}});
 				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.RoleIconUtils, "getRoleIconData", {after: e => {
-					if (e.returnValue && e.methodArguments[0].id && changedRoles[e.methodArguments[0].id] && changedRoles[e.methodArguments[0].id].icon) return {customIconSrc: changedRoles[e.methodArguments[0].id].icon};
+					if (e.returnValue && e.methodArguments[0].id && changedRoles[e.methodArguments[0].id]) {
+						if (changedRoles[e.methodArguments[0].id].icon) return {customIconSrc: changedRoles[e.methodArguments[0].id].icon};
+						else if (changedRoles[e.methodArguments[0].id].removeIcon) return {customIconSrc: null};
+					}
 				}});
 				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.RoleIconUtils, "canGuildUseRoleIcons", {after: e => {
 					if (e.returnValue === false && Object.keys(e.methodArguments[0].roles).some(roleId => changedRoles[roleId] && changedRoles[roleId].icon)) return true;
@@ -170,20 +165,18 @@ module.exports = (_ => {
 			}
 			
 			onUserContextMenu (e) {
-				let [children, index] = BDFDB.ContextMenuUtils.findItem(e.returnvalue, {id: "roles"});
-				if (index > -1 && children[index].props && BDFDB.ArrayUtils.is(children[index].props.children)) for (let child of children[index].props.children) {
-					if (child && child.props && typeof child.props.label == "function") {
-						let renderLabel = child.props.label;
-						child.props.label = (...args) => {
-							let label = renderLabel(...args);
-							let onContextMenu = typeof label.props.onContextMenu == "function" ? label.props.onContextMenu : (_ => {});
-							label.props.onContextMenu = event => {
-								BDFDB.LibraryModules.ContextMenuUtils.openContextMenu(event, function (e) {
-									return BDFDB.ReactUtils.createElement(BDFDB.ModuleUtils.findByName("DeveloperContextMenu"), Object.assign({}, e, {id: child.props.id}));
-								});
+				if (e.subType == "useUserRolesItems") {
+					let [children, index] = BDFDB.ContextMenuUtils.findItem(e.returnvalue, {id: "roles"});
+					if (index > -1 && children[index].props && BDFDB.ArrayUtils.is(children[index].props.children)) for (let child of children[index].props.children) {
+						if (child && child.props && typeof child.props.label == "function") {
+							let renderLabel = child.props.label;
+							child.props.label = (...args) => {
+								let label = renderLabel(...args);
+								let onContextMenu = typeof label.props.onContextMenu == "function" ? label.props.onContextMenu : (_ => {});
+								label.props.onContextMenu = event => BDFDB.LibraryModules.ContextMenuUtils.openContextMenu(event, e => BDFDB.ReactUtils.createElement(BDFDB.ModuleUtils.findByName("DeveloperContextMenu"), Object.assign({}, e2, {id: child.props.id})));
+								return label;
 							};
-							return label;
-						};
+						}
 					}
 				}
 			}

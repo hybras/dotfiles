@@ -2,7 +2,7 @@
  * @name EditUsers
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 4.5.9
+ * @version 4.6.1
  * @description Allows you to locally edit Users
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -17,7 +17,7 @@ module.exports = (_ => {
 		"info": {
 			"name": "EditUsers",
 			"author": "DevilBro",
-			"version": "4.5.9",
+			"version": "4.6.1",
 			"description": "Allows you to locally edit Users"
 		}
 	};
@@ -103,6 +103,7 @@ module.exports = (_ => {
 						ChannelEditorContainer: "render",
 						AutocompleteUserResult: "render",
 						UserBanner: "default",
+						UserPopoutAvatar: "UserPopoutAvatar",
 						UserPopoutInfo: "UserPopoutInfo",
 						UserProfileModal: "default",
 						UserProfileModalHeader: "default",
@@ -202,6 +203,10 @@ module.exports = (_ => {
 				let observer = new MutationObserver(_ => {this.changeAppTitle();});
 				BDFDB.ObserverUtils.connect(this, document.head.querySelector("title"), {name: "appTitleObserver", instance: observer}, {childList: true});
 			
+				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.UserNameUtils, "getName", {after: e => {
+					if (e.methodArguments[2] && changedUsers[e.methodArguments[2].id] && changedUsers[e.methodArguments[2].id].name) return changedUsers[e.methodArguments[2].id].name;
+				}});
+			
 				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.StageChannelUtils, "getMutableParticipants", {after: e => {
 					if (BDFDB.ArrayUtils.is(e.returnValue)) for (let i in e.returnValue) {
 						if (e.returnValue[i] && e.returnValue[i].user && changedUsers[e.returnValue[i].user.id]) e.returnValue[i] = Object.assign({}, e.returnValue[i], {user: this.getUserData(e.returnValue[i].user.id)});
@@ -268,15 +273,6 @@ module.exports = (_ => {
 					if (user) {
 						if (user.id == "278543574059057154") return user.banner;
 						let data = changedUsers[user.id];
-						if (data && data.banner && !data.removeBanner) return data.banner;
-					}
-					return e.callOriginalMethod();
-				}});
-				
-				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.BannerUtils, "getUserBannerURLForContext", {instead: e => {
-					if (e.methodArguments[0].user) {
-						if (e.methodArguments[0].user.id == "278543574059057154") return e.methodArguments[0].user.banner;
-						let data = changedUsers[e.methodArguments[0].user.id];
 						if (data && data.banner && !data.removeBanner) return data.banner;
 					}
 					return e.callOriginalMethod();
@@ -493,22 +489,13 @@ module.exports = (_ => {
 			}
 
 			processChannelCallHeader (e) {
-				if (e.instance.props.channel && this.settings.places.dmHeader) {
-					if (e.instance.props.channel.isDM()) {
-						let userName = BDFDB.ReactUtils.findChild(e.returnvalue, {name: "Title"});
-						if (userName) {
-							let recipientId = e.instance.props.channel.getRecipientId();
-							if (changedUsers[recipientId]) {
-								userName.props.children = this.getUserData(recipientId).username;
-								this.changeUserColor(userName, recipientId);
-							}
-						}
-					}
-					else {
-						let channelTitle = BDFDB.ReactUtils.findChild(e.returnvalue, {name: "ChannelTitle"});
-						if (channelTitle && channelTitle.props && channelTitle.props.focusedParticipant && channelTitle.props.focusedParticipant.user && changedUsers[channelTitle.props.focusedParticipant.user.id]) {
-							channelTitle.props.focusedParticipant.user = this.getUserData(channelTitle.props.focusedParticipant.user.id);
-							channelTitle.props.focusedParticipant.userNick = changedUsers[channelTitle.props.focusedParticipant.user.id].name || channelTitle.props.focusedParticipant.userNick;
+				if (e.instance.props.channel && this.settings.places.dmHeader && e.instance.props.channel.isDM()) {
+					let userName = BDFDB.ReactUtils.findChild(e.returnvalue, {name: "Title"});
+					if (userName) {
+						let recipientId = e.instance.props.channel.getRecipientId();
+						if (changedUsers[recipientId]) {
+							userName.props.children = this.getUserData(recipientId).username;
+							this.changeUserColor(userName, recipientId);
 						}
 					}
 				}
@@ -578,7 +565,17 @@ module.exports = (_ => {
 			}
 
 			processUserBanner (e) {
-				if (e.instance.props.bannerSrc && e.instance.props.user && e.instance.props.bannerSrc.indexOf(`/${e.instance.props.user.id}/http`) > -1) e.instance.props.bannerSrc = `http${e.instance.props.bannerSrc.split(`/${e.instance.props.user.id}/http`)[1].replace(/\.png\?size=[\d]*$/g, "")}`;
+				if (e.instance.props.user && changedUsers[e.instance.props.user.id]) {
+					if (changedUsers[e.instance.props.user.id].removeBanner) e.instance.props.bannerSrc = null;
+					else if (changedUsers[e.instance.props.user.id].banner) e.instance.props.bannerSrc = changedUsers[e.instance.props.user.id].banner;
+				}
+			}
+
+			processUserPopoutAvatar (e) {
+				if (e.instance.props.displayProfile && e.instance.props.user && changedUsers[e.instance.props.user.id]) {
+					if (changedUsers[e.instance.props.user.id].removeBanner) e.instance.props.displayProfile.banner = null;
+					else if (changedUsers[e.instance.props.user.id].banner) e.instance.props.displayProfile.banner = changedUsers[e.instance.props.user.id].banner;
+				}
 			}
 			
 			processUserPopoutContainer (e) {
