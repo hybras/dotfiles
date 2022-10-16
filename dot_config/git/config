@@ -26,6 +26,8 @@
 	autocrlf = input
 [interactive]
 	diffFilter = delta --color-only
+[add.interactive]
+	useBuiltin = false
 [alias]
 	ignore = gi
 [merge]
