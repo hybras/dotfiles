@@ -1,6 +1,8 @@
 {
     "currentVersionInfo": {
-        "version": "0.2.5",
+        "version": "1.0.0",
         "hasShownChangelog": true
-    }
+    },
+    "blurred": [],
+    "sen": []
 }
