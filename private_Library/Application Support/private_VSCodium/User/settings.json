@@ -1,13 +1,12 @@
 {
     "window.autoDetectColorScheme": true,
-    "workbench.colorTheme": "Pitch Black",
+    "workbench.colorTheme": "GitHub Light Default",
     "workbench.preferredDarkColorTheme": "Pitch Black",
     "workbench.preferredLightColorTheme": "GitHub Light Default",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.tree.indent": 12,
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook",
-        "*.pdf": "latex-workshop-pdf-hook"
     },
     "workbench.editor.enablePreview": false,
     "workbench.colorCustomizations": {
@@ -38,6 +37,7 @@
     "terminal.integrated.env.osx": {
         "FIG_NEW_SESSION": "1"
     },
+    "terminal.external.osxExec": "Warp.app",
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 500,
     "files.exclude": {
@@ -143,4 +143,13 @@
         "js",
     ],
     "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "always",
+    "[racket]": {
+        "editor.rulers": [
+            102
+        ],
+        "editor.wordSeparators": "()[]{}\",'`;#|",
+        "editor.formatOnType": true,
+        "editor.formatOnSave": true
+    },
+    "window.zoomLevel": 1
 }
