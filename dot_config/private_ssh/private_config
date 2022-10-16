@@ -1,6 +1,7 @@
 Host grace
 	User vchari
 	HostName grace.umd.edu
+	ForwardX11 yes
 
 Host terp
 	User vchari
