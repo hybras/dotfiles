@@ -9,7 +9,7 @@
     "CallTimeCounter": true,
     "FreeEmojis": true,
     "PluginRepo": true,
-    "ShowHiddenChannels": true,
+    "ShowHiddenChannels": false,
     "HideSideBar": false,
     "TimedLightDarkMode": true,
     "ThemeRepo": true,
