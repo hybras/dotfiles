@@ -1,5 +1,59 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
-# https://hints.macworld.com/article.php?story=20051225101106519
+##
+## Created by Pico Mitchell (of Random Applications) on 11/16/22
+##
+## https://gist.github.com/PicoMitchell/619c12fd6a53ae6ec657514915d4edf9
+##
+## MIT License
+##
+## Copyright (c) 2022 Pico Mitchell (Random Applications)
+##
+## Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
+## to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+## and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+##
+## The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+##
+## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+## FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+## WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+##
 
-command man -t "$@" | open -f -a Preview
+man_pdf_folder_base_path="${XDG_CACHE_HOME}/man PDFs" # Set this path to wherever you want the man page PDFs to be saved to (it doesn't have to be a temporary location).
+
+this_man_path="$(/usr/bin/man -w "$@" 2>/dev/null)"
+
+if [ -f "${this_man_path}" ]; then
+	man_pdf_folder_os_path="${man_pdf_folder_base_path}/$(/usr/bin/sw_vers -productVersion) ($(/usr/bin/sw_vers -buildVersion))"
+	# Save every man page PDF into a sub-folder for the current OS version (and build) since man pages can be updated between
+	# OS versions, and don't want to retrieve an old cached version from a preivous OS (when not saving to a temporary location).
+
+	if [ ! -d "${man_pdf_folder_os_path}" ]; then
+		if [ -d "${man_pdf_folder_base_path}" ]; then
+			# If the man PDFs base path exists, but not the current OS sub-folder, that likely means that there has been an OS update since the last run,
+			# so clear the cache of the old man PDFs from the previous OS version by deleting the base path which will be re-created when the new latest OS sub-folder is created below.
+
+			/bin/rm -rf "${man_pdf_folder_base_path}"
+		fi
+
+		/bin/mkdir -p "${man_pdf_folder_os_path}"
+	fi
+
+	this_man_filename="${this_man_path##*/}"
+	this_man_section="${this_man_filename#*.}"
+	this_man_filename="${this_man_filename%.*}"
+	if [ "${this_man_section}" != '1' ]; then
+		this_man_filename="${this_man_filename} (${this_man_section})"
+	fi
+
+	this_man_pdf_path="${man_pdf_folder_os_path}/man ${this_man_filename}.pdf"
+
+	if [ ! -f "${this_man_pdf_path}" ]; then
+		/usr/bin/mandoc -T pdf "${this_man_path}" >"${this_man_pdf_path}"
+	fi
+
+	/usr/bin/open "${this_man_pdf_path}"
+else
+	/usr/bin/man "$@" # If the man page didn't exist, run the actual "man" command with the passed arguments to show any relevant output or error.
+fi
