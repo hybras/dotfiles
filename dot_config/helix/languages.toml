@@ -1,0 +1,9 @@
+[[languages]]
+name = "racket"
+scope = "source.racket"
+file-types = ["rkt"]
+roots = ["info.rkt"]
+auto-format = true
+comment-token = ";"
+language-server = { command = "racket", args = ["--lib", "racket-langserver"] }
+formatter = { command = "raco", args = ["fmt"] }
