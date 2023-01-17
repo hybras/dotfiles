@@ -1,5 +1,8 @@
 {
 	"all": {
+		"general": {
+			"running": true
+		},
 		"settings": {
 			"running": true
 		},

@@ -2,7 +2,7 @@
  * @name TimedLightDarkMode
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 1.1.3
+ * @version 1.1.5
  * @description Adds a Time Slider to the Appearance Settings
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -13,20 +13,16 @@
  */
 
 module.exports = (_ => {
-	const config = {
-		"info": {
-			"name": "TimedLightDarkMode",
-			"author": "DevilBro",
-			"version": "1.1.3",
-			"description": "Adds a Time Slider to the Appearance Settings"
-		}
+	const changeLog = {
+		
 	};
 
 	return !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
-		getName () {return config.info.name;}
-		getAuthor () {return config.info.author;}
-		getVersion () {return config.info.version;}
-		getDescription () {return `The Library Plugin needed for ${config.info.name} is missing. Open the Plugin Settings to download it. \n\n${config.info.description}`;}
+		constructor (meta) {for (let key in meta) this[key] = meta[key];}
+		getName () {return this.name;}
+		getAuthor () {return this.author;}
+		getVersion () {return this.version;}
+		getDescription () {return `The Library Plugin needed for ${this.name} is missing. Open the Plugin Settings to download it. \n\n${this.description}`;}
 		
 		downloadLibrary () {
 			require("request").get("https://mwittrien.github.io/BetterDiscordAddons/Library/0BDFDB.plugin.js", (e, r, b) => {
@@ -39,7 +35,7 @@ module.exports = (_ => {
 			if (!window.BDFDB_Global || !Array.isArray(window.BDFDB_Global.pluginQueue)) window.BDFDB_Global = Object.assign({}, window.BDFDB_Global, {pluginQueue: []});
 			if (!window.BDFDB_Global.downloadModal) {
 				window.BDFDB_Global.downloadModal = true;
-				BdApi.showConfirmationModal("Library Missing", `The Library Plugin needed for ${config.info.name} is missing. Please click "Download Now" to install it.`, {
+				BdApi.showConfirmationModal("Library Missing", `The Library Plugin needed for ${this.name} is missing. Please click "Download Now" to install it.`, {
 					confirmText: "Download Now",
 					cancelText: "Cancel",
 					onCancel: _ => {delete window.BDFDB_Global.downloadModal;},
@@ -49,24 +45,23 @@ module.exports = (_ => {
 					}
 				});
 			}
-			if (!window.BDFDB_Global.pluginQueue.includes(config.info.name)) window.BDFDB_Global.pluginQueue.push(config.info.name);
+			if (!window.BDFDB_Global.pluginQueue.includes(this.name)) window.BDFDB_Global.pluginQueue.push(this.name);
 		}
 		start () {this.load();}
 		stop () {}
 		getSettingsPanel () {
 			let template = document.createElement("template");
-			template.innerHTML = `<div style="color: var(--header-primary); font-size: 16px; font-weight: 300; white-space: pre; line-height: 22px;">The Library Plugin needed for ${config.info.name} is missing.\nPlease click <a style="font-weight: 500;">Download Now</a> to install it.</div>`;
+			template.innerHTML = `<div style="color: var(--header-primary); font-size: 16px; font-weight: 300; white-space: pre; line-height: 22px;">The Library Plugin needed for ${this.name} is missing.\nPlease click <a style="font-weight: 500;">Download Now</a> to install it.</div>`;
 			template.content.firstElementChild.querySelector("a").addEventListener("click", this.downloadLibrary);
 			return template.content.firstElementChild;
 		}
 	} : (([Plugin, BDFDB]) => {
 		var checkInterval, changeTimeout, disableChanging;
-		var settings = {}, values = {};
 		
 		return class TimedLightDarkMode extends Plugin {
 			onLoad () {
 				this.defaults = {
-					settings: {
+					general: {
 						running:	{value: true}
 					},
 					values: {
@@ -75,16 +70,16 @@ module.exports = (_ => {
 					}
 				};
 				
-				this.patchedModules = {
-					after: {
-						UserSettingsAppearance: "render"
-					}
+				this.modulePatches = {
+					after: [
+						"UserSettingsAppearance"
+					]
 				};
 			}
 			
 			onStart () {
 				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.AppearanceSettingsUtils, "updateTheme", {after: e => {
-					if (settings.running) {
+					if (this.settings.general.running) {
 						BDFDB.TimeUtils.clear(changeTimeout);
 						disableChanging = true;
 						changeTimeout = BDFDB.TimeUtils.timeout(_ => {
@@ -106,52 +101,49 @@ module.exports = (_ => {
 
 			processUserSettingsAppearance (e) {
 				let formItem = BDFDB.ReactUtils.findChild(e.returnvalue, {name: "FormItem", props: [["title", BDFDB.LanguageUtils.LanguageStrings.THEME]]});
-				if (formItem && formItem.props) {
-					let slider;
-					formItem.props.children = [
-						formItem.props.children,
-						BDFDB.ReactUtils.createElement("div", {
-							className: BDFDB.disCNS._timedlightdarkmodetimersettings + BDFDB.disCN.margintop20,
-							children: [
-								BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsSaveItem, {
-									type: "Switch",
-									plugin: this,
-									keys: ["settings", "running"],
-									value: settings.running,
-									label: `${BDFDB.LanguageUtils.LanguageStrings.THEME} Timer`,
-									tag: BDFDB.LibraryComponents.FormComponents.FormTitle.Tags.H5,
-									childProps: {
-										checkedColor: BDFDB.DiscordConstants.Colors.STATUS_GREEN
-									},
-									onChange: (value, instance) => {
-										this.startInterval();
-										if (slider) BDFDB.DOMUtils.toggleClass(slider, BDFDB.disCN.sliderdisabled, !value);
-									}
-								}),
-								BDFDB.ReactUtils.elementToReact(BDFDB.DOMUtils.create(`<div class="${BDFDB.disCNS.slider + BDFDB.disCN.margintop20}${!settings.running ? (" " + BDFDB.disCN.sliderdisabled): ""}"><div class="${BDFDB.disCN.slidertrack}">${[["0%", "00:00"], ["12.5%", "03:00"], ["25%", "06:00"], ["37.5%", "09:00"], ["50%", "12:00"], ["62.5%", "15:00"], ["75%", "18:00"], ["87.5%", "21:00"], ["100%", "24:00"]].map(n => `<div class="${BDFDB.disCNS.slidermark + BDFDB.disCN.slidermarkabove}" style="left:${n[0]};"><div class="${BDFDB.disCN.slidermarkvalue}">${n[1]}</div><div class="${BDFDB.disCN.slidermarkdash}"></div></div>`).join("")}</div><div class="${BDFDB.disCN.sliderbar}"><div class="${BDFDB.disCN.sliderbarfill}"></div></div><div class="${BDFDB.disCN.slidertrack}"><div class="${BDFDB.disCNS.slidergrabber + BDFDB.disCN._timedlightdarkmodetimergrabber}" timer="timer1" style="left: ${values.timer1}%;"></div><div class="${BDFDB.disCNS.slidergrabber + BDFDB.disCN._timedlightdarkmodetimergrabber}" timer="timer2" style="left: ${values.timer2}%;"></div><div class="${BDFDB.disCNS.slidergrabber + BDFDB.disCN._timedlightdarkmodedategrabber}" timer="current" style="left: ${this.getPercent(new Date())}%; cursor: help !important; height: 12px; margin-top: -7px;"></div></div></div>`), node => {
-									if (!Node.prototype.isPrototypeOf(node)) return;
-									slider = node;
-									this.updateSlider(slider, values);
-									BDFDB.ListenerUtils.addToChildren(slider, "mousedown", BDFDB.dotCN._timedlightdarkmodetimergrabber, event => this.dragSlider(event.currentTarget));
-									BDFDB.ListenerUtils.addToChildren(slider, "mouseenter", BDFDB.dotCN._timedlightdarkmodedategrabber, event => this.showCurrentTime(event.currentTarget));
-								})
-							]
-						}),
-						BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.FormComponents.FormDivider, {
-							className: BDFDB.disCNS.margintop20 + BDFDB.disCN.marginbottom8
-						})
-					].flat(10).filter(n => n);
-				}
+				if (!formItem || !formItem.props) return;
+				let slider;
+				formItem.props.children = [
+					formItem.props.children,
+					BDFDB.ReactUtils.createElement("div", {
+						className: BDFDB.disCNS._timedlightdarkmodetimersettings + BDFDB.disCN.margintop20,
+						children: [
+							BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsSaveItem, {
+								type: "Switch",
+								plugin: this,
+								keys: ["general", "running"],
+								value: this.settings.general.running,
+								label: `${BDFDB.LanguageUtils.LanguageStrings.THEME} Timer`,
+								tag: BDFDB.LibraryComponents.FormComponents.FormTags.H5,
+								childProps: {
+									checkedColor: BDFDB.DiscordConstants.Colors.STATUS_GREEN_600
+								},
+								onChange: (value, instance) => {
+									this.startInterval();
+									if (slider) BDFDB.DOMUtils.toggleClass(slider, BDFDB.disCN.sliderdisabled, !value);
+								}
+							}),
+							BDFDB.ReactUtils.elementToReact(BDFDB.DOMUtils.create(`<div class="${BDFDB.disCNS.slider + BDFDB.disCN.margintop20}${!this.settings.general.running ? (" " + BDFDB.disCN.sliderdisabled): ""}"><div class="${BDFDB.disCN.slidertrack}">${[["0%", "00:00"], ["12.5%", "03:00"], ["25%", "06:00"], ["37.5%", "09:00"], ["50%", "12:00"], ["62.5%", "15:00"], ["75%", "18:00"], ["87.5%", "21:00"], ["100%", "24:00"]].map(n => `<div class="${BDFDB.disCNS.slidermark + BDFDB.disCN.slidermarkabove}" style="left:${n[0]};"><div class="${BDFDB.disCN.slidermarkvalue}">${n[1]}</div><div class="${BDFDB.disCN.slidermarkdash}"></div></div>`).join("")}</div><div class="${BDFDB.disCN.sliderbar}"><div class="${BDFDB.disCN.sliderbarfill}"></div></div><div class="${BDFDB.disCN.slidertrack}"><div class="${BDFDB.disCNS.slidergrabber + BDFDB.disCN._timedlightdarkmodetimergrabber}" timer="timer1" style="left: ${this.settings.values.timer1}%;"></div><div class="${BDFDB.disCNS.slidergrabber + BDFDB.disCN._timedlightdarkmodetimergrabber}" timer="timer2" style="left: ${this.settings.values.timer2}%;"></div><div class="${BDFDB.disCNS.slidergrabber + BDFDB.disCN._timedlightdarkmodedategrabber}" timer="current" style="left: ${this.getPercent(new Date())}%; cursor: help !important; height: 12px; margin-top: -7px;"></div></div></div>`), node => {
+								if (!Node.prototype.isPrototypeOf(node)) return;
+								slider = node;
+								this.updateSlider(slider);
+								BDFDB.ListenerUtils.addToChildren(slider, "mousedown", BDFDB.dotCN._timedlightdarkmodetimergrabber, event => this.dragSlider(event.currentTarget));
+								BDFDB.ListenerUtils.addToChildren(slider, "mouseenter", BDFDB.dotCN._timedlightdarkmodedategrabber, event => this.showCurrentTime(event.currentTarget));
+							})
+						]
+					}),
+					BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.FormComponents.FormDivider, {
+						className: BDFDB.disCNS.margintop20 + BDFDB.disCN.marginbottom8
+					})
+				].flat(10).filter(n => n);
 			}
 
 			startInterval () {
 				BDFDB.TimeUtils.clear(checkInterval);
-				settings = BDFDB.DataUtils.get(this, "settings");
-				values = BDFDB.DataUtils.get(this, "values");
 				disableChanging = false;
-				if (settings.running) {
-					let inverted = values.timer1 > values.timer2;
-					let timer1LOW = this.getTime(values.timer1), timer2LOW = this.getTime(values.timer2);
+				if (this.settings.general.running) {
+					let inverted = this.settings.values.timer1 > this.settings.values.timer2;
+					let timer1LOW = this.getTime(this.settings.values.timer1), timer2LOW = this.getTime(this.settings.values.timer2);
 					let timer1HIGH = this.getHighTime(timer2LOW), timer2HIGH = this.getHighTime(timer1LOW);
 					let check = _ => {
 						if (disableChanging) return;
@@ -192,7 +184,7 @@ module.exports = (_ => {
 
 				BDFDB.DOMUtils.appendLocalStyle("disableTextSelection", `*{user-select: none !important;}`);
 
-				let value = values[timer];
+				let value = this.settings.values[timer];
 				let sY = 0;
 				let sHalfW = BDFDB.DOMUtils.getRects(grabber).width/2;
 				let sMinX = BDFDB.DOMUtils.getRects(track).left;
@@ -213,19 +205,19 @@ module.exports = (_ => {
 					grabber.style.setProperty("left", value + "%");
 					tooltipContent.innerText = this.getTime(value, true);
 					tooltip.update();
-					values[timer] = value;
-					this.updateSlider(track.parentNode, values);
+					this.settings.values[timer] = value;
+					this.updateSlider(track.parentNode);
 				};
 				document.addEventListener("mouseup", mouseUp);
 				document.addEventListener("mousemove", mouseMove);
 			}
 
-			updateSlider (slider, values) {
+			updateSlider (slider) {
 				let bar = slider.querySelector(BDFDB.dotCN.sliderbar);
 				let fill = slider.querySelector(BDFDB.dotCN.sliderbarfill);
-				let inverted = values.timer1 > values.timer2;
-				fill.style.setProperty("width", (inverted ? (values.timer1 - values.timer2) : (values.timer2 - values.timer1)) + "%");
-				fill.style.setProperty("margin-left", (inverted ? values.timer2 : values.timer1) + "%");
+				let inverted = this.settings.values.timer1 > this.settings.values.timer2;
+				fill.style.setProperty("width", (inverted ? (this.settings.values.timer1 - this.settings.values.timer2) : (this.settings.values.timer2 - this.settings.values.timer1)) + "%");
+				fill.style.setProperty("margin-left", (inverted ? this.settings.values.timer2 : this.settings.values.timer1) + "%");
 				fill.style.setProperty("background-color", inverted ? "#66757F" : "#E0C460", "important");
 				bar.style.setProperty("background-color", inverted ? "#E0C460" : "#66757F", "important");
 			}
@@ -255,5 +247,5 @@ module.exports = (_ => {
 				return [hours, minutes];
 			}
 		};
-	})(window.BDFDB_Global.PluginUtils.buildPlugin(config));
+	})(window.BDFDB_Global.PluginUtils.buildPlugin(changeLog));
 })();

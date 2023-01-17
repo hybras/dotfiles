@@ -2,7 +2,7 @@
  * @name EditRoles
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 1.1.2
+ * @version 1.1.4
  * @description Allows you to locally edit Roles
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -60,19 +60,17 @@ module.exports = (_ => {
 		
 		return class EditRoles extends Plugin {
 			onLoad () {
-				this.patchedModules = {
-					before: {
-						RoleMention: "default",
-						AutocompleteRoleResult: "render",
-						MessageHeader: "default",
-						ChannelMembers: "render",
-						MemberListItem: "render",
-						UserPopoutBodySection: "default",
-						UserPopoutBody: "default"
-					},
-					after: {
-						RichRoleMention: "RoleMention"
-					}
+				this.modulePatches = {
+					before: [
+						"AutocompleteRoleResult",
+						"ChannelMembers",
+						"MemberListItem",
+						"MessageContent",
+						"UserPopoutBody"
+					],
+					after: [
+						"RichRoleMention"
+					]
 				};
 			}
 			
@@ -87,9 +85,9 @@ module.exports = (_ => {
 						});
 					}
 				}});
-				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.MemberStore, "getMember", {after: e => {
+				BDFDB.PatchUtils.patch(this, BDFDB.LibraryStores.GuildMemberStore, "getMember", {after: e => {
 					if (e.returnValue) {
-						let guild = BDFDB.LibraryModules.GuildStore.getGuild(e.methodArguments[0]);
+						let guild = BDFDB.LibraryStores.GuildStore.getGuild(e.methodArguments[0]);
 						if (guild) {
 							let colorRole, iconRole;
 							for (let id of e.returnValue.roles) {
@@ -159,19 +157,17 @@ module.exports = (_ => {
 			}
 			
 			onUserContextMenu (e) {
-				if (e.subType == "useUserRolesItems") {
-					let [children, index] = BDFDB.ContextMenuUtils.findItem(e.returnvalue, {id: "roles"});
-					if (index > -1 && children[index].props && BDFDB.ArrayUtils.is(children[index].props.children)) for (let child of children[index].props.children) {
-						if (child && child.props && typeof child.props.label == "function" && changedRoles[child.props.id]) {
-							let data = changedRoles[child.props.id];
-							let renderLabel = child.props.label;
-							child.props.label = BDFDB.TimeUtils.suppress((...args) => {
-								let label = renderLabel(...args);
-								if (data.color && label.props.children[0] && label.props.children[0].props) label.props.children[0].props.color = BDFDB.ColorUtils.convert(data.color, "hex");
-								if (data.name && label.props.children[1] && label.props.children[1].props && label.props.children[1].props.children) label.props.children[1].props.children = data.name;
-								return label;
-							}, "Error in renderLabel of UserRolesItems", this);
-						}
+				let [children, index] = BDFDB.ContextMenuUtils.findItem(e.returnvalue, {id: "roles"});
+				if (index > -1 && children[index].props && BDFDB.ArrayUtils.is(children[index].props.children)) for (let child of children[index].props.children) {
+					if (child && child.props && typeof child.props.label == "function" && changedRoles[child.props.id]) {
+						let data = changedRoles[child.props.id];
+						let renderLabel = child.props.label;
+						child.props.label = BDFDB.TimeUtils.suppress((...args) => {
+							let label = renderLabel(...args);
+							if (data.color && label.props.children[0] && label.props.children[0].props) label.props.children[0].props.color = BDFDB.ColorUtils.convert(data.color, "hex");
+							if (data.name && label.props.children[1] && label.props.children[1].props && label.props.children[1].props.children) label.props.children[1].props.children = data.name;
+							return label;
+						}, "Error in renderLabel of UserRolesItems", this);
 					}
 				}
 			}
@@ -199,7 +195,7 @@ module.exports = (_ => {
 									BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuItem, {
 										label: this.labels.submenu_resetsettings,
 										id: BDFDB.ContextMenuUtils.createItemId(this.name, "settings-reset"),
-										color: BDFDB.LibraryComponents.MenuItems.Colors.DANGER,
+										color: BDFDB.DiscordConstants.MenuItemColors.DANGER,
 										disabled: !changedRoles[e.instance.props.id],
 										action: event => {
 											let remove = _ => {
@@ -217,29 +213,27 @@ module.exports = (_ => {
 					e.returnvalue.props.children
 				].flat(10).filter(n => n);
 			}
-			
-			processRichRoleMention (e) {
-				if (e.instance.props.id && changedRoles[e.instance.props.id]) {
-					e.returnvalue.props.color = changedRoles[e.instance.props.id].color ? BDFDB.ColorUtils.convert(changedRoles[e.instance.props.id].color, "int") : e.returnvalue.props.color;
-					e.returnvalue.props.children[1] = changedRoles[e.instance.props.id].name || e.returnvalue.props.children[1];
+
+			processMessageContent (e) {
+				if (!BDFDB.ArrayUtils.is(e.instance.props.content)) return;
+				for (let ele of e.instance.props.content) if (BDFDB.ReactUtils.isValidElement(ele) && ele.props && ele.props.type == "mention" && ele.props.roleId && changedRoles[ele.props.roleId]) {
+					ele.props.roleColor = changedRoles[ele.props.roleId].color ? BDFDB.ColorUtils.convert(changedRoles[ele.props.roleId].color, "int") : ele.props.roleColor;
+					if (changedRoles[ele.props.roleId].name) ele.props.children = ["@" + changedRoles[ele.props.roleId].name];
 				}
 			}
 			
-			processRoleMention (e) {
-				if (e.instance.props.roleId && changedRoles[e.instance.props.roleId]) {
-					e.instance.props.roleColor = changedRoles[e.instance.props.roleId].color ? BDFDB.ColorUtils.convert(changedRoles[e.instance.props.roleId].color, "int") : e.instance.props.roleColor;
-					e.instance.props.children = [`@${changedRoles[e.instance.props.roleId].name || e.instance.props.children[1]}`];
-					if (e.instance.props.content && e.instance.props.content[0]) e.instance.props.content[0].content = `@${changedRoles[e.instance.props.roleId].name || e.instance.props.children[1]}`;
-				}
+			processRichRoleMention (e) {
+				if (!e.instance.props.id || !changedRoles[e.instance.props.id]) return;
+				e.returnvalue.props.color = changedRoles[e.instance.props.id].color ? BDFDB.ColorUtils.convert(changedRoles[e.instance.props.id].color, "int") : e.returnvalue.props.color;
+				e.returnvalue.props.children[1] = changedRoles[e.instance.props.id].name || e.returnvalue.props.children[1];
 			}
 			
 			processAutocompleteRoleResult (e) {
-				if (e.instance.props.role && changedRoles[e.instance.props.role.id]) {
-					e.instance.props.role = Object.assign({}, e.instance.props.role);
-					e.instance.props.role.color = changedRoles[e.instance.props.role.id].color ? BDFDB.ColorUtils.convert(changedRoles[e.instance.props.role.id].color, "int") : e.instance.props.role.color;
-					e.instance.props.role.colorString = changedRoles[e.instance.props.role.id].color ? BDFDB.ColorUtils.convert(changedRoles[e.instance.props.role.id].color, "hex") : e.instance.props.role.colorString;
-					e.instance.props.role.name = changedRoles[e.instance.props.role.id].name || e.instance.props.role.name;
-				}
+				if (!e.instance.props.role || !changedRoles[e.instance.props.role.id]) return;
+				e.instance.props.role = Object.assign({}, e.instance.props.role);
+				e.instance.props.role.color = changedRoles[e.instance.props.role.id].color ? BDFDB.ColorUtils.convert(changedRoles[e.instance.props.role.id].color, "int") : e.instance.props.role.color;
+				e.instance.props.role.colorString = changedRoles[e.instance.props.role.id].color ? BDFDB.ColorUtils.convert(changedRoles[e.instance.props.role.id].color, "hex") : e.instance.props.role.colorString;
+				e.instance.props.role.name = changedRoles[e.instance.props.role.id].name || e.instance.props.role.name;
 			}
 			
 			processChannelMembers (e) {
@@ -256,14 +250,9 @@ module.exports = (_ => {
 			}
 			
 			processMemberListItem (e) {
-				if (e.instance.props.user) {
-					let member = BDFDB.LibraryModules.MemberStore.getMember(e.instance.props.guildId, e.instance.props.user.id);
-					if (member) e.instance.props.colorString = member.colorString;
-				}
-			}
-			
-			processUserPopoutBodySection (e) {
-				if (e.instance.props.guild) e.instance.props.guild = this.changeRolesInGuild(e.instance.props.guild);
+				if (!e.instance.props.user) return;
+				let member = BDFDB.LibraryStores.GuildMemberStore.getMember(e.instance.props.guildId, e.instance.props.user.id);
+				if (member) e.instance.props.colorString = member.colorString;
 			}
 			
 			processUserPopoutBody (e) {
@@ -271,7 +260,7 @@ module.exports = (_ => {
 			}
 			
 			getGuildFromRoleId (roleId) {
-				return BDFDB.LibraryModules.FolderStore.getFlattenedGuilds().find(g => g.roles[roleId]);
+				return BDFDB.LibraryModules.SortedGuildUtils.getFlattenedGuilds().find(g => g.roles[roleId]);
 			}
 			
 			changeRolesInGuild (guild, useNative) {
@@ -300,7 +289,7 @@ module.exports = (_ => {
 					BDFDB.DataUtils.remove(this, "roles", id);
 				}
 				else {
-					for (let guild of BDFDB.LibraryModules.FolderStore.getFlattenedGuilds()) if (cachedRoles[guild.id]) guild.roles = cachedRoles[guild.id];
+					for (let guild of BDFDB.LibraryModules.SortedGuildUtils.getFlattenedGuilds()) if (cachedRoles[guild.id]) guild.roles = cachedRoles[guild.id];
 					cachedRoles = {};
 					BDFDB.DataUtils.remove(this, "roles");
 				}
@@ -360,15 +349,15 @@ module.exports = (_ => {
 									children: [
 										BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.FormComponents.FormTitle, {
 											className: BDFDB.disCN.marginreset,
-											tag: BDFDB.LibraryComponents.FormComponents.FormTitle.Tags.H5,
-											children: BDFDB.LibraryModules.LanguageStore.Messages.FORM_LABEL_ROLE_ICON
+											tag: BDFDB.LibraryComponents.FormComponents.FormTags.H5,
+											children: BDFDB.LanguageUtils.LanguageStrings.FORM_LABEL_ROLE_ICON
 										}),
 										BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsItem, {
 											type: "Switch",
 											margin: 0,
 											grow: 0,
 											label: BDFDB.LanguageUtils.LanguageStrings.REMOVE,
-											tag: BDFDB.LibraryComponents.FormComponents.FormTitle.Tags.H5,
+											tag: BDFDB.LibraryComponents.FormComponents.FormTags.H5,
 											value: data.removeIcon,
 											onChange: value => {
 												newData.removeIcon = value;
@@ -427,6 +416,11 @@ module.exports = (_ => {
 						delete instance.props.errorMessage;
 						callback("");
 						BDFDB.ReactUtils.forceUpdate(instance);
+					}
+					else if (url.indexOf("data:") == 0) {
+						instance.props.success = true;
+						delete instance.props.errorMessage;
+						callback(url);
 					}
 					else instance.checkTimeout = BDFDB.TimeUtils.timeout(_ => {
 						BDFDB.LibraryRequires.request(url, {agentOptions: {rejectUnauthorized: false}}, (error, response, result) => {

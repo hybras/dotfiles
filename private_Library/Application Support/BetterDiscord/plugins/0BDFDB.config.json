@@ -1,20 +1,25 @@
 {
 	"all": {
 		"changeLogs": {
-			"BDFDB": "2.3.2",
-			"BetterSearchPage": "1.2.0",
-			"ClickableMentions": "1.0.5",
-			"CopyRawMessage": "1.1.3",
-			"CreationDate": "1.4.6",
-			"EditChannels": "4.4.2",
-			"EditRoles": "1.1.2",
-			"EditServers": "2.3.7",
-			"EditUsers": "4.6.9",
-			"JoinedAtDate": "1.3.3",
-			"LastMessageDate": "1.2.8",
-			"MessageUtilities": "1.9.4",
+			"BDFDB": "3.0.7",
+			"BetterFriendList": "1.5.2",
+			"BetterNsfwTag": "1.3.2",
+			"BetterSearchPage": "1.2.3",
+			"CharCounter": "1.6.2",
+			"ClickableMentions": "1.0.6",
+			"CopyRawMessage": "1.1.4",
+			"CreationDate": "9.9.9",
+			"EditChannels": "4.5.2",
+			"EditRoles": "1.1.4",
+			"EditServers": "2.4.1",
+			"EditUsers": "4.7.3",
+			"JoinedAtDate": "9.9.9",
+			"LastMessageDate": "1.3.5",
+			"MessageUtilities": "1.9.6",
+			"PluginRepo": "2.4.5",
 			"ShowHiddenChannels": "9.9.9",
-			"ThemeRepo": "2.3.9"
+			"ThemeRepo": "2.4.8",
+			"TimedLightDarkMode": "1.1.5"
 		},
 		"choices": {
 			"toastPosition": "right"
@@ -26,8 +31,8 @@
 			"useChromium": false
 		},
 		"hashes": {
-			"0BDFDB.data.json": "6de0b6b13c8c89fb0775a6eb61257d88bdc56629",
-			"0BDFDB.raw.css": "c10b12dd7ea7d591e3b0817afa421b97a14816bf"
+			"0BDFDB.data.json": "81ce256688c271a61d77f8c6a769adff5713784d",
+			"0BDFDB.raw.css": "a1c4a8b6f28c4765c6af2853ddf13a35922a2b9e"
 		}
 	}
 }

@@ -1,6 +1,6 @@
 {
     "BDFDB": true,
-    "ZeresPluginLibrary": true,
+    "ZeresPluginLibrary": false,
     "BetterCodeblocks": true,
     "BetterFolders": true,
     "BetterInvites": true,
@@ -13,16 +13,16 @@
     "HideSideBar": false,
     "TimedLightDarkMode": true,
     "ThemeRepo": true,
-    "AppNotifications": true,
+    "AppNotifications": false,
     "BetterFormattingRedux": true,
     "BetterFriendList": true,
     "BetterSearchPage": true,
-    "BlurNSFW": true,
+    "BlurNSFW": false,
     "CharCounter": true,
     "ClickToChat": true,
     "ClickToCopyUsername": true,
     "ClickableMentions": true,
-    "CreationDate": true,
+    "CreationDate": false,
     "discordExperiments": false,
     "DoNotTrack": true,
     "EditServers": true,
@@ -32,7 +32,8 @@
     "EditUsers": true,
     "DoubleClickToEdit": true,
     "EditRoles": true,
-    "JoinedAtDate": true,
+    "JoinedAtDate": false,
     "LastMessageDate": true,
-    "MessageUtilities": true
+    "MessageUtilities": true,
+    "Double Click To Edit": false
 }

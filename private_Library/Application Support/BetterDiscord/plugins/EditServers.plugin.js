@@ -2,7 +2,7 @@
  * @name EditServers
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 2.3.8
+ * @version 2.4.1
  * @description Allows you to locally edit Servers
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -13,20 +13,18 @@
  */
 
 module.exports = (_ => {
-	const config = {
-		"info": {
-			"name": "EditServers",
-			"author": "DevilBro",
-			"version": "2.3.8",
-			"description": "Allows you to locally edit Servers"
+	const changeLog = {
+		"fixed": {
+			"Banners": "work again"
 		}
 	};
 	
 	return !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
-		getName () {return config.info.name;}
-		getAuthor () {return config.info.author;}
-		getVersion () {return config.info.version;}
-		getDescription () {return `The Library Plugin needed for ${config.info.name} is missing. Open the Plugin Settings to download it. \n\n${config.info.description}`;}
+		constructor (meta) {for (let key in meta) this[key] = meta[key];}
+		getName () {return this.name;}
+		getAuthor () {return this.author;}
+		getVersion () {return this.version;}
+		getDescription () {return `The Library Plugin needed for ${this.name} is missing. Open the Plugin Settings to download it. \n\n${this.description}`;}
 		
 		downloadLibrary () {
 			require("request").get("https://mwittrien.github.io/BetterDiscordAddons/Library/0BDFDB.plugin.js", (e, r, b) => {
@@ -39,7 +37,7 @@ module.exports = (_ => {
 			if (!window.BDFDB_Global || !Array.isArray(window.BDFDB_Global.pluginQueue)) window.BDFDB_Global = Object.assign({}, window.BDFDB_Global, {pluginQueue: []});
 			if (!window.BDFDB_Global.downloadModal) {
 				window.BDFDB_Global.downloadModal = true;
-				BdApi.showConfirmationModal("Library Missing", `The Library Plugin needed for ${config.info.name} is missing. Please click "Download Now" to install it.`, {
+				BdApi.showConfirmationModal("Library Missing", `The Library Plugin needed for ${this.name} is missing. Please click "Download Now" to install it.`, {
 					confirmText: "Download Now",
 					cancelText: "Cancel",
 					onCancel: _ => {delete window.BDFDB_Global.downloadModal;},
@@ -49,13 +47,13 @@ module.exports = (_ => {
 					}
 				});
 			}
-			if (!window.BDFDB_Global.pluginQueue.includes(config.info.name)) window.BDFDB_Global.pluginQueue.push(config.info.name);
+			if (!window.BDFDB_Global.pluginQueue.includes(this.name)) window.BDFDB_Global.pluginQueue.push(this.name);
 		}
 		start () {this.load();}
 		stop () {}
 		getSettingsPanel () {
 			let template = document.createElement("template");
-			template.innerHTML = `<div style="color: var(--header-primary); font-size: 16px; font-weight: 300; white-space: pre; line-height: 22px;">The Library Plugin needed for ${config.info.name} is missing.\nPlease click <a style="font-weight: 500;">Download Now</a> to install it.</div>`;
+			template.innerHTML = `<div style="color: var(--header-primary); font-size: 16px; font-weight: 300; white-space: pre; line-height: 22px;">The Library Plugin needed for ${this.name} is missing.\nPlease click <a style="font-weight: 500;">Download Now</a> to install it.</div>`;
 			template.content.firstElementChild.querySelector("a").addEventListener("click", this.downloadLibrary);
 			return template.content.firstElementChild;
 		}
@@ -71,7 +69,7 @@ module.exports = (_ => {
 					places: {
 						guildList:				{value: true, 			description: "Server List"},
 						guildHeader:			{value: true, 			description: "Server Header"},
-						guildInvites:			{value: true, 			description: "Server Invites"},
+						invites:				{value: true, 			description: "Server Invites"},
 						chat:					{value: true, 			description: "Chat (Welcome Message, etc.)"},
 						mutualGuilds:			{value: true, 			description: "Mutual Servers"},
 						recentMentions:			{value: true, 			description: "Recent Mentions Popout"},
@@ -79,27 +77,26 @@ module.exports = (_ => {
 					}
 				};
 			
-				this.patchedModules = {
-					before: {
-						GuildItem: "type",
-						GuildIconWrapper: "render",
-						QuickSwitchGuildResult: "render",
-						QuickSwitchChannelResult: "render",
-						GuildSidebar: "render",
-						GuildHeader: "type",
-						InviteGuildName: "GuildName"
-					},
-					after: {
-						RecentsChannelHeader: "default",
-						GuildItem: "type",
-						BlobMask: "render",
-						GuildIconWrapper: "render",
-						GuildIcon: "render",
-						MutualGuilds: "default",
-						NavItem: "default",
-						GuildHeader: "type",
-						WelcomeArea: "default"
-					}
+				this.modulePatches = {
+					before: [
+						"ChannelsList",
+						"GuildHeader",
+						"GuildIconWrapper",
+						"GuildItem",
+						"InviteGuildName",
+						"QuickSwitchChannelResult",
+						"QuickSwitchGuildResult"
+					],
+					after: [
+						"BlobMask",
+						"DefaultChannelEmptyMessage",
+						"GuildHeader",
+						"GuildIcon",
+						"GuildIconWrapper",
+						"GuildItem",
+						"UserProfileMutualGuilds",
+						"RecentsChannelHeader"
+					]
 				};
 				
 				this.patchPriority = 7;
@@ -114,7 +111,7 @@ module.exports = (_ => {
 			
 			onStart () {
 				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.IconUtils, "getGuildBannerURL", {instead: e => {
-					let guild = BDFDB.LibraryModules.GuildStore.getGuild(e.methodArguments[0].id);
+					let guild = BDFDB.LibraryStores.GuildStore.getGuild(e.methodArguments[0].id);
 					if (guild) {
 						let data = changedGuilds[guild.id];
 						if (data && data.banner && !data.removeBanner) return data.banner;
@@ -122,21 +119,16 @@ module.exports = (_ => {
 					return e.callOriginalMethod();
 				}});
 
-				BDFDB.PatchUtils.patch(this, BDFDB.LibraryComponents.GuildComponents.Guild.prototype, "render", {
-					before: e => this.processGuildItem({instance: e.thisObject, returnvalue: e.returnValue, methodname: "render"}),
-					after: e => this.processGuildItem({instance: e.thisObject, returnvalue: e.returnValue, methodname: "render"})
-				});
-
 				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.QuerySearchUtils, "queryGuilds", {after: e => {
 					if (!e.methodArguments[0].query) return;
-					for (let id in changedGuilds) if (changedGuilds[id] && changedGuilds[id].name && changedGuilds[id].name.toLocaleLowerCase().indexOf(e.methodArguments[0].query.toLocaleLowerCase()) > -1 && !e.returnValue.find(n => n.record && n.record.id == id && n.type == BDFDB.LibraryModules.QueryUtils.AutocompleterResultTypes.GUILD)) {
-						let guild = BDFDB.LibraryModules.GuildStore.getGuild(id);
+					for (let id in changedGuilds) if (changedGuilds[id] && changedGuilds[id].name && changedGuilds[id].name.toLocaleLowerCase().indexOf(e.methodArguments[0].query.toLocaleLowerCase()) > -1 && !e.returnValue.find(n => n.record && n.record.id == id && n.type == BDFDB.DiscordConstants.AutocompleterResultTypes.GUILD)) {
+						let guild = BDFDB.LibraryStores.GuildStore.getGuild(id);
 						if (guild) e.returnValue.push({
 							comparator: guild.name,
 							record: guild,
 							score: 30000,
 							sortable: guild.name.toLocaleLowerCase(),
-							type: BDFDB.LibraryModules.QueryUtils.AutocompleterResultTypes.GUILD
+							type: BDFDB.DiscordConstants.AutocompleterResultTypes.GUILD
 						});
 					}
 				}});
@@ -200,211 +192,151 @@ module.exports = (_ => {
 			forceUpdateAll () {
 				changedGuilds = BDFDB.DataUtils.load(this, "servers");
 				
-				BDFDB.PatchUtils.forceAllUpdates(this);
-				BDFDB.GuildUtils.rerenderAll();
+				BDFDB.DiscordUtils.rerenderAll();
 			}
 		
 			onGuildContextMenu (e) {
-				if (e.instance.props.guild) {
-					let [children, index] = BDFDB.ContextMenuUtils.findItem(e.returnvalue, {id: "devmode-copy-id", group: true});
-					children.splice(index > -1 ? index : children.length, 0, BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuGroup, {
-						children: BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuItem, {
-							label: this.labels.context_localserversettings,
-							id: BDFDB.ContextMenuUtils.createItemId(this.name, "settings-submenu"),
-							children: BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuGroup, {
-								children: [
-									BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuItem, {
-										label: this.labels.submenu_serversettings,
-										id: BDFDB.ContextMenuUtils.createItemId(this.name, "settings-change"),
-										action: _ => this.openGuildSettingsModal(e.instance.props.guild.id)
-									}),
-									BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuItem, {
-										label: this.labels.submenu_resetsettings,
-										id: BDFDB.ContextMenuUtils.createItemId(this.name, "settings-reset"),
-										color: BDFDB.LibraryComponents.MenuItems.Colors.DANGER,
-										disabled: !changedGuilds[e.instance.props.guild.id],
-										action: event => {
-											let remove = _ => {
-												BDFDB.DataUtils.remove(this, "servers", e.instance.props.guild.id);
-												this.forceUpdateAll(true);
-											};
-											if (event.shiftKey) remove();
-											else BDFDB.ModalUtils.confirm(this, this.labels.confirm_reset, remove);
-										}
-									})
-								]
-							})
+				if (!e.instance.props.guild) return;
+				let [children, index] = BDFDB.ContextMenuUtils.findItem(e.returnvalue, {id: "devmode-copy-id", group: true});
+				children.splice(index > -1 ? index : children.length, 0, BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuGroup, {
+					children: BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuItem, {
+						label: this.labels.context_localserversettings,
+						id: BDFDB.ContextMenuUtils.createItemId(this.name, "settings-submenu"),
+						children: BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuGroup, {
+							children: [
+								BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuItem, {
+									label: this.labels.submenu_serversettings,
+									id: BDFDB.ContextMenuUtils.createItemId(this.name, "settings-change"),
+									action: _ => this.openGuildSettingsModal(e.instance.props.guild.id)
+								}),
+								BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuItem, {
+									label: this.labels.submenu_resetsettings,
+									id: BDFDB.ContextMenuUtils.createItemId(this.name, "settings-reset"),
+									color: BDFDB.DiscordConstants.MenuItemColors.DANGER,
+									disabled: !changedGuilds[e.instance.props.guild.id],
+									action: event => {
+										let remove = _ => {
+											BDFDB.DataUtils.remove(this, "servers", e.instance.props.guild.id);
+											this.forceUpdateAll(true);
+										};
+										if (event.shiftKey) remove();
+										else BDFDB.ModalUtils.confirm(this, this.labels.confirm_reset, remove);
+									}
+								})
+							]
 						})
-					}));
-				}
+					})
+				}));
 			}
 
 			processGuildItem (e) {
-				if (BDFDB.GuildUtils.is(e.instance.props.guild) && e.instance.props.guild.joinedAt && this.settings.places.guildList) {
-					if (!e.returnvalue) e.instance.props.guild = this.getGuildData(e.instance.props.guild.id);
-					else {
-						let data = changedGuilds[e.instance.props.guild.id];
-						if (data && (data.color3 || data.color4)) {
-							let [children, index] = BDFDB.ReactUtils.findParent(e.returnvalue, {name: ["GuildTooltip", "BDFDB_TooltipContainer"]});
-							if (index > -1) children[index] = BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TooltipContainer, {
-								tooltipConfig: {
-									type: "right",
-									guild: e.instance.props.guild,
-									list: true,
-									offset: 12,
-									backgroundColor: data.color3,
-									fontColor: data.color4
-								},
-								children: children[index].props.children
-							});
-						}
+				if (!this.settings.places.guildList || !BDFDB.GuildUtils.is(e.instance.props.guild) || !e.instance.props.guild.joinedAt) return;
+				if (!e.returnvalue) e.instance.props.guild = this.getGuildData(e.instance.props.guild.id);
+				else {
+					let data = changedGuilds[e.instance.props.guild.id];
+					if (data && (data.color3 || data.color4)) {
+						let [children, index] = BDFDB.ReactUtils.findParent(e.returnvalue, {name: ["GuildTooltip", "BDFDB_TooltipContainer"]});
+						if (index > -1) children[index] = BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TooltipContainer, {
+							tooltipConfig: {
+								type: "right",
+								guild: e.instance.props.guild,
+								list: true,
+								offset: 12,
+								backgroundColor: data.color3,
+								fontColor: data.color4
+							},
+							children: children[index].props.children
+						});
 					}
 				}
 			}
 
 			processBlobMask (e) {
-				if (this.settings.places.guildList) {
-					let [children, index] = BDFDB.ReactUtils.findParent(e.returnvalue, {name: "NavItem"});
-					if (index > -1 && children[index].props.to && children[index].props.to.pathname) {
-						let guild = BDFDB.LibraryModules.GuildStore.getGuild((children[index].props.to.pathname.split("/channels/")[1] || "").split("/")[0]);
-						if (guild) {
-							let data = changedGuilds[guild.id];
-							if (data) {
-								if (data.shortName) children[index].props.name = data.shortName.split("").join(" ");
-								else if (data.name && data.ignoreCustomName) children[index].props.name = guild.name;
-							}
-						}
-					}
-				}
-			}
-			
-			processGuildIconWrapper (e) {
-				if (BDFDB.GuildUtils.is(e.instance.props.guild) && e.instance.props.guild.joinedAt) {
-					if (e.instance.props.className && e.instance.props.className.indexOf(BDFDB.disCN.guildfolderguildicon) > -1) e.instance.props.guild = this.getGuildData(e.instance.props.guild.id, this.settings.places.guildList);
-					else if (e.instance.props.className && e.instance.props.className.indexOf(BDFDB.disCN.listavatar) > -1) e.instance.props.guild = this.getGuildData(e.instance.props.guild.id, this.settings.places.mutualGuilds);
-					else e.instance.props.guild = this.getGuildData(e.instance.props.guild.id);
-				}
+				if (!this.settings.places.guildList) return;
+				let [children, index] = BDFDB.ReactUtils.findParent(e.returnvalue, {name: "NavItem"});
+				if (index == -1 || !children[index].props.to || !children[index].props.to.pathname) return;
+				let guild = BDFDB.LibraryStores.GuildStore.getGuild((children[index].props.to.pathname.split("/channels/")[1] || "").split("/")[0]);
+				if (!guild || !changedGuilds[guild.id]) return;
+				if (changedGuilds[guild.id].shortName) children[index].props.name = changedGuilds[guild.id].shortName.split("").join(" ");
+				else if (changedGuilds[guild.id].name && changedGuilds[guild.id].ignoreCustomName) children[index].props.name = guild.name;
 			}
 			
 			processGuildIcon (e) {
-				if (BDFDB.GuildUtils.is(e.instance.props.guild) && e.instance.props.guild.joinedAt && e.instance.props.style && (!e.instance.props.style.backgroundImage || e.instance.props.style.backgroundImage == "none")) {
-					let data = changedGuilds[e.instance.props.guild.id];
-					if (data) {
-						if (e.instance.props.className && e.instance.props.className.indexOf(BDFDB.disCN.guildfolderguildicon) > -1) this.changeGuildIcon(e, data, this.settings.places.guildList);
-						else if (e.instance.props.className && e.instance.props.className.indexOf(BDFDB.disCN.listavatar) > -1 || BDFDB.ReactUtils.findConstructor(e.instance, "MutualGuild", {up: true})) this.changeGuildIcon(e, data, this.settings.places.mutualGuilds);
-						else this.changeGuildIcon(e, data);
-					}
-				}
+				this.processGuildIconWrapper(e);
 			}
 			
-			processNavItem (e) {
-				if (this.settings.places.guildList) {
-					let pathname = BDFDB.ObjectUtils.get(e.instance, "props.to.pathname");
-					let data = pathname && changedGuilds[(pathname.split("/channels/")[1] || "").split("/")[0]];
-					if (data) {
-						let guildAcronym = BDFDB.ReactUtils.findChild(e.returnvalue, {props: [["className", BDFDB.disCN.guildiconacronym]]});
-						if (guildAcronym) {
-							let fontGradient = BDFDB.ObjectUtils.is(data.color2);
-							guildAcronym.props.style = Object.assign({}, guildAcronym.props.style, {
-								background: BDFDB.ObjectUtils.is(data.color1) ? BDFDB.ColorUtils.createGradient(data.color1) : BDFDB.ColorUtils.convert(data.color1, "RGBA"),
-								color: !fontGradient && BDFDB.ColorUtils.convert(data.color2, "RGBA")
-							});
-							if (fontGradient) guildAcronym.props.children = BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TextGradientElement, {
-								gradient: BDFDB.ColorUtils.createGradient(data.color2),
-								children: guildAcronym.props.children
-							});
-						}
-					}
-				}
+			processGuildIconWrapper (e) {
+				if (!BDFDB.GuildUtils.is(e.instance.props.guild) || !changedGuilds[e.instance.props.guild.id] || !e.instance.props.guild.joinedAt) return;
+				let change = true;
+				if (e.instance.props.className && e.instance.props.className.indexOf(BDFDB.disCN.guildfolderguildicon) > -1) change = this.settings.places.guildList;
+				else if (e.instance.props.className && e.instance.props.className.indexOf(BDFDB.disCN.listavatar) > -1) change = this.settings.places.mutualGuilds;
+				if (change) e.instance.props.guild = this.getGuildData(e.instance.props.guild.id);
 			}
 
-			processMutualGuilds (e) {
-				if (this.settings.places.mutualGuilds) {
-					let [children, index] = BDFDB.ReactUtils.findParent(e.returnvalue, {name: "GuildRow"});
-					if (index > -1) for (let row of children) if (row && row.props && row.props.guild) row.props.guild = this.getGuildData(row.props.guild.id);
-				}
+			processUserProfileMutualGuilds (e) {
+				if (!this.settings.places.mutualGuilds || !e.returnvalue.props.children || !e.returnvalue.props.children.length) return;
+				for (let row of e.returnvalue.props.children) if (row && row.props && row.props.guild) row.props.guild = this.getGuildData(row.props.guild.id);
 			}
-
 
 			processQuickSwitchGuildResult (e) {
-				if (e.instance.props.guild && this.settings.places.quickSwitcher) {
-					e.instance.props.guild = this.getGuildData(e.instance.props.guild.id);
-				}
+				if (this.settings.places.quickSwitcher && e.instance.props.guild) e.instance.props.guild = this.getGuildData(e.instance.props.guild.id);
 			}
 
 			processQuickSwitchChannelResult (e) {
-				if (e.instance.props.channel && e.instance.props.channel.guild_id && this.settings.places.quickSwitcher) {
-					e.instance.props.children.props.children = this.getGuildData(e.instance.props.channel.guild_id).name;
-				}
+				if (this.settings.places.quickSwitcher && e.instance.props.channel && e.instance.props.channel.guild_id) e.instance.props.children.props.children = this.getGuildData(e.instance.props.channel.guild_id).name;
 			}
 			
 			processRecentsChannelHeader (e) {
-				if (this.settings.places.recentMentions && BDFDB.ArrayUtils.is(e.returnvalue.props.children)) {
-					for (let child of e.returnvalue.props.children) if (child && child.props && child.props.channel && child.type.displayName == "ChannelName") {
-						let oldType = child.type;
-						child.type = (...args) => {
-							let instance = oldType(...args);
-							let guildName = BDFDB.ReactUtils.findChild(instance, {props: [["className", BDFDB.disCN.recentmentionsguildname]]});
-							if (guildName) guildName.props.children = (this.getGuildData(e.instance.props.channel.guild_id) || {}).name || guildName.props.children;
-							return instance;
-						};
-						child.type.displayName = oldType.displayName;
-					}
-				}
+				if (!this.settings.places.recentMentions || !e.instance.props.channel || !e.instance.props.channel.guild_id || !changedGuilds[e.instance.props.channel.guild_id] || !changedGuilds[e.instance.props.channel.guild_id].name) return;
+				let guild = BDFDB.LibraryStores.GuildStore.getGuild(e.instance.props.channel.guild_id);
+				if (!guild) return;
+				let guildName = BDFDB.ReactUtils.findChild(e.returnvalue, {props: [["className", BDFDB.disCN.recentmentionsguildname]]});
+				if (guildName && typeof guildName.props.children == "string") guildName.props.children = guildName.props.children.replace(guild.name, changedGuilds[e.instance.props.channel.guild_id].name);
 			}
 			
-			processGuildSidebar (e) {
-				if (e.instance.props.guild) {
-					let data = changedGuilds[e.instance.props.guild.id];
-					if (data) {
-						if (data.removeBanner) e.instance.props.guild = new BDFDB.DiscordObjects.Guild(Object.assign({}, e.instance.props.guild, {banner: null}));
-						else if (data.banner) e.instance.props.guild = new BDFDB.DiscordObjects.Guild(Object.assign({}, e.instance.props.guild, {banner: data.banner}));
-					}
-				}
+			processChannelsList (e) {
+				if (!this.settings.places.guildHeader || !e.instance.props.guild || !changedGuilds[e.instance.props.guild.id]) return;
+				e.instance.props.guild = this.getGuildData(e.instance.props.guild.id);
+				if (e.instance.props.guild.banner && !e.instance.props.guildBanner) e.instance.props.guildBanner = e.instance.props.guild.banner;
 			}
 			
 			processGuildHeader (e) {
-				if (e.instance.props.guild && this.settings.places.guildHeader) {
-					e.instance.props.guild = this.getGuildData(e.instance.props.guild.id);
-					let oldName = (BDFDB.LibraryModules.GuildStore.getGuild(e.instance.props.guild.id) || {}).name;
-					if (e.returnvalue && this.settings.general.addOriginalTooltip && oldName != e.instance.props.guild.name) {
-						e.returnvalue.props.children[0] = BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TooltipContainer, {
-							text: oldName,
-							children: e.returnvalue.props.children[0],
-							tooltipConfig: {type: "right"}
-						});
-					}
+				if (!this.settings.places.guildHeader || !e.instance.props.guild || !changedGuilds[e.instance.props.guild.id]) return;
+				e.instance.props.guild = this.getGuildData(e.instance.props.guild.id);
+				if (e.instance.props.guild.banner && !e.instance.props.guildBanner) {
+					e.instance.props.bannerVisible = true;
+					e.instance.props.guildBanner = e.instance.props.guild.banner;
+				}
+				let oldName = (BDFDB.LibraryStores.GuildStore.getGuild(e.instance.props.guild.id) || {}).name;
+				if (e.returnvalue && this.settings.general.addOriginalTooltip && oldName != e.instance.props.guild.name) {
+					e.returnvalue.props.children[0] = BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TooltipContainer, {
+						text: oldName,
+						children: e.returnvalue.props.children[0],
+						tooltipConfig: {type: "right"}
+					});
 				}
 			}
 			
 			processInviteGuildName (e) {
-				if (e.instance.props.guild && e.instance.props.guild.joinedAt && this.settings.places.guildInvites) {
-					e.instance.props.guild = this.getGuildData(e.instance.props.guild.id);
-				}
+				if (this.settings.places.invites && e.instance.props.guild && e.instance.props.guild.joinedAt) e.instance.props.guild = this.getGuildData(e.instance.props.guild.id);
 			}
 			
-			processWelcomeArea (e) {
-				if (e.instance.props.channel && this.settings.places.chat) {
-					let name = (BDFDB.LibraryModules.GuildStore.getGuild(e.instance.props.channel.guild_id) || {}).name;
-					let guildName = name && BDFDB.ReactUtils.findChild(e.returnvalue, {props: [["className", "titleName-3-Lp3Z"]]});
-					if (guildName && guildName.props && BDFDB.ArrayUtils.is(guildName.props.children)) {
-						for (let child of guildName.props.children) if (child && child.props && BDFDB.ArrayUtils.is(child.props.children) && child.props.children[0] == name) {
-							child.props.children = [(this.getGuildData(e.instance.props.channel.guild_id) || {}).name || name];
-							break;
-						}
-					}
-				}
+			processDefaultChannelEmptyMessage (e) {
+				if (!this.settings.places.chat || !e.instance.props.channel || !changedGuilds[e.instance.props.channel.guild_id] || !changedGuilds[e.instance.props.channel.guild_id].name) return;
+				let name = (BDFDB.LibraryStores.GuildStore.getGuild(e.instance.props.channel.guild_id) || {}).name;
+				let guildName = name && BDFDB.ReactUtils.findChild(e.returnvalue, {props: [["className", BDFDB.disCN.defaultchannelwelcometitle]]});
+				if (guildName) for (let child of guildName.props.children) if (child && child.props && child.props.children && child.props.children[0] == name) child.props.children[0] = changedGuilds[e.instance.props.channel.guild_id].name;
 			}
 			
 			getGuildData (guildId, change = true) {
-				let guild = BDFDB.LibraryModules.GuildStore.getGuild(guildId);
+				let guild = BDFDB.LibraryStores.GuildStore.getGuild(guildId);
 				if (!guild) return new BDFDB.DiscordObjects.Guild({});
 				let data = change && changedGuilds[guild.id];
 				if (data) {
 					let newGuildObject = {}, nativeObject = new BDFDB.DiscordObjects.Guild(guild);
 					for (let key in nativeObject) newGuildObject[key] = nativeObject[key];
 					newGuildObject.name = data.name || nativeObject.name;
-					newGuildObject.acronym = data.shortName && data.shortName.replace(/\s/g, "") || BDFDB.LibraryModules.StringUtils.getAcronym(!data.ignoreCustomName && data.name || nativeObject.name);
+					newGuildObject.acronym = data.shortName && data.shortName.replace(/\s/g, "") || BDFDB.StringUtils.getAcronym(!data.ignoreCustomName && data.name || nativeObject.name);
 					if (data.removeIcon) {
 						newGuildObject.icon = null;
 						newGuildObject.getIconURL = _ => {return null;};
@@ -419,23 +351,9 @@ module.exports = (_ => {
 				}
 				return new BDFDB.DiscordObjects.Guild(guild);
 			}
-			
-			changeGuildIcon (e, data, change = true) {
-				if (change) {
-					let fontGradient = BDFDB.ObjectUtils.is(data.color2);
-					e.returnvalue.props.style = Object.assign({}, e.returnvalue.props.style, {
-						background: BDFDB.ObjectUtils.is(data.color1) ? BDFDB.ColorUtils.createGradient(data.color1) : BDFDB.ColorUtils.convert(data.color1, "RGBA"),
-						color: !fontGradient && BDFDB.ColorUtils.convert(data.color2, "RGBA")
-					});
-					if (fontGradient) e.returnvalue.props.children[0] = BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TextGradientElement, {
-						gradient: BDFDB.ColorUtils.createGradient(data.color2),
-						children: e.returnvalue.props.children[0]
-					});
-				}
-			}
 
 			openGuildSettingsModal (guildId) {
-				let guild = BDFDB.LibraryModules.GuildStore.getGuild(guildId);
+				let guild = BDFDB.LibraryStores.GuildStore.getGuild(guildId);
 				if (!guild) return;
 				let data = changedGuilds[guild.id] || {};
 				let newData = Object.assign({}, data);
@@ -461,7 +379,7 @@ module.exports = (_ => {
 										onChange: value => {
 											newData.name = value;
 											if (!newData.ignoreCustomName) {
-												acronymInput.props.placeholder = value && BDFDB.LibraryModules.StringUtils.getAcronym(value) || guild.acronym;
+												acronymInput.props.placeholder = value && BDFDB.StringUtils.getAcronym(value) || guild.acronym;
 												BDFDB.ReactUtils.forceUpdate(acronymInput);
 											}
 										}
@@ -474,7 +392,7 @@ module.exports = (_ => {
 									BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TextInput, {
 										value: data.shortName,
 										ref: instance => {if (instance) acronymInput = instance;},
-										placeholder: !data.ignoreCustomName && data.name && BDFDB.LibraryModules.StringUtils.getAcronym(data.name) || guild.acronym,
+										placeholder: !data.ignoreCustomName && data.name && BDFDB.StringUtils.getAcronym(data.name) || guild.acronym,
 										onChange: value => {newData.shortName = value;}
 									})
 								}),
@@ -482,11 +400,11 @@ module.exports = (_ => {
 									type: "Switch",
 									className: BDFDB.disCN.marginbottom20,
 									label: this.labels.modal_ignorecustomname,
-									tag: BDFDB.LibraryComponents.FormComponents.FormTitle.Tags.H5,
+									tag: BDFDB.LibraryComponents.FormComponents.FormTags.H5,
 									value: data.ignoreCustomName,
 									onChange: value => {
 										newData.ignoreCustomName = value;
-										acronymInput.props.placeholder = !value && newData.name && BDFDB.LibraryModules.StringUtils.getAcronym(newData.name) || guild.acronym;
+										acronymInput.props.placeholder = !value && newData.name && BDFDB.StringUtils.getAcronym(newData.name) || guild.acronym;
 										BDFDB.ReactUtils.forceUpdate(acronymInput);
 									}
 								}),
@@ -500,7 +418,7 @@ module.exports = (_ => {
 											children: [
 												BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.FormComponents.FormTitle, {
 													className: BDFDB.disCN.marginreset,
-													tag: BDFDB.LibraryComponents.FormComponents.FormTitle.Tags.H5,
+													tag: BDFDB.LibraryComponents.FormComponents.FormTags.H5,
 													children: BDFDB.LanguageUtils.LibraryStrings.guildicon
 												}),
 												BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsItem, {
@@ -508,7 +426,7 @@ module.exports = (_ => {
 													margin: 0,
 													grow: 0,
 													label: BDFDB.LanguageUtils.LanguageStrings.REMOVE,
-													tag: BDFDB.LibraryComponents.FormComponents.FormTitle.Tags.H5,
+													tag: BDFDB.LibraryComponents.FormComponents.FormTags.H5,
 													value: data.removeIcon,
 													onChange: value => {
 														newData.removeIcon = value;
@@ -520,9 +438,7 @@ module.exports = (_ => {
 														}
 														else {
 															iconInput.props.disabled = false;
-															this.checkUrl(iconInput.props.value, iconInput).then(returnValue => {
-																newData.url = returnValue;
-															});
+															this.checkUrl(iconInput.props.value, iconInput).then(returnValue => newData.url = returnValue);
 														}
 													}
 												})
@@ -536,9 +452,7 @@ module.exports = (_ => {
 											disabled: data.removeIcon,
 											ref: instance => {if (instance) iconInput = instance;},
 											onChange: (value, instance) => {
-												this.checkUrl(value, instance).then(returnValue => {
-													newData.url = returnValue;
-												});
+												this.checkUrl(value, instance).then(returnValue => newData.url = returnValue);
 											}
 										})
 									]
@@ -553,7 +467,7 @@ module.exports = (_ => {
 											children: [
 												BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.FormComponents.FormTitle, {
 													className: BDFDB.disCN.marginreset,
-													tag: BDFDB.LibraryComponents.FormComponents.FormTitle.Tags.H5,
+													tag: BDFDB.LibraryComponents.FormComponents.FormTags.H5,
 													children: BDFDB.LanguageUtils.LibraryStrings.guildbanner
 												}),
 												BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsItem, {
@@ -561,7 +475,7 @@ module.exports = (_ => {
 													margin: 0,
 													grow: 0,
 													label: BDFDB.LanguageUtils.LanguageStrings.REMOVE,
-													tag: BDFDB.LibraryComponents.FormComponents.FormTitle.Tags.H5,
+													tag: BDFDB.LibraryComponents.FormComponents.FormTags.H5,
 													value: data.removeBanner && guild.id != "410787888507256842",
 													disabled: guild.id == "410787888507256842",
 													onChange: value => {
@@ -574,9 +488,7 @@ module.exports = (_ => {
 														}
 														else {
 															bannerInput.props.disabled = false;
-															this.checkUrl(bannerInput.props.value, bannerInput).then(returnValue => {
-																newData.url = returnValue;
-															});
+															this.checkUrl(bannerInput.props.value, bannerInput).then(returnValue => newData.url = returnValue);
 														}
 													}
 												})
@@ -590,9 +502,7 @@ module.exports = (_ => {
 											disabled: data.removeBanner || guild.id == "410787888507256842",
 											ref: instance => {if (instance) bannerInput = instance;},
 											onChange: (value, instance) => {
-												this.checkUrl(value, instance).then(returnValue => {
-													newData.banner = returnValue;
-												});
+												this.checkUrl(value, instance).then(returnValue => newData.banner = returnValue);
 											}
 										})
 									]
@@ -603,37 +513,12 @@ module.exports = (_ => {
 							tab: this.labels.modal_tabheader2,
 							children: [
 								BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.FormComponents.FormItem, {
-									title: this.labels.modal_colorpicker1,
-									className: BDFDB.disCN.marginbottom20,
-									children: [
-										BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.ColorSwatches, {
-											color: data.color1,
-											onColorChange: value => {newData.color1 = value;}
-										})
-									]
-								}),
-								BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.FormComponents.FormItem, {
-									title: this.labels.modal_colorpicker2,
-									className: BDFDB.disCN.marginbottom20,
-									children: [
-										BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.ColorSwatches, {
-											color: data.color2,
-											onColorChange: value => {newData.color2 = value;}
-										})
-									]
-								})
-							]
-						}),
-						BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.ModalComponents.ModalTabContent, {
-							tab: this.labels.modal_tabheader3,
-							children: [
-								BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.FormComponents.FormItem, {
 									title: this.labels.modal_colorpicker3,
 									className: BDFDB.disCN.marginbottom20,
 									children: [
 										BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.ColorSwatches, {
 											color: data.color3,
-											onColorChange: value => {newData.color3 = value;}
+											onColorChange: value => newData.color3 = value
 										})
 									]
 								}),
@@ -643,7 +528,7 @@ module.exports = (_ => {
 									children: [
 										BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.ColorSwatches, {
 											color: data.color4,
-											onColorChange: value => {newData.color4 = value;}
+											onColorChange: value => newData.color4 = value
 										})
 									]
 								})
@@ -682,6 +567,11 @@ module.exports = (_ => {
 						callback("");
 						BDFDB.ReactUtils.forceUpdate(instance);
 					}
+					else if (url.indexOf("data:") == 0) {
+						instance.props.success = true;
+						delete instance.props.errorMessage;
+						callback(url);
+					}
 					else instance.checkTimeout = BDFDB.TimeUtils.timeout(_ => {
 						BDFDB.LibraryRequires.request(url, {agentOptions: {rejectUnauthorized: false}}, (error, response, result) => {
 							delete instance.checkTimeout;
@@ -708,7 +598,7 @@ module.exports = (_ => {
 
 			setBanner (id, data) {
 				data = data || {};
-				let guild = BDFDB.LibraryModules.GuildStore.getGuild(id);
+				let guild = BDFDB.LibraryStores.GuildStore.getGuild(id);
 				if (!guild) return;
 				if (guild.EditServersCachedBanner === undefined) guild.EditServersCachedBanner = guild.banner;
 				guild.banner = data.removeBanner ? null : (data.banner || guild.EditServersCachedBanner);
@@ -731,8 +621,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Използвайте оригиналното име на сървъра за съкращението на сървъра",
 							modal_invalidurl:					"Невалиден адрес",
 							modal_tabheader1:					"Сървър",
-							modal_tabheader2:					"Цвят на иконата",
-							modal_tabheader3:					"Цвят на подсказка",
+							modal_tabheader2:					"Цвят на подсказка",
 							submenu_resetsettings:				"Нулиране на сървъра",
 							submenu_serversettings:				"Промяна на настройките"
 						};
@@ -751,8 +640,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Brug det originale servernavn til serverakronymet",
 							modal_invalidurl:					"Ugyldig URL",
 							modal_tabheader1:					"Server",
-							modal_tabheader2:					"Ikonfarve",
-							modal_tabheader3:					"Værktøjstip farve",
+							modal_tabheader2:					"Værktøjstip farve",
 							submenu_resetsettings:				"Nulstil server",
 							submenu_serversettings:				"Ændre indstillinger"
 						};
@@ -771,8 +659,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Verwenden Sie den ursprünglichen Servernamen für das Serverakronym",
 							modal_invalidurl:					"Ungültige URL",
 							modal_tabheader1:					"Server",
-							modal_tabheader2:					"Symbolfarbe",
-							modal_tabheader3:					"Tooltipfarbe",
+							modal_tabheader2:					"Tooltipfarbe",
 							submenu_resetsettings:				"Server zurücksetzen",
 							submenu_serversettings:				"Einstellungen ändern"
 						};
@@ -791,8 +678,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Χρησιμοποιήστε το αρχικό όνομα διακομιστή για το αρκτικόλεξο διακομιστή",
 							modal_invalidurl:					"Μη έγκυρη διεύθυνση URL",
 							modal_tabheader1:					"Υπηρέτης",
-							modal_tabheader2:					"Χρώμα εικονιδίου",
-							modal_tabheader3:					"Χρώμα επεξήγησης εργαλείου",
+							modal_tabheader2:					"Χρώμα επεξήγησης εργαλείου",
 							submenu_resetsettings:				"Επαναφορά διακομιστή",
 							submenu_serversettings:				"Αλλαξε ρυθμίσεις"
 						};
@@ -811,8 +697,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Utilice el nombre del servidor original para el acrónimo del servidor",
 							modal_invalidurl:					"URL invalida",
 							modal_tabheader1:					"Servidor",
-							modal_tabheader2:					"Color del icono",
-							modal_tabheader3:					"Color de información sobre herramientas",
+							modal_tabheader2:					"Color de información sobre herramientas",
 							submenu_resetsettings:				"Restablecer servidor",
 							submenu_serversettings:				"Cambiar ajustes"
 						};
@@ -831,8 +716,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Käytä palvelimen lyhenteessä alkuperäistä palvelimen nimeä",
 							modal_invalidurl:					"Virheellinen URL",
 							modal_tabheader1:					"Palvelin",
-							modal_tabheader2:					"Kuvakkeen väri",
-							modal_tabheader3:					"Työkaluvihjeen väri",
+							modal_tabheader2:					"Työkaluvihjeen väri",
 							submenu_resetsettings:				"Nollaa palvelin",
 							submenu_serversettings:				"Vaihda asetuksia"
 						};
@@ -851,8 +735,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Utilisez le nom de serveur d'origine pour l'acronyme de serveur",
 							modal_invalidurl:					"URL invalide",
 							modal_tabheader1:					"Serveur",
-							modal_tabheader2:					"Couleur de l'icône",
-							modal_tabheader3:					"Couleur de l'info-bulle",
+							modal_tabheader2:					"Couleur de l'info-bulle",
 							submenu_resetsettings:				"Réinitialiser le serveur",
 							submenu_serversettings:				"Modifier les paramètres"
 						};
@@ -871,8 +754,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Koristite izvorno ime poslužitelja za kraticu poslužitelja",
 							modal_invalidurl:					"Neispravna poveznica",
 							modal_tabheader1:					"Poslužitelj",
-							modal_tabheader2:					"Ikona Boja",
-							modal_tabheader3:					"Boja opisa",
+							modal_tabheader2:					"Boja opisa",
 							submenu_resetsettings:				"Resetiraj poslužitelj",
 							submenu_serversettings:				"Promijeniti postavke"
 						};
@@ -891,8 +773,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"A kiszolgáló rövidítéshez használja az eredeti kiszolgáló nevet",
 							modal_invalidurl:					"Érvénytelen URL",
 							modal_tabheader1:					"Szerver",
-							modal_tabheader2:					"Ikon színe",
-							modal_tabheader3:					"Tooltip Color",
+							modal_tabheader2:					"Tooltip Color",
 							submenu_resetsettings:				"Reset Server",
 							submenu_serversettings:				"Beállítások megváltoztatása"
 						};
@@ -911,8 +792,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Utilizzare il nome del server originale per l'acronimo del server",
 							modal_invalidurl:					"URL non valido",
 							modal_tabheader1:					"Server",
-							modal_tabheader2:					"Colore dell'icona",
-							modal_tabheader3:					"Colore della descrizione comando",
+							modal_tabheader2:					"Colore della descrizione comando",
 							submenu_resetsettings:				"Reimposta server",
 							submenu_serversettings:				"Cambia impostazioni"
 						};
@@ -931,8 +811,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"サーバーの頭字語には元のサーバー名を使用します",
 							modal_invalidurl:					"無効なURL",
 							modal_tabheader1:					"サーバ",
-							modal_tabheader2:					"アイコンの色",
-							modal_tabheader3:					"ツールチップの色",
+							modal_tabheader2:					"ツールチップの色",
 							submenu_resetsettings:				"サーバーのリセット",
 							submenu_serversettings:				"設定を変更する"
 						};
@@ -951,8 +830,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"서버 약어에 원래 서버 이름 사용",
 							modal_invalidurl:					"잘못된 URL",
 							modal_tabheader1:					"섬기는 사람",
-							modal_tabheader2:					"아이콘 색상",
-							modal_tabheader3:					"툴팁 색상",
+							modal_tabheader2:					"툴팁 색상",
 							submenu_resetsettings:				"서버 재설정",
 							submenu_serversettings:				"설정 변경"
 						};
@@ -971,8 +849,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Serverio akronimui naudokite originalų serverio pavadinimą",
 							modal_invalidurl:					"Neteisingas URL",
 							modal_tabheader1:					"Serveris",
-							modal_tabheader2:					"Piktogramos spalva",
-							modal_tabheader3:					"Patarimo spalva",
+							modal_tabheader2:					"Patarimo spalva",
 							submenu_resetsettings:				"Iš naujo nustatyti serverį",
 							submenu_serversettings:				"Pakeisti nustatymus"
 						};
@@ -991,8 +868,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Gebruik de oorspronkelijke servernaam voor het serveracroniem",
 							modal_invalidurl:					"Ongeldige URL",
 							modal_tabheader1:					"Server",
-							modal_tabheader2:					"Icoonkleur",
-							modal_tabheader3:					"Tooltipkleur",
+							modal_tabheader2:					"Tooltipkleur",
 							submenu_resetsettings:				"Reset server",
 							submenu_serversettings:				"Instellingen veranderen"
 						};
@@ -1011,8 +887,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Bruk det originale servernavnet for serverakronymet",
 							modal_invalidurl:					"Ugyldig URL",
 							modal_tabheader1:					"Server",
-							modal_tabheader2:					"Ikonfarge",
-							modal_tabheader3:					"Verktøytipsfarge",
+							modal_tabheader2:					"Verktøytipsfarge",
 							submenu_resetsettings:				"Tilbakestill server",
 							submenu_serversettings:				"Endre innstillinger"
 						};
@@ -1031,8 +906,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Użyj oryginalnej nazwy serwera dla akronimu serwera",
 							modal_invalidurl:					"Nieprawidłowy URL",
 							modal_tabheader1:					"Serwer",
-							modal_tabheader2:					"Kolor ikony",
-							modal_tabheader3:					"Kolor etykiety narzędzi",
+							modal_tabheader2:					"Kolor etykiety narzędzi",
 							submenu_resetsettings:				"Zresetuj serwer",
 							submenu_serversettings:				"Zmień ustawienia"
 						};
@@ -1051,8 +925,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Use o nome do servidor original para o acrônimo do servidor",
 							modal_invalidurl:					"URL inválida",
 							modal_tabheader1:					"Servidor",
-							modal_tabheader2:					"Cor do ícone",
-							modal_tabheader3:					"Cor da dica de ferramenta",
+							modal_tabheader2:					"Cor da dica de ferramenta",
 							submenu_resetsettings:				"Reiniciar Servidor",
 							submenu_serversettings:				"Mudar configurações"
 						};
@@ -1071,8 +944,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Utilizați numele serverului original pentru acronimul serverului",
 							modal_invalidurl:					"URL invalid",
 							modal_tabheader1:					"Server",
-							modal_tabheader2:					"Culoare pictogramă",
-							modal_tabheader3:					"Culoare sfat",
+							modal_tabheader2:					"Culoare sfat",
 							submenu_resetsettings:				"Resetați serverul",
 							submenu_serversettings:				"Schimbă setările"
 						};
@@ -1091,8 +963,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Используйте исходное имя сервера для аббревиатуры сервера",
 							modal_invalidurl:					"Неверная ссылка",
 							modal_tabheader1:					"Сервер",
-							modal_tabheader2:					"Цвет значка",
-							modal_tabheader3:					"Цвет всплывающей подсказки",
+							modal_tabheader2:					"Цвет всплывающей подсказки",
 							submenu_resetsettings:				"Сбросить сервер",
 							submenu_serversettings:				"Изменить настройки"
 						};
@@ -1111,8 +982,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Använd det ursprungliga servernamnet för servernakronym",
 							modal_invalidurl:					"Ogiltig URL",
 							modal_tabheader1:					"Server",
-							modal_tabheader2:					"Ikonfärg",
-							modal_tabheader3:					"Verktygstipsfärg",
+							modal_tabheader2:					"Verktygstipsfärg",
 							submenu_resetsettings:				"Återställ server",
 							submenu_serversettings:				"Ändra inställningar"
 						};
@@ -1131,8 +1001,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"ใช้ชื่อเซิร์ฟเวอร์เดิมสำหรับตัวย่อเซิร์ฟเวอร์",
 							modal_invalidurl:					"URL ไม่ถูกต้อง",
 							modal_tabheader1:					"เซิร์ฟเวอร์",
-							modal_tabheader2:					"ไอคอนสี",
-							modal_tabheader3:					"เคล็ดลับเครื่องมือสี",
+							modal_tabheader2:					"เคล็ดลับเครื่องมือสี",
 							submenu_resetsettings:				"รีเซ็ตเซิร์ฟเวอร์",
 							submenu_serversettings:				"เปลี่ยนการตั้งค่า"
 						};
@@ -1151,8 +1020,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Sunucu Kısaltması için orijinal Sunucu Adını kullanın",
 							modal_invalidurl:					"Geçersiz URL",
 							modal_tabheader1:					"Sunucu",
-							modal_tabheader2:					"Simge Rengi",
-							modal_tabheader3:					"Araç İpucu Rengi",
+							modal_tabheader2:					"Araç İpucu Rengi",
 							submenu_resetsettings:				"Sunucuyu Sıfırla",
 							submenu_serversettings:				"Ayarları değiştir"
 						};
@@ -1171,8 +1039,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Використовуйте оригінальне ім’я сервера для абревіатури сервера",
 							modal_invalidurl:					"Недійсна URL-адреса",
 							modal_tabheader1:					"Сервер",
-							modal_tabheader2:					"Значок Колір",
-							modal_tabheader3:					"Колір підказки",
+							modal_tabheader2:					"Колір підказки",
 							submenu_resetsettings:				"Скинути сервер",
 							submenu_serversettings:				"Змінити налаштування"
 						};
@@ -1191,8 +1058,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Sử dụng tên máy chủ ban đầu cho từ viết tắt máy chủ",
 							modal_invalidurl:					"URL không hợp lệ",
 							modal_tabheader1:					"Người phục vụ",
-							modal_tabheader2:					"Màu biểu tượng",
-							modal_tabheader3:					"Màu chú giải công cụ",
+							modal_tabheader2:					"Màu chú giải công cụ",
 							submenu_resetsettings:				"Đặt lại máy chủ",
 							submenu_serversettings:				"Thay đổi cài đặt"
 						};
@@ -1211,8 +1077,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"使用原始服务器名称作为服务器首字母缩写词",
 							modal_invalidurl:					"无效的网址",
 							modal_tabheader1:					"服务器",
-							modal_tabheader2:					"图标颜色",
-							modal_tabheader3:					"工具提示颜色",
+							modal_tabheader2:					"工具提示颜色",
 							submenu_resetsettings:				"重置服务器",
 							submenu_serversettings:				"更改设置"
 						};
@@ -1231,8 +1096,7 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"使用原始服務器名稱作為服務器首字母縮寫詞",
 							modal_invalidurl:					"無效的網址",
 							modal_tabheader1:					"服務器",
-							modal_tabheader2:					"圖標顏色",
-							modal_tabheader3:					"工具提示顏色",
+							modal_tabheader2:					"工具提示顏色",
 							submenu_resetsettings:				"重置服務器",
 							submenu_serversettings:				"更改設置"
 						};
@@ -1251,13 +1115,12 @@ module.exports = (_ => {
 							modal_ignorecustomname:				"Use the original Server Name for the Server Acronym",
 							modal_invalidurl:					"Invalid URL",
 							modal_tabheader1:					"Server",
-							modal_tabheader2:					"Icon Color",
-							modal_tabheader3:					"Tooltip Color",
+							modal_tabheader2:					"Tooltip Color",
 							submenu_resetsettings:				"Reset Server",
 							submenu_serversettings:				"Change Settings"
 						};
 				}
 			}
 		};
-	})(window.BDFDB_Global.PluginUtils.buildPlugin(config));
+	})(window.BDFDB_Global.PluginUtils.buildPlugin(changeLog));
 })();

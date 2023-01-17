@@ -6,7 +6,7 @@
 		"places": {
 			"guildList": true,
 			"guildHeader": true,
-			"guildInvites": true,
+			"invites": true,
 			"chat": true,
 			"mutualGuilds": true,
 			"recentMentions": true,
