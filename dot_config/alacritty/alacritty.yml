@@ -73,7 +73,7 @@ themes:
 colors: *default
 
 font:
-  size: 16.0
+  size: 20.0
   normal:
     family: JetBrainsMono Nerd Font
 
