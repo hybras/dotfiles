@@ -22,7 +22,9 @@
         }
     },
     "editor.cursorStyle": "block",
-    "editor.fontSize": 16,
+    "editor.fontSize": 18,
+    "editor.fontFamily": "CaskaydiaCove Nerd Font Mono",
+    "editor.fontLigatures": true,
     "editor.formatOnSave": true,
     "editor.suggestSelection": "first",
     "editor.formatOnPaste": true,
@@ -163,5 +165,4 @@
     "[dockerfile]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
     },
-    "haskell.manageHLS": "PATH",
 }
