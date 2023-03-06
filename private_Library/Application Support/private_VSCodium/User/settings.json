@@ -1,6 +1,6 @@
 {
-    "window.autoDetectColorScheme": true,
     "window.zoomLevel": 1,
+    "window.autoDetectColorScheme": true,
     "workbench.colorTheme": "GitHub Light Default",
     "workbench.preferredDarkColorTheme": "Pitch Black",
     "workbench.preferredLightColorTheme": "GitHub Light Default",
@@ -94,7 +94,7 @@
         // "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
     },
     "cmake.configureOnOpen": true,
-    "C_Cpp.intelliSenseEngine": "Disabled",
+    "C_Cpp.intelliSenseEngine": "disabled",
     "clangd.path": "/Users/hybras/Library/Application Support/VSCodium/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/12.0.1/clangd_12.0.1/bin/clangd",
     "[markdown]": {
         // "editor.defaultFormatter": "dprint.dprint",
@@ -103,11 +103,9 @@
     "markdown.preview.fontSize": 16,
     "emojisense.markupCompletionsEnabled": false,
     "markdownlint.config": {
-        "no-hard-tabs": false,
         "line-length": false,
         "no-blanks-blockquote": false,
     },
-    "markdownExtended.puppeteerExecutable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
     "[javascript]": {
         // "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
@@ -119,6 +117,7 @@
     "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.message.error.show": false,
     "latex-workshop.message.warning.show": false,
+    "todo-tree.regex.regex": "(--|//|#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
     "todo-tree.general.tags": [
         "BUG",
         "HACK",
@@ -128,7 +127,6 @@
         "[ ]",
         "[x]"
     ],
-    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
     "redhat.telemetry.enabled": false,
     "powershell.powerShellDefaultVersion": "Windows PowerShell (x86)",
     "vsicons.dontShowNewVersionMessage": true,
@@ -160,7 +158,8 @@
     "[asciidoc]": {
         "editor.wordWrap": "on",
         "editor.tabCompletion": "on",
-        "editor.quickSuggestions": {}
+        "editor.quickSuggestions": {},
+        "editor.fontLigatures": false
     },
     "[dockerfile]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
