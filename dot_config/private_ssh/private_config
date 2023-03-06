@@ -3,6 +3,10 @@ Host grace
 	HostName grace.umd.edu
 	ForwardX11 yes
 
+Host junk
+	User vchari
+	HostName junkfood.cs.umd.edu
+
 Host terp
 	User vchari
 	HostName terpconnect.umd.edu
