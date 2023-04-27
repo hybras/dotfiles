@@ -108,10 +108,6 @@ github = 'ael-code/zsh-colored-man-pages'
 [plugins.you-should-use]
 github = 'MichaelAquilina/zsh-you-should-use'
 
-[plugins.opam]
-local = '~/.opam/opam-init/'
-use = ['init.zsh']
-
 [plugins.autoenv]
 github = 'zpm-zsh/autoenv'
 
