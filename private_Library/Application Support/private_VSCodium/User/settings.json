@@ -98,7 +98,8 @@
     "clangd.path": "/Users/hybras/Library/Application Support/VSCodium/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/12.0.1/clangd_12.0.1/bin/clangd",
     "[markdown]": {
         // "editor.defaultFormatter": "dprint.dprint",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "editor.fontLigatures": false
     },
     "markdown.preview.fontSize": 16,
     "emojisense.markupCompletionsEnabled": false,
