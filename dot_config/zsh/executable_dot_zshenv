@@ -21,3 +21,11 @@ export GPG_TTY=$(tty)
 export MCFLY_FUZZY=2
 export MCFLY_RESULTS=15
 
+# set path to a sensible *starting* default based on the contents of /etc/paths (on macos)
+# this prevents path_helper (called in /etc/zprofile) from moving already prepended entries to the end.
+# this is needed to dedupe path entries in new interactive shells
+# this is needed to prevent prepended entries from moving to the end in new login shell
+# the union of the above 2 cases (new interactive, login shell) is most important
+[[ -o login ]] && export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin'
+
+
