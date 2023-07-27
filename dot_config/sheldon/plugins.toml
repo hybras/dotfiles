@@ -43,10 +43,10 @@ local = '~/.config/zsh/personal'
 [plugins.starship] # why dont it work with zsh-defer? 15 ms
 inline = 'eval "$(starship init zsh)"'
 
-[plugins.mcfly] # 5 ms
+[plugins.mcfly] # 10 ms
 inline = 'zsh-defer eval "$(mcfly init zsh)"'
 
-[plugins.direnv] # 10 ms
+[plugins.direnv] # 5 ms
 inline = 'zsh-defer eval "$(direnv hook zsh)"'
 
 [plugins.gencomp_cache]
