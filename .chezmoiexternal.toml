@@ -3,8 +3,3 @@ type = "git-repo"
 url = "https://github.com/alacritty/alacritty-theme"
 refreshPeriod = "168h"
 external = true
-
-[".config/direnv/nix-direnv"]
-type = "file"
-url = "https://raw.githubusercontent.com/nix-community/nix-direnv/master/direnvrc"
-refreshPeriod = "168h"
