@@ -71,5 +71,9 @@ module.exports = {
             ].includes(opener.bundleId),
             browser: chrome,
         },
+        {
+            match: ({ url }) => url.host.endsWith(".onion"),
+            browser: tor,
+        }
     ],
 };
