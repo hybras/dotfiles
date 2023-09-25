@@ -1,14 +1,18 @@
-const steam = "com.valvesoftware.steam"
-const netnewswire = "com.ranchero.NetNewsWire-Evergreen"
 const browserosaurus = "com.browserosaurus"
-const tor = "org.torproject.torbrowser"
-const zoom = "us.zoom.xos"
-const vscode = "com.visualstudio.code.oss"
-const brave = "com.brave.Browser"
-const iridium = "de.iridiumbrowser"
-const chrome = "com.google.Chrome"
-const firefox = "org.mozilla.firefox"
-const freetube = "io.freetubeapp.freetube"
+
+const browsers = {
+    firefox: "org.mozilla.firefox",
+    chrome: "com.google.Chrome",
+    tor: "org.torproject.torbrowser",
+}
+
+const apps = {
+    freetube: "io.freetubeapp.freetube",
+    vscode: "com.visualstudio.code.oss",
+    zoom: "us.zoom.xos",
+    netnewswire: "com.ranchero.NetNewsWire-Evergreen",
+    steam: "com.valvesoftware.steam",
+}
 
 module.exports = {
     defaultBrowser: browserosaurus, // manually decide which browser to use
@@ -36,7 +40,7 @@ module.exports = {
                 };
             },
         },
-        {
+        { // Redirect nytimes to onion
             match: ({ url }) => ["www.nytimes.com", "nytimes.com", "archive.nytimes.com", "nyt.com"].includes(url.host),
             url: { host: "www.nytimesn7cgmftshazwhfgzm37qxb44r64ytbb2dj3x62d2lljsciiyd.onion" },
         }
@@ -48,32 +52,32 @@ module.exports = {
                 /^https:\/\/www\.youtube\.com\/.*$/,
                 /^https:\/\/youtu\.be\/.*$/,
             ],
-            browser: freetube,
+            browser: apps.freetube,
         },
         { // Open onion links in tor
             match: ({ url }) => url.host.endsWith(".onion"),
-            browser: tor,
+            browser: browsers.tor,
         },
-        {
+        { // Open wikipedia and github in firefox. they dont need js
             match: [
                 /^https:\/\/wikipedia\.com\/.*$/,
                 /^https:\/\/github\.com\/.*$/,
             ],
-            browser: firefox,
+            browser: browsers.firefox,
         },
         { // Open links from feed reader and ide in firefox. Links are probably fine.
             match: ({ opener }) => [
-                netnewswire,
-                vscode,
+                apps.netnewswire,
+                apps.vscode,
             ].includes(opener.bundleId),
-            browser: firefox,
+            browser: browsers.firefox,
         },
         { // Open links from zoom and steam in chrome. They're probably to pages that need javascript or signing in.
             match: ({ opener }) => [
-                zoom,
-                steam,
+                apps.zoom,
+                apps.steam,
             ].includes(opener.bundleId),
-            browser: chrome,
+            browser: browsers.chrome,
         },
     ],
 };
