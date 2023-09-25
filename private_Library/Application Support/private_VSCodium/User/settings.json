@@ -1,7 +1,7 @@
 {
     "window.zoomLevel": 1,
     "window.autoDetectColorScheme": true,
-    "workbench.colorTheme": "GitHub Light Default",
+    "workbench.colorTheme": "Pitch Black",
     "workbench.preferredDarkColorTheme": "Pitch Black",
     "workbench.preferredLightColorTheme": "GitHub Light Default",
     "workbench.iconTheme": "material-icon-theme",
@@ -87,9 +87,6 @@
     ],
     "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
     "python.languageServer": "Pylance",
-    "python.linting.enabled": true,
-    "python.formatting.provider": "black",
-    "python.formatting.blackPath": "/opt/homebrew/bin/black",
     "[c]": {
         // "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
     },
@@ -97,27 +94,15 @@
     "C_Cpp.intelliSenseEngine": "disabled",
     "clangd.path": "/Users/hybras/Library/Application Support/VSCodium/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/12.0.1/clangd_12.0.1/bin/clangd",
     "[markdown]": {
-        // "editor.defaultFormatter": "dprint.dprint",
         "editor.formatOnSave": true,
         "editor.fontLigatures": false
     },
     "markdown.preview.fontSize": 16,
     "emojisense.markupCompletionsEnabled": false,
-    "markdownlint.config": {
-        "line-length": false,
-        "no-blanks-blockquote": false,
-    },
     "[javascript]": {
-        // "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+        "editor.defaultFormatter": "vscode.typescript-language-features"
     },
-    "[json]": {
-        // "editor.defaultFormatter": "dprint.dprint"
-    },
-    "html.format.endWithNewline": true,
     "html.format.indentInnerHtml": true,
-    "latex-workshop.view.pdf.viewer": "tab",
-    "latex-workshop.message.error.show": false,
-    "latex-workshop.message.warning.show": false,
     "todo-tree.regex.regex": "(--|//|#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
     "todo-tree.general.tags": [
         "BUG",
@@ -165,4 +150,21 @@
     "[dockerfile]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
     },
+    "emojisense.languages": {
+        "asciidoc": true,
+        "markdown": true,
+        "plaintext": {
+            "markupCompletionsEnabled": false,
+            "emojiDecoratorsEnabled": false
+        },
+        "scminput": true,
+        "git-commit": true
+    },
+    "nix.enableLanguageServer": true,
+    "nix.serverPath": "nil",
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "asciidoc.preview.preservePreviewWhenHidden": true,
+    "lldb.suppressUpdateNotifications": true,
 }
