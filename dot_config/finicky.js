@@ -51,7 +51,6 @@ module.exports = {
             match: [
                 /^https:\/\/wikipedia\.com\/.*$/,
                 /^https:\/\/github\.com\/.*$/,
-                /^https:\/\/feed.dilbert.com\/.*$/,
             ],
             browser: firefox,
         },
