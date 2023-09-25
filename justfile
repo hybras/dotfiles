@@ -1,3 +1,6 @@
+default:
+  just --list
+
 fin:
     chezmoi apply ~/.config/finicky.js
 
