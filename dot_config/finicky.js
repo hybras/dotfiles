@@ -50,6 +50,10 @@ module.exports = {
             ],
             browser: freetube,
         },
+        { // Open onion links in tor
+            match: ({ url }) => url.host.endsWith(".onion"),
+            browser: tor,
+        },
         {
             match: [
                 /^https:\/\/wikipedia\.com\/.*$/,
@@ -71,9 +75,5 @@ module.exports = {
             ].includes(opener.bundleId),
             browser: chrome,
         },
-        {
-            match: ({ url }) => url.host.endsWith(".onion"),
-            browser: tor,
-        }
     ],
 };
