@@ -6,3 +6,4 @@ Brewfile
 Brewfile.lock.json
 Brewfile.sh
 dotfiles.code-workspace
+diff.diff

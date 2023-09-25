@@ -11,4 +11,4 @@ ala:
     chezmoi apply ~/.config/alacritty.yml
 
 diff:
-    chezmoi diff
+    chezmoi diff > diff.diff
