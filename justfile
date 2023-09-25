@@ -1,5 +1,5 @@
 fin:
-    chezmoi apply ~/.config/finicky/config.js
+    chezmoi apply ~/.config/finicky.js
 
 shel:
     chezmoi apply ~/.config/sheldon/plugins.toml
