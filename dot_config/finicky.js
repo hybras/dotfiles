@@ -11,7 +11,7 @@ const firefox = "org.mozilla.firefox"
 const freetube = "io.freetubeapp.freetube"
 
 module.exports = {
-    defaultBrowser: browserosaurus,
+    defaultBrowser: browserosaurus, // manually decide which browser to use
     rewrite: [
         { // Redirect all urls to use https
             match: ({ url }) => url.protocol === "http",
