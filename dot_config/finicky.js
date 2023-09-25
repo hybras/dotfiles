@@ -8,6 +8,7 @@ const brave = "com.brave.Browser"
 const iridium = "de.iridiumbrowser"
 const chrome = "com.google.Chrome"
 const firefox = "org.mozilla.firefox"
+const freetube = "io.freetubeapp.freetube"
 
 module.exports = {
     defaultBrowser: browserosaurus,
@@ -41,6 +42,13 @@ module.exports = {
         {
             match: [
                 /^https:\/\/youtube\.com\/.*$/,
+                /^https:\/\/www\.youtube\.com\/.*$/,
+                /^https:\/\/youtu\.be\/.*$/,
+            ],
+            browser: freetube,
+        },
+        {
+            match: [
                 /^https:\/\/wikipedia\.com\/.*$/,
                 /^https:\/\/github\.com\/.*$/,
                 /^https:\/\/feed.dilbert.com\/.*$/,
