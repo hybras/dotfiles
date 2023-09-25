@@ -13,13 +13,12 @@ const freetube = "io.freetubeapp.freetube"
 module.exports = {
     defaultBrowser: browserosaurus,
     rewrite: [
-        {
-            // Redirect all urls to use https
+        { // Redirect all urls to use https
             match: ({ url }) => url.protocol === "http",
             url: { protocol: "https" },
         },
-        {
-            // Remove some tracking from urls
+        { // Remove some tracking from urls
+
             match: () => true,
             url({ url }) {
                 const removeKeysStartingWith = ["utm_", "uta_"]; // Remove all query parameters beginning with these strings
@@ -39,7 +38,7 @@ module.exports = {
         },
     ],
     handlers: [
-        {
+        { // Open Youtube in Freetube
             match: [
                 /^https:\/\/youtube\.com\/.*$/,
                 /^https:\/\/www\.youtube\.com\/.*$/,
@@ -54,14 +53,14 @@ module.exports = {
             ],
             browser: firefox,
         },
-        {
+        { // Open links from feed reader and ide in firefox. Links are probably fine.
             match: ({ opener }) => [
                 netnewswire,
                 vscode,
             ].includes(opener.bundleId),
             browser: firefox,
         },
-        {
+        { // Open links from zoom and steam in chrome. They're probably to pages that need javascript or signing in.
             match: ({ opener }) => [
                 zoom,
                 steam,
