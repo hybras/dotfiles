@@ -36,6 +36,10 @@ module.exports = {
                 };
             },
         },
+        {
+            match: ({ url }) => ["www.nytimes.com", "nytimes.com", "archive.nytimes.com", "nyt.com"].includes(url.host),
+            url: { host: "www.nytimesn7cgmftshazwhfgzm37qxb44r64ytbb2dj3x62d2lljsciiyd.onion" },
+        }
     ],
     handlers: [
         { // Open Youtube in Freetube
