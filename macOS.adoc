@@ -47,6 +47,7 @@ https://github.com/marzocchi/zsh-notify#configuration
 * https://github.com/jwise/HoRNDIS[Horndis]
 * Karabiner : Remap keys to application at ~/Application
 * https://davidwalsh.name/touch-sudo[Sudo with TouchID]
+** https://derflounder.wordpress.com/2023/10/14/enabling-touch-id-authentication-for-sudo-on-macos-sonoma/
 * https://www.tp-link.com/us/support/download/ue305/#Driver[TP Link Ethernet Driver]
 * https://nightowl.kramser.xyz/[NightOwl]
 * https://support.discord.com/hc/en-us/articles/1500006741102#h_01F33Q2M9381YXGAD2YBVF43NG[Discord Audio Sharing]
