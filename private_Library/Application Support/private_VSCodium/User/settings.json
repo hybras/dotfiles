@@ -1,7 +1,9 @@
 {
+    // I am blind
     "window.zoomLevel": 1,
+    // Theming
     "window.autoDetectColorScheme": true,
-    "workbench.colorTheme": "Pitch Black",
+    "workbench.colorTheme": "GitHub Light Default",
     "workbench.preferredDarkColorTheme": "Pitch Black",
     "workbench.preferredLightColorTheme": "GitHub Light Default",
     "workbench.iconTheme": "material-icon-theme",
@@ -21,6 +23,12 @@
             "editorInlayHint.foreground": "#00ccff83"
         }
     },
+    // major ui elements
+    "window.titleBarStyle": "custom",
+    "window.commandCenter": false,
+    "workbench.activityBar.location": "top",
+    "zenMode.showTabs": "none",
+    // Editor
     "editor.cursorStyle": "block",
     "editor.fontSize": 18,
     "editor.fontFamily": "CaskaydiaCove Nerd Font Mono",
@@ -36,6 +44,7 @@
     },
     "editor.linkedEditing": true,
     "editor.accessibilitySupport": "off",
+    // Terminal
     "debug.console.fontSize": 16,
     "terminal.integrated.fontSize": 16,
     "terminal.external.windowsExec": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.EXE",
@@ -45,22 +54,19 @@
     "terminal.external.osxExec": "Warp.app",
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 500,
-    "files.exclude": {
-        "**/.classpath": true,
-        "**/.project": true,
-        "**/.settings": true,
-        "**/.factorypath": true
-    },
     "files.watcherExclude": {
+        // Default rules
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
         "**/node_modules/*/**": true,
         "**/.hg/store/**": true,
-        "/target/**": true
+        // Added rules
+        "/target/**": true // rust / cargo projects build output
     },
     "files.associations": {
         "*.rmd": "markdown"
     },
+    // git
     "git.autofetch": true,
     "git.confirmSync": false,
     "git.allowForcePush": true,
@@ -85,6 +91,7 @@
         "hackathon",
         "lockdown"
     ],
+    // Language specific stuff
     "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
     "python.languageServer": "Pylance",
     "[c]": {
@@ -123,7 +130,6 @@
     "yaml.format.enable": true,
     "[yaml]": {
         "editor.defaultFormatter": "redhat.vscode-yaml"
-        // "editor.defaultFormatter": "redhat.vscode-yaml"
     },
     "auto-rename-tag.activationOnLanguage": [
         "html",
@@ -147,6 +153,7 @@
         "editor.quickSuggestions": {},
         "editor.fontLigatures": false
     },
+    "asciidoc.preview.preservePreviewWhenHidden": true,
     "[dockerfile]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
     },
@@ -165,6 +172,5 @@
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
     },
-    "asciidoc.preview.preservePreviewWhenHidden": true,
     "lldb.suppressUpdateNotifications": true,
 }
