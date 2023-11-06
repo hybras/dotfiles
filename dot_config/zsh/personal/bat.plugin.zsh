@@ -1,8 +1,9 @@
-
-# alias bat="bat --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo default || echo GitHub)"
-
 function bat_theme() {
-  export BAT_THEME=$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo default || echo GitHub)
+  if defaults read -globalDomain AppleInterfaceStyle &> /dev/null; then
+    unset BAT_THEME
+  else
+    export BAT_THEME=GitHub
+  fi
 }
 
 autoload -Uz add-zsh-hook
