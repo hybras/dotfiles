@@ -47,9 +47,17 @@ module.exports = {
         { // Redirect theguardian to onion
             match: ({ url }) => ["www.theguardian.com", "theguardian.com"].includes(url.host),
             url: { host: "www.guardian2zotagl6tmjucg3lrhxdk4dw3lhbqnkvvkywawy3oqfoprid.onion" }
+        },
+        { // open hugo server in firefox w/o https
+            match: ({ url }) => url.host === "localhost" && url.port === 1313,
+            url: { protocol: "http", }
         }
     ],
     handlers: [
+        {
+            match: /^http:\/\/localhost:1313\/.*$/,
+            browser: browsers.firefox,
+        },
         { // Open Youtube in Freetube
             match: [
                 /^https:\/\/youtube\.com\/.*$/,
