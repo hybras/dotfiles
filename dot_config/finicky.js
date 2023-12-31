@@ -4,6 +4,7 @@ const browsers = {
     firefox: "org.mozilla.firefox",
     chrome: "com.google.Chrome",
     tor: "org.torproject.torbrowser",
+    orion: "com.kagi.kagimacOS",
 }
 
 const apps = {
@@ -83,13 +84,6 @@ module.exports = {
                 apps.vscode,
             ].includes(opener.bundleId),
             browser: browsers.firefox,
-        },
-        { // Open links from zoom and steam in chrome. They're probably to pages that need javascript or signing in.
-            match: ({ opener }) => [
-                apps.zoom,
-                apps.steam,
-            ].includes(opener.bundleId),
-            browser: browsers.chrome,
         },
     ],
 };
