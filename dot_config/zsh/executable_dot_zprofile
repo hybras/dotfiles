@@ -1,8 +1,8 @@
-path=(
-	$path
-)
+# path=(
+#	 $path
+# )
 
-export PATH
+# export PATH
 
 # Inlining the homebrew call for speed
 # eval `/opt/homebrew/bin/brew shellenv zsh`
