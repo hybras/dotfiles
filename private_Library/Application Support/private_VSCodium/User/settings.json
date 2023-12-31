@@ -3,7 +3,7 @@
     "window.zoomLevel": 1,
     // Theming
     "window.autoDetectColorScheme": true,
-    "workbench.colorTheme": "GitHub Light Default",
+    "workbench.colorTheme": "Pitch Black",
     "workbench.preferredDarkColorTheme": "Pitch Black",
     "workbench.preferredLightColorTheme": "GitHub Light Default",
     "workbench.iconTheme": "material-icon-theme",
@@ -28,6 +28,7 @@
     "window.commandCenter": false,
     "workbench.activityBar.location": "top",
     "zenMode.showTabs": "none",
+    "workbench.statusBar.visible": false,
     // Editor
     "editor.cursorStyle": "block",
     "editor.fontSize": 18,
@@ -39,11 +40,12 @@
     "editor.formatOnType": true,
     "editor.wordWrap": "bounded",
     "editor.codeActionsOnSave": {
-        "source.fixAll.markdownlint": true,
-        "source.fixAll.eslint": true
+        "source.fixAll.markdownlint": "explicit",
+        "source.fixAll.eslint": "explicit"
     },
     "editor.linkedEditing": true,
     "editor.accessibilitySupport": "off",
+    "editor.stickyScroll.enabled": true,
     // Terminal
     "debug.console.fontSize": 16,
     "terminal.integrated.fontSize": 16,
@@ -154,6 +156,7 @@
         "editor.fontLigatures": false
     },
     "asciidoc.preview.preservePreviewWhenHidden": true,
+    "asciidoc.antora.enableAntoraSupport": false,
     "[dockerfile]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
     },
