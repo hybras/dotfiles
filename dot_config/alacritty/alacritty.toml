@@ -1,0 +1,11 @@
+import = ["/Users/hybras/.config/alacritty/default.toml"]
+
+[font]
+size = 20.0
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
