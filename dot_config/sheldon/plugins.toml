@@ -40,6 +40,9 @@ local = '~/.config/zsh/personal/aliases'
 [plugins.bitwarden]
 local = '~/.config/zsh/personal'
 
+[plugins.bat]
+local = '~/.config/zsh/personal'
+
 [plugins.starship] # why dont it work with zsh-defer? 15 ms
 inline = 'eval "$(starship init zsh)"'
 
@@ -124,10 +127,6 @@ inline = "zsh-defer ssh-add --apple-use-keychain -q ~/.ssh/id_rsa_github ~/.ssh/
 
 [plugins.gencomp]
 github = 'RobSis/zsh-completion-generator'
-
-[plugins.bat]
-local = '/Users/hybras/.config/zsh/personal'
-use = ['bat.plugin.zsh']
 
 # [plugins.ssh-agent]
 # github = 'ohmyzsh/ohmyzsh'
