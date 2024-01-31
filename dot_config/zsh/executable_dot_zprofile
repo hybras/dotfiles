@@ -1,9 +1,3 @@
-# path=(
-#	 $path
-# )
-
-# export PATH
-
 # Inlining the homebrew call for speed
 # eval `/opt/homebrew/bin/brew shellenv zsh`
 export HOMEBREW_PREFIX="/opt/homebrew"
