@@ -11,6 +11,7 @@ alias vi='nvim'
 alias vim='nvim'
 alias pj='pijul'
 alias l1='exa -1'
+alias ls=exa
 alias exa='exa --group-directories-first'
 alias youtube-dl='yt-dlp'
 alias viddl='youtube-dl --add-metadata'
