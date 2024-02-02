@@ -1,4 +1,4 @@
 {{- if (eq .chezmoi.os "darwin") -}}
 #!/usr/bin/env zsh
-brew bundle --no-lock --file=$XDG_CONFIG_HOME/Brewfile
+brew bundle --no-lock --file=$XDG_DATA_HOME/chezmoi/Brewfile
 {{ end -}}
