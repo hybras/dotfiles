@@ -140,6 +140,7 @@
         "js",
     ],
     "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "always",
+    "rust-analyzer.hover.memoryLayout.enable": false,
     "[racket]": {
         "editor.rulers": [
             102
