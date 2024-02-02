@@ -1,0 +1,7 @@
+= Zsh Startup files
+
+== Benchmarking
+
+Should be less than 100ms
+
+`hyperfine --warmup 1 "zsh --login --interactive -c exit" -m 30`
