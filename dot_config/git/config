@@ -25,7 +25,7 @@
 	pager = delta
 	autocrlf = input
 [interactive]
-	diffFilter = delta --color-only
+	diffFilter = delta --color-only	
 [add.interactive]
 	useBuiltin = false
 [alias]
@@ -36,3 +36,11 @@
 [diff]
 	colorMoved = default
 
+[rebase]
+	autostash = true
+	autoSquash = true
+[push]
+	autoSetupRemote = true
+
+[includeIf "hasconfig:remote.*.url:git@gitlab.com:**"]
+	path = gitlab
