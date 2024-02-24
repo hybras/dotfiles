@@ -4,4 +4,3 @@
 brew bundle dump -f
 brewfile-format Brewfile > Brewfile.rb
 mv Brewfile.rb Brewfile
-sd ', args: \{ appdir: "~/Applications" }' '' Brewfile
