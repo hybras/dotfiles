@@ -15,3 +15,8 @@ ala:
 
 diff:
     chezmoi diff > diff.diff
+
+cache:
+    starship init zsh > dot_config/zsh/personal/starship.plugin.zsh
+    mcfly init zsh > dot_config/zsh/personal/mcfly.plugin.zsh
+    direnv hook zsh > dot_config/zsh/personal/direnv.plugin.zsh
