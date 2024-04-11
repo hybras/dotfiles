@@ -28,7 +28,6 @@
     "window.commandCenter": false,
     "workbench.activityBar.location": "top",
     "zenMode.showTabs": "none",
-    "workbench.statusBar.visible": false,
     // Editor
     "editor.cursorStyle": "block",
     "editor.fontSize": 18,
