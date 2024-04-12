@@ -1,5 +1,5 @@
-[".config/alacritty/themes"]
-type = "git-repo"
-url = "https://github.com/alacritty/alacritty-theme"
+[".config/alacritty/themes/atom_one_light.toml"]
+type = "file"
+url = "https://raw.githubusercontent.com/alacritty/alacritty-theme/master/themes/atom_one_light.toml"
+stripComponents = 1
 refreshPeriod = "168h"
-external = true
