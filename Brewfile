@@ -146,6 +146,7 @@ brew "zsh"
 brew "cantino/mcfly/mcfly"
 brew "heroku/brew/heroku"
 brew "hybras/tap/brewfile-format", args: ["HEAD"]
+brew "hybras/tap/dark-mode-notify", args: ["HEAD"]
 brew "hybras/tap/homebrew-createzap"
 brew "hybras/tap/pijul"
 brew "hybras/tap/sshpass"
