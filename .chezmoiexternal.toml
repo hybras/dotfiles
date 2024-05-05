@@ -3,3 +3,24 @@ type = "file"
 url = "https://raw.githubusercontent.com/alacritty/alacritty-theme/master/themes/atom_one_light.toml"
 stripComponents = 1
 refreshPeriod = "168h"
+
+[".local/share/ive-drives/vol-3"]
+type = "archive"
+url = "https://lmnt.me/archive/icons/ive-drives-vol-3.zip"
+stripComponents = 2
+checksum.sha512 = "e03caa3e3250c9cf8e8155396fe2c8f1324bf11f41bed285586db6b6d7f60dd357ca08ef5716b6987df5e65c95e618bf51384220d1cadc5e375bccf40ca8e70b"
+# include = ["Icons/*.icns"]
+
+[".local/share/ive-drives/vol-2"]
+type = "archive"
+url = "https://lmnt.me/archive/icons/ive-drives-vol-2.zip"
+stripComponents = 2
+checksum.sha512 = "657abde7ce95bb6a1c52fb4b94f0e727f14a26dd58d58668c334ef6d6782de0259fc3ded7a682983726efd7e0e1489ebaadf3e88a411a37d12a12ed102e216a0"
+# include = ["Icons/*.icns"]
+
+[".local/share/ive-drives/vol-1"]
+type = "archive"
+url = "https://lmnt.me/archive/icons/ive-drives-vol-1.zip"
+stripComponents = 2
+checksum.sha512 = "fb1bd140f0a008661caf25e573b5c2614b1e1821f17e84b5582b6041f7e5b122049351362c03818a2a86128f71b13f6c97690e2aa815645eca0af1abcfbb1683"
+# include = ["Icons/*.icns"]
