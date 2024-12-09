@@ -30,12 +30,11 @@ zsh-defer source \"{{ file }}\"\n
 github = 'romkatv/zsh-defer'
 apply = ['source']
 
-[plugins.history]
-local = '~/.config/zsh/personal'
+# [plugins.history]
+# local = '~/.config/zsh/personal'
 
-[plugins.pretty-completions]
-local = '~/.config/zsh/personal'
-
+# [plugins.pretty-completions]
+# local = '~/.config/zsh/personal'
 
 [plugins.brew-zsh-completions]
 local = "/opt/homebrew/share/zsh/site-functions" # inlining logic makes it < 1 ms
@@ -75,6 +74,10 @@ local = '~/.config/zsh/personal'
 [plugins.direnv] # 5 ms
 # inline = 'zsh-defer eval "$(direnv hook zsh)"'
 local = '~/.config/zsh/personal'
+
+[plugins.fzf]
+local = '/opt/homebrew/opt/fzf/shell/'
+use = ['completion.zsh']
 
 [plugins.gencomp_cache]
 local = '~/.cache/gencomp'

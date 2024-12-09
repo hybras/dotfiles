@@ -1,12 +1,10 @@
 {
-    // I am blind
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 1, // I am blind
+    "task.allowAutomaticTasks": "on",
     // Theming
     "window.autoDetectColorScheme": true,
-    "workbench.colorTheme": "Pitch Black",
     "workbench.preferredDarkColorTheme": "Pitch Black",
-    "workbench.preferredLightColorTheme": "GitHub Light Default",
-    "workbench.iconTheme": "material-icon-theme",
+    "workbench.preferredLightColorTheme": "GitHub Light",
     "workbench.tree.indent": 12,
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook",
@@ -23,6 +21,7 @@
             "editorInlayHint.foreground": "#00ccff83"
         }
     },
+    "zenMode.fullScreen": false,
     // major ui elements
     "window.titleBarStyle": "custom",
     "window.commandCenter": false,
@@ -86,6 +85,25 @@
     "remote.SSH.remotePlatform": {
         "umd": "linux"
     },
+    "githubPullRequests.pullBranch": "never",
+    "github.copilot.editor.enableAutoCompletions": true,
+    "githubIssues.queries": [
+        {
+            "label": "My Issues",
+            "query": "is:open assignee:${user} repo:${owner}/${repository}",
+            "groupBy": [
+                "milestone"
+            ]
+        },
+        {
+            "label": "Created Issues",
+            "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
+        },
+        {
+            "label": "Recent Issues",
+            "query": "state:open repo:${owner}/${repository} sort:updated-desc"
+        }
+    ],
     "cSpell.userWords": [
         "Imma",
         "asciicasts",
@@ -94,7 +112,7 @@
     ],
     // Language specific stuff
     "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
-    "python.languageServer": "Pylance",
+    "python.languageServer": "Jedi",
     "[c]": {
         // "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
     },
@@ -107,9 +125,20 @@
     },
     "markdown.preview.fontSize": 16,
     "emojisense.markupCompletionsEnabled": false,
+    "emojisense.languages": {
+        "asciidoc": true,
+        "markdown": true,
+        "plaintext": {
+            "markupCompletionsEnabled": false,
+            "emojiDecoratorsEnabled": false
+        },
+        "scminput": true,
+        "git-commit": true
+    },
     "[javascript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
     },
+    "npm.keybindingsChangedWarningShown": true,
     "html.format.indentInnerHtml": true,
     "todo-tree.regex.regex": "(--|//|#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
     "todo-tree.general.tags": [
@@ -148,7 +177,6 @@
         "editor.formatOnType": true,
         "editor.formatOnSave": true
     },
-    "npm.keybindingsChangedWarningShown": true,
     "[asciidoc]": {
         "editor.wordWrap": "on",
         "editor.tabCompletion": "on",
@@ -156,19 +184,9 @@
         "editor.fontLigatures": false
     },
     "asciidoc.preview.preservePreviewWhenHidden": true,
-    "asciidoc.antora.enableAntoraSupport": false,
+    "asciidoc.antora.showEnableAntoraPrompt": false,
     "[dockerfile]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-    },
-    "emojisense.languages": {
-        "asciidoc": true,
-        "markdown": true,
-        "plaintext": {
-            "markupCompletionsEnabled": false,
-            "emojiDecoratorsEnabled": false
-        },
-        "scminput": true,
-        "git-commit": true
     },
     "nix.enableLanguageServer": true,
     "nix.serverPath": "nil",
@@ -176,4 +194,6 @@
         "editor.defaultFormatter": "foxundermoon.shell-format"
     },
     "lldb.suppressUpdateNotifications": true,
+    "notebook.consolidatedRunButton": true,
+    "notebook.formatOnSave.enabled": true,
 }
