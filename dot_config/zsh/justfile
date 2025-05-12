@@ -1,0 +1,10 @@
+apply:
+    chezmoi apply ~/.config/zsh/.zshenv ~/.config/zsh/.zshrc ~/.config/zsh/.zprofile
+
+bench:
+    hyperfine --warmup 1 "zsh --login --interactive -c exit" -m 30
+
+apply-and-bench: apply bench
+
+watch:
+    watchexec just apply-and-bench
