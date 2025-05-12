@@ -5,3 +5,9 @@
 Should be less than 100ms
 
 `hyperfine --warmup 1 "zsh --login --interactive -c exit" -m 30`
+
+== Links
+
+https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where
+https://unix.stackexchange.com/questions/71253/what-should-shouldnt-go-in-zshenv-zshrc-zlogin-zprofile-zlogout
+https://gist.github.com/Linerre/f11ad4a6a934dcf01ee8415c9457e7b2
