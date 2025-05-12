@@ -2,9 +2,7 @@
 	"$schema": "https://dprint.dev/schemas/v0.json",
 	"incremental": true,
 	"typescript": {},
-	"json": {
-		"useTabs": true
-	},
+	"json": {},
 	"markdown": {
 		"emphasisKind": "asterisks"
 	},
