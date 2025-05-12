@@ -1,3 +1,8 @@
+[".config/git/ignore"]
+type = "file"
+url = "https://www.toptal.com/developers/gitignore/api/macos,windows,intellij+all,visualstudiocode"
+refreshPeriod = "30d"
+
 [".config/alacritty/themes/atom_one_light.toml"]
 type = "file"
 url = "https://raw.githubusercontent.com/alacritty/alacritty-theme/master/themes/one_light.toml"
