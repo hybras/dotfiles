@@ -82,11 +82,19 @@
         "switch:command",
         "push:command"
     ],
-    "remote.SSH.remotePlatform": {
-        "umd": "linux"
+    "gitlens.views.scm.grouped.views": {
+        "commits": true,
+        "branches": true,
+        "remotes": true,
+        "stashes": true,
+        "tags": true,
+        "worktrees": true,
+        "contributors": true,
+        "repositories": false,
+        "searchAndCompare": false,
+        "launchpad": true
     },
     "githubPullRequests.pullBranch": "never",
-    "github.copilot.editor.enableAutoCompletions": true,
     "githubIssues.queries": [
         {
             "label": "My Issues",
@@ -196,4 +204,5 @@
     "lldb.suppressUpdateNotifications": true,
     "notebook.consolidatedRunButton": true,
     "notebook.formatOnSave.enabled": true,
+    "rubyLsp.rubyExecutablePath": "/opt/homebrew/opt/ruby/bin/ruby",
 }
