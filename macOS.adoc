@@ -1,5 +1,12 @@
 = macOS Changes
 
+== Discord
+
+* ripcord
+* dissent
+* abaddon
+* voxa
+
 == Terminal
 
 * https://hyper.is[hyper]
@@ -9,6 +16,7 @@
 * https://www.warp.dev[warp]
 * https://wezfurlong.org/wezterm/[wezterm]
 * https://tabby.sh/[tabby]
+* https://ghostty.org/[ghostty]
 
 == Shell
 
@@ -29,8 +37,14 @@ https://github.com/marzocchi/zsh-notify#configuration
 * https://github.com/zero-sh/zero.sh
 * https://dotfiles.github.io/utilities/
 
+== Terminal Text Editor
+
+* helix
+* amp
+* micro
 == RSS
 
+* NetNewsWire
 * https://quiterss.org/[Quite]
 * https://ravenreader.app/[Raven]
 * https://github.com/Xyrio/RSSOwlnix[Owl]
@@ -41,6 +55,18 @@ https://github.com/marzocchi/zsh-notify#configuration
 * https://yomu.jaxx2104.info/[Yomu]
 * https://github.com/samuelclay/NewsBlur[NewsBlur]
 * https://nodetics.com/feedbro[FeedBro]
+
+== Logged In
+
+* Discord
+* Vscodium
+* Chrome google account
+** Bitwarden extension
+* Bitwarden desktop app
+* Firefox (no account)
+** Bitwarden extension
+* Tailscale
+* syncthing
 
 == Misc
 
