@@ -2,8 +2,5 @@
 Readme.adoc
 macOS.adoc
 justfile
-Brewfile
-Brewfile.lock.json
-Brewfile.sh
 dotfiles.code-workspace
 diff.diff
