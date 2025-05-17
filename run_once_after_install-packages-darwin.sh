@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
-curl -fsSL https://github.com/Homebrew/brew/releases/download/4.5.2/Homebrew-4.5.2.pkg -o ~/Downloads/Homebrew-4.5.2.pkg
-sudo installer -pkg ~/Downloads/Homebrew-4.5.2.pkg -target /
+install_brew() {
+    local brew_version='4.5.2'
+    curl -fsSL "https://github.com/Homebrew/brew/releases/download/$brew_version/Homebrew-$brew_version.pkg" -o "$HOME/Downloads/Homebrew-$brew_version.pkg"
+    sudo installer -pkg "$HOME/Downloads/Homebrew-$brew_version.pkg" -target /
+}
+
+install_brew
 
 brew bundle install --quiet --file --global
-
