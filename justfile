@@ -2,10 +2,10 @@ default:
   just --list
 
 brew:
-    # cask_args appdir: "~/Applications", require_sha: true
-    brew bundle dump -f
+    brew bundle dump --force
     brewfile-format Brewfile > Brewfile.rb
     mv Brewfile.rb Brewfile
+    sd -f m '\n\n(cask "font)' '\n\ncask_args appdir: "~/Applications"\n\n$1' Brewfile
 
 fin:
     chezmoi apply ~/.config/finicky.js

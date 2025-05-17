@@ -4,3 +4,5 @@ macOS.adoc
 justfile
 dotfiles.code-workspace
 diff.diff
+Brewfile
+Brewfile.rb
