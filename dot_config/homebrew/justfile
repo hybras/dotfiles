@@ -1,0 +1,7 @@
+dump:
+    brew bundle dump --force --global
+    chezmoi add ~/.config/homebrew/Brewfile
+    brewfile-format Brewfile > Brewfile.rb
+    mv Brewfile.rb Brewfile
+    sd -f m '\n\n(cask "font)' '\n\ncask_args appdir: "~/Applications"\n\n$1' Brewfile
+
