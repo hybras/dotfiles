@@ -2,3 +2,8 @@ encryption: age
 age:
   identity: "~/.config/age_key.txt"
   recipient: "age1j6rpg0mgmg8nhs00yjld82sdj8gmx7tytxjqfa54jtpfd85qgvuqmkf8rd"
+
+
+data:
+  brew:
+    prefix: {{ if eq .chezmoi.arch "amd64" }}/usr/local{{ else }}/opt/homebrew{{ end }}
