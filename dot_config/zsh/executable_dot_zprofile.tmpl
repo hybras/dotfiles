@@ -10,8 +10,6 @@ export PATH="{{ .brew.prefix }}/bin:{{ .brew.prefix }}/sbin${PATH+:$PATH}";
 export MANPATH="{{ .brew.prefix }}/share/man${MANPATH+:$MANPATH}:";
 export INFOPATH="{{ .brew.prefix }}/share/info:${INFOPATH:-}";
 
-export HOMEBREW_BUNDLE_FILE_GLOBAL="$HOME/.local/share/chezmoi/Brewfile"
-
 # Nix. Sets PATH, NIX_SSL_CERT_FILE, NIX_LINK_NEW, NIX_PROFILES
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
 	. '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'

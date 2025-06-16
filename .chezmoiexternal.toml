@@ -9,6 +9,10 @@ url = "https://raw.githubusercontent.com/alacritty/alacritty-theme/master/themes
 stripComponents = 1
 refreshPeriod = "168h"
 
+["Downloads/Homebrew-{{ .brew.version }}.pkg"]
+type = "file"
+url = "https://github.com/Homebrew/brew/releases/download/{{ .brew.version }}/Homebrew-{{ .brew.version }}.pkg"
+
 # [".local/share/ive-drives/vol-3"]
 # type = "archive"
 # url = "https://lmnt.me/archive/icons/ive-drives-vol-3.zip"
