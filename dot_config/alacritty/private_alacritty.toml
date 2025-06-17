@@ -11,7 +11,7 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 
 [general]
 # https://alacritty.org/config-alacritty.html
-import = ["~/.config/alacritty/themes/default.toml"]
+import = ["~/.config/alacritty/themes/atom_one_light.toml"]
 
 [window]
 option_as_alt = 'Both'
