@@ -6,4 +6,5 @@ fi
 
 # shellcheck disable=SC2154
 echo "${HOMEBREW_BUNDLE_FILE_GLOBAL}"
-brew bundle install --global
+brew bundle install --global --no-upgrade
+brew autoupdate start 604800 --immediate --upgrade --greedy --sudo
