@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-sudo installer -pkg "$HOME/Downloads/Homebrew-{{ .brew.version }}.pkg" -target /
-
-# shellcheck disable=SC2154
-echo "${HOMEBREW_BUNDLE_FILE_GLOBAL}"
-brew bundle install --global

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [[ ! -x {{ .brew.prefix }}/bin/brew ]]; then
+    sudo installer -pkg "$HOME/Downloads/Homebrew-{{ .brew.version }}.pkg" -target /
+fi
+
+# shellcheck disable=SC2154
+echo "${HOMEBREW_BUNDLE_FILE_GLOBAL}"
+brew bundle install --global
