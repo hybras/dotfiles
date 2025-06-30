@@ -1,8 +1,6 @@
-// @ts-check
-
-/**
- * @typedef {import('/Users/hybras/Applications/Finicky.app/Contents/Resources/finicky.d.ts').FinickyConfig} FinickyConfig
- */
+import type { FinickyConfig } from "/Users/hybras/Applications/Finicky.app/Contents/Resources/finicky.d.ts";
+const homedir = require('os').homedir();
+finicky.getSystemInfo.name
 
 const browserosaurus = "com.browserosaurus"
 
@@ -74,12 +72,12 @@ export default {
       browser: browsers.tor,
     },
     { // Open wikipedia and github in firefox. they dont need js
-      match: [
-        /^https:\/\/wikipedia\.com\/.*$/,
-        /^https:\/\/github\.com\/.*$/,
-        /^https:\/\/www\.theguardian\.com\/.*$/,
-        /^https:\/\/theguardian\.com\/.*$/,
-      ],
+      match: finicky.matchHostnames([
+        "wikipedia.com",
+        "github.com",
+        "www.theguardian.com",
+        "theguardian.com",
+      ]),
       browser: browsers.firefox,
     },
     { // Open links from feed reader and ide in firefox. Links are probably fine.
@@ -90,4 +88,4 @@ export default {
       browser: browsers.firefox,
     },
   ],
-};
+} satisfies FinickyConfig;

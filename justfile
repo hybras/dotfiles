@@ -9,7 +9,7 @@ brew:
     sd -f m '\n\n(cask "font)' '\n\ncask_args appdir: "~/Applications"\n\n$1' dot_brewfile
 
 fin:
-    chezmoi apply ~/.config/finicky.js
+    chezmoi apply ~/.config/finicky.ts
 
 shel:
     chezmoi apply ~/.config/sheldon/plugins.toml
