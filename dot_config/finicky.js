@@ -1,3 +1,9 @@
+// @ts-check
+
+/**
+ * @typedef {import('/Users/hybras/Applications/Finicky.app/Contents/Resources/finicky.d.ts').FinickyConfig} FinickyConfig
+ */
+
 const browserosaurus = "com.browserosaurus"
 
 const browsers = {
@@ -16,17 +22,20 @@ const apps = {
   steam: "com.valvesoftware.steam",
 }
 
-module.exports = {
+/**
+ * @type {FinickyConfig}
+ */
+export default {
   defaultBrowser: browserosaurus, // manually decide which browser to use
   rewrite: [
     { // Redirect all urls to use https
-      match: ({ url }) => url.protocol === "http",
-      url: { protocol: "https" },
+      match: (url) => url.protocol === "http",
+      url: (url) => { return { ...url, protocol: "https" } },
     },
     { // Remove some tracking from urls
 
-      match: () => true,
-      url({ url }) {
+      match: (url) => true,
+      url: (url) => {
         const removeKeysStartingWith = ["utm_", "uta_"]; // Remove all query parameters beginning with these strings
         const removeKeys = ["fblid", "gclid"]; // Remove all query parameters matching these keys
 
@@ -42,19 +51,9 @@ module.exports = {
         };
       },
     },
-    // Disabled: onion no longer gives free access
-    // { // Redirect nytimes to onion
-    //     match: ({ url }) => ["www.nytimes.com", "nytimes.com", "archive.nytimes.com", "nyt.com"].includes(url.host),
-    //     url: { host: "www.nytimesn7cgmftshazwhfgzm37qxb44r64ytbb2dj3x62d2lljsciiyd.onion" },
-    // },
-    // Disabled: theguardian works without JS
-    // { // Redirect theguardian to onion
-    // match: ({ url }) => ["www.theguardian.com", "theguardian.com"].includes(url.host),
-    //     url: { host: "www.guardian2zotagl6tmjucg3lrhxdk4dw3lhbqnkvvkywawy3oqfoprid.onion" }
-    // },
     { // open hugo server in firefox w/o https
-      match: ({ url }) => url.host === "localhost" && url.port === 1313,
-      url: { protocol: "http", }
+      match: (url) => url.host === "localhost" && url.port === '1313',
+      url: (url) => { return { ...url, protocol: "http" } }
     }
   ],
   handlers: [
@@ -71,7 +70,7 @@ module.exports = {
       browser: apps.mpv,
     },
     { // Open onion links in tor
-      match: ({ url }) => url.host.endsWith(".onion"),
+      match: (url) => url.host.endsWith(".onion"),
       browser: browsers.tor,
     },
     { // Open wikipedia and github in firefox. they dont need js
@@ -84,10 +83,10 @@ module.exports = {
       browser: browsers.firefox,
     },
     { // Open links from feed reader and ide in firefox. Links are probably fine.
-      match: ({ opener }) => [
+      match: (_url, options) => [
         apps.netnewswire,
         apps.vscode,
-      ].includes(opener.bundleId),
+      ].includes(options.opener?.bundleId || ''),
       browser: browsers.firefox,
     },
   ],
