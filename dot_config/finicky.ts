@@ -57,6 +57,10 @@ export default {
       match: /^http:\/\/localhost:1313\/.*$/,
       browser: browsers.firefox,
     },
+    { // plex media server
+      match: /^http:\/\/127\.0\.0\.1:32400\/myplex\/launch.*$/,
+      browser: browsers.chrome,
+    },
     { // Open Youtube in Freetube
       match: [
         /^https:\/\/youtube\.com\/.*$/,
