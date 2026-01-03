@@ -1,6 +1,4 @@
 import type { FinickyConfig } from "/Users/hybras/Applications/Finicky.app/Contents/Resources/finicky.d.ts";
-const homedir = require('os').homedir();
-finicky.getSystemInfo.name
 
 const browserosaurus = "com.browserosaurus"
 
@@ -65,7 +63,7 @@ export default {
         /^https:\/\/www\.youtube\.com\/.*$/,
         /^https:\/\/youtu\.be\/.*$/,
       ],
-      browser: apps.mpv,
+      browser: apps.freetube,
     },
     { // Open onion links in tor
       match: (url) => url.host.endsWith(".onion"),
