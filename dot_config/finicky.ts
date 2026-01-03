@@ -1,13 +1,13 @@
 import type { FinickyConfig } from "/Users/hybras/Applications/Finicky.app/Contents/Resources/finicky.d.ts";
 
-const browserosaurus = "com.browserosaurus"
+const browserosaurus = "com.browserosaurus";
 
 const browsers = {
   firefox: "org.mozilla.firefox",
   chrome: "com.google.Chrome",
   tor: "org.torproject.torbrowser",
   orion: "com.kagi.kagimacOS",
-}
+};
 
 const apps = {
   freetube: "io.freetubeapp.freetube",
@@ -16,7 +16,8 @@ const apps = {
   zoom: "us.zoom.xos",
   netnewswire: "com.ranchero.NetNewsWire-Evergreen",
   steam: "com.valvesoftware.steam",
-}
+  plex_server: "com.plexapp.plexmediaserver",
+};
 
 /**
  * @type {FinickyConfig}
@@ -26,10 +27,11 @@ export default {
   rewrite: [
     { // Redirect all urls to use https
       match: (url) => url.protocol === "http",
-      url: (url) => { return { ...url, protocol: "https" } },
+      url: (url) => {
+        return { ...url, protocol: "https" };
+      },
     },
     { // Remove some tracking from urls
-
       match: (url) => true,
       url: (url) => {
         const removeKeysStartingWith = ["utm_", "uta_"]; // Remove all query parameters beginning with these strings
@@ -48,17 +50,21 @@ export default {
       },
     },
     { // open hugo server in firefox w/o https
-      match: (url) => url.host === "localhost" && url.port === '1313',
-      url: (url) => { return { ...url, protocol: "http" } }
-    }
+      match: (url) => url.host === "localhost" && url.port === "1313",
+      url: (url) => {
+        return { ...url, protocol: "http" };
+      },
+    },
   ],
   handlers: [
     {
       match: /^http:\/\/localhost:1313\/.*$/,
       browser: browsers.firefox,
     },
-    { // plex media server
-      match: /^http:\/\/127\.0\.0\.1:32400\/myplex\/launch.*$/,
+    { // plex media server links in chrome
+      match: (_url, options) =>
+        apps.plex_server
+          === options.opener?.bundleId,
       browser: browsers.chrome,
     },
     { // Open Youtube in Freetube
@@ -83,10 +89,11 @@ export default {
       browser: browsers.firefox,
     },
     { // Open links from feed reader and ide in firefox. Links are probably fine.
-      match: (_url, options) => [
-        apps.netnewswire,
-        apps.vscode,
-      ].includes(options.opener?.bundleId || ''),
+      match: (_url, options) =>
+        [
+          apps.netnewswire,
+          apps.vscode,
+        ].includes(options.opener?.bundleId || ""),
       browser: browsers.firefox,
     },
   ],
