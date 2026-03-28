@@ -1,6 +1,7 @@
 function bat_theme() {
   if defaults read -globalDomain AppleInterfaceStyle &> /dev/null; then
-    unset BAT_THEME
+    unset  BAT_THEME
+    unset  MCFLY_LIGHT
   else
     export MCFLY_LIGHT=TRUE
     export BAT_THEME="Monokai Extended Light"
