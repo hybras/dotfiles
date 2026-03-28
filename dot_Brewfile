@@ -200,7 +200,7 @@ cask "lapce"
 cask "launchcontrol"
 cask "maccy"
 cask "mimestream"
-cask "mullvad-vpn", args: { appdir: "~/Applications" }
+cask "mullvad-vpn"
 cask "netnewswire"
 cask "nightfall"
 cask "openmtp"
