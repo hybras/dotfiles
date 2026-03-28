@@ -48,3 +48,25 @@ Host aws
 	StrictHostKeyChecking no
   	UserKnownHostsFile /dev/null
   	LogLevel QUIET
+
+Host e6.lol
+	HostName e6.lol
+	User hybras
+	UseKeychain yes
+	AddKeysToAgent yes
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/id_ed25519_e6_lol
+	Port 42067
+
+Host talia
+	Hostname talia.tail05e854.ts.net
+	User hybras
+	AddKeysToAgent yes
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/id_ed25519_talia
+
+Host talia.local
+	User hybras
+	AddKeysToAgent yes
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/id_ed25519_talia
