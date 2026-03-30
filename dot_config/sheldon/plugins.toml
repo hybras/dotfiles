@@ -50,7 +50,7 @@ local = '~/.config/zsh/personal/aliases'
 [plugins.bitwarden]
 local = '~/.config/zsh/personal'
 
-[plugins.bat]
+[plugins.dark_theme]
 local = '~/.config/zsh/personal'
 
 [plugins.keychain] # blocking because it may ask for input
