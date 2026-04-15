@@ -1,7 +1,7 @@
 [user]
 	name = hybras
 	email = 24651269+hybras@users.noreply.github.com
-	signingkey = 24651269+hybras@users.noreply.github.com
+	signingkey = /Users/hybras/.ssh/id_rsa_github.pub
 [commit]
 	gpgsign = on
 [color "diff-highlight"]
@@ -44,3 +44,5 @@
 
 [includeIf "hasconfig:remote.*.url:git@gitlab.com:**"]
 	path = gitlab
+[gpg]
+	format = ssh
