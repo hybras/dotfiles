@@ -6,14 +6,6 @@ bindkey -e
 # setopt CORRECT
 # setopt CORRECT_ALL
 
-# zstyle :omz:plugins:ssh-agent identities id_rsa_github id_rsa_gitlab pijul_nest
-# zstyle :omz:plugins:ssh-agent ssh-add-args -A
-zstyle :omz:plugins:keychain options --quiet
-zstyle :omz:plugins:keychain agents gpg,ssh
-zstyle :omz:plugins:keychain identities id_rsa_github id_rsa_gitlab id_umd
-
-# zstyle :plugin:zsh-completion-generator programs $program
-
 export GENCOMPL_FPATH=$XDG_CACHE_HOME/gencomp
 export GENCOMPL_PY=python3
 export YSU_HARDCORE=1
