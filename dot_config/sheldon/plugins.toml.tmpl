@@ -20,7 +20,7 @@ apply = ['defer']
 [templates]
 defer = """
 {% for file in files %}
-zsh-defer source \"{{ file }}\"\n
+zsh-defer source \"{{ "{{" }} file {{ "}}" }}\"\n
 {% endfor %}
 """
 
@@ -37,7 +37,7 @@ apply = ['source']
 # local = '~/.config/zsh/personal'
 
 [plugins.brew-zsh-completions]
-local = "/opt/homebrew/share/zsh/site-functions" # inlining logic makes it < 1 ms
+local = "{{ .brew.prefix }}/share/zsh/site-functions" # inlining logic makes it < 1 ms
 apply = ['fpath']
 # inline = 'zsh-defer fpath+="$(brew --prefix)/share/zsh/site-functions"' # 10 ms
 
@@ -76,7 +76,7 @@ local = '~/.config/zsh/personal'
 local = '~/.config/zsh/personal'
 
 [plugins.fzf]
-local = '/opt/homebrew/opt/fzf/shell/'
+local = '{{ .brew.prefix }}/opt/fzf/shell/'
 use = ['completion.zsh']
 
 [plugins.gencomp_cache]
@@ -100,27 +100,27 @@ github = 'scriptingosx/mac-zsh-completions'
 
 [plugins.sudo]
 github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/{{ name }}'
+dir = 'plugins/{{ "{{" }} name {{ "}}" }}'
 
 # [plugins.git]
 # github = 'ohmyzsh/ohmyzsh'
-# dir = 'plugins/{{ name }}'
+# dir = 'plugins/{{ "{{" }} name {{ "}}" }}'
 
 [plugins.gitignore]
 github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/{{ name }}'
+dir = 'plugins/{{ "{{" }} name {{ "}}" }}'
 
 [plugins.zoxide]
 github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/{{ name }}'
+dir = 'plugins/{{ "{{" }} name {{ "}}" }}'
 
 [plugins.command-not-found]
 github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/{{ name }}'
+dir = 'plugins/{{ "{{" }} name {{ "}}" }}'
 
 [plugins.gradle]
 github = 'ohmyzsh/ohmyzsh'
-dir = 'plugins/{{ name }}'
+dir = 'plugins/{{ "{{" }} name {{ "}}" }}'
 
 [plugins.clipboard]
 github = 'ohmyzsh/ohmyzsh'
@@ -149,12 +149,12 @@ github = 'RobSis/zsh-completion-generator'
 
 # [plugins.ssh-agent]
 # github = 'ohmyzsh/ohmyzsh'
-# dir = 'plugins/{{ name }}'
+# dir = 'plugins/{{ "{{" }} name {{ "}}" }}'
 
 # [plugins.gpg-agent]
 # github = 'ohmyzsh/ohmyzsh'
-# dir = 'plugins/{{ name }}'
+# dir = 'plugins/{{ "{{" }} name {{ "}}" }}'
 
 # [plugins.keychain]
 # github = 'ohmyzsh/ohmyzsh'
-# dir = 'plugins/{{ name }}'
+# dir = 'plugins/{{ "{{" }} name {{ "}}" }}'
