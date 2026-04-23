@@ -12,7 +12,7 @@ const browsers = {
 const apps = {
   freetube: "io.freetubeapp.freetube",
   mpv: "io.mpv",
-  vscode: "com.visualstudio.code.oss",
+  vscode: "com.microsoft.VSCode",
   zoom: "us.zoom.xos",
   netnewswire: "com.ranchero.NetNewsWire-Evergreen",
   steam: "com.valvesoftware.steam",
@@ -78,6 +78,11 @@ export default {
     { // Open onion links in tor
       match: (url) => url.host.endsWith(".onion"),
       browser: browsers.tor,
+    },
+    {
+      // Open docker hub links in chrome
+      match: /^https:\/\/(hub\.)?docker\.com\/.*$/,
+      browser: browsers.chrome,
     },
     { // Open wikipedia and github in firefox. they dont need js
       match: finicky.matchHostnames([
