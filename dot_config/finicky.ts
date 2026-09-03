@@ -101,5 +101,15 @@ export default {
         ].includes(options.opener?.bundleId || ""),
       browser: browsers.firefox,
     },
+    {
+      // Open docker hub links in chrome
+      match: /^https:\/\/(hub\.)?docker\.com\/.*$/,
+      browser: browsers.chrome,
+    },
+    {
+      // Open tahani therapy zoom in chrome
+      match: /^https:\/\/us02web\.zoom\.us\/j\/9937806263$/,
+      browser: browsers.chrome
+    }
   ],
 } satisfies FinickyConfig;
