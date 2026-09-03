@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# symlinked to /opt/homebrew/etc/onInterfaceThemeChange
+
+light=atom_one_light
+dark=default
+
+# shellcheck disable=SC2154
+if [[ "${DARKMODE}" = 1 ]]; then
+  theme=$dark
+else
+  theme=$light
+fi
+
+ln -sf "$HOME/.config/alacritty/themes/${theme}.toml" "$HOME/.config/alacritty/autoswitch.toml"
