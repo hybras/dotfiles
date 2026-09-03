@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+security find-internet-password -l "vault.bitwarden.com" -w | clip
