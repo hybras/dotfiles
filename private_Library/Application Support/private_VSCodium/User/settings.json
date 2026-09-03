@@ -61,7 +61,8 @@
         "**/node_modules/*/**": true,
         "**/.hg/store/**": true,
         // Added rules
-        "/target/**": true // rust / cargo projects build output
+        "/target/**": true, // rust / cargo projects build output
+        ".direnv/**": true, // direnv cache
     },
     "files.associations": {
         "*.rmd": "markdown"
@@ -73,7 +74,7 @@
     "git.closeDiffOnOperation": true,
     "git.enableCommitSigning": true,
     "git.useEditorAsCommitInput": false,
-    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.ignoreTrimWhitespace": true,
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.defaultDateShortFormat": "D MMM, YY",
     "gitlens.defaultDateFormat": null,
@@ -204,5 +205,23 @@
     "lldb.suppressUpdateNotifications": true,
     "notebook.consolidatedRunButton": true,
     "notebook.formatOnSave.enabled": true,
-    "rubyLsp.rubyExecutablePath": "/opt/homebrew/opt/ruby/bin/ruby",
+    "rubyLsp.rubyExecutablePath": "/opt/homebrew/opt/ruby@3",
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        },
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "chat.disableAIFeatures": false,
+    "[typescript]": {
+        "editor.defaultFormatter": "dprint.dprint"
+    },
 }
