@@ -55,7 +55,7 @@ local = '~/.config/zsh/personal'
 
 [plugins.keychain] # blocking because it may ask for input
 inline = """
-eval `keychain --eval --noask id_rsa_github`
+eval `keychain --eval --quiet --noask id_rsa_github`
 """
 
 # Disabled cuz slow, despite being native
