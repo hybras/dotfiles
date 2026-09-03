@@ -7,21 +7,14 @@ Host e6.lol
 	IdentityFile ~/.ssh/id_ed25519_e6_lol
 	Port 42067
 
-Host talia
-	Hostname talia.tail05e854.ts.net
+Host talia talia.local talia.tail05e854.ts.net
 	User hybras
 	AddKeysToAgent yes
 	PreferredAuthentications publickey
 	IdentityFile ~/.ssh/id_ed25519_talia
 
-Host talia.local
-	User hybras
-	AddKeysToAgent yes
-	PreferredAuthentications publickey
-	IdentityFile ~/.ssh/id_ed25519_talia
-
-Host gatech
+Host github.gatech.edu gatech
 	Hostname github.gatech.edu
 	IdentityFile ~/.ssh/id_gatech_ed25519
 	PreferredAuthentications publickey
-	User vchari3
+	User git
