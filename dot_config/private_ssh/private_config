@@ -1,54 +1,3 @@
-Host grace
-	User vchari
-	HostName grace.umd.edu
-	ForwardX11 yes
-
-Host junk
-	User vchari
-	HostName junkfood.cs.umd.edu
-
-Host terp
-	User vchari
-	HostName terpconnect.umd.edu
-
-Host umd_cs_git
-	User vchari
-	HostName gitlab.cs.umd.edu
-	PreferredAuthentications publickey
-
-Host github
-	HostName github.com
-	UseKeychain yes
-   	AddKeysToAgent yes
-	PreferredAuthentications publickey
-	IdentityFile ~/.ssh/id_rsa_github
-
-Host gitlab
-	HostName gitlab.com
-	UseKeychain yes
-	AddKeysToAgent yes
-	PreferredAuthentications publickey
-	IdentityFile ~/.ssh/id_rsa_gitlab
-
-Host eld
-	User hybras
-	HostName elderberry.local
-	PreferredAuthentications publickey,password
-	IdentityFile ~/.ssh/id_rsa_github
-
-Host kde_invent
-	HostName invent.kde.org
-	UseKeychain yes
-	AddKeysToAgent yes
-	PreferredAuthentications publickey
-	IdentityFile ~/.ssh/id_invent_kde
-
-Host aws
-	HostName *.us-west-2.compute.amazonaws.com
-	StrictHostKeyChecking no
-  	UserKnownHostsFile /dev/null
-  	LogLevel QUIET
-
 Host e6.lol
 	HostName e6.lol
 	User hybras
@@ -70,3 +19,9 @@ Host talia.local
 	AddKeysToAgent yes
 	PreferredAuthentications publickey
 	IdentityFile ~/.ssh/id_ed25519_talia
+
+Host gatech
+	Hostname github.gatech.edu
+	IdentityFile ~/.ssh/id_gatech_ed25519
+	PreferredAuthentications publickey
+	User vchari3
